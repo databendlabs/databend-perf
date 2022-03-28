@@ -1,0 +1,24 @@
+metadata:
+  table: numbers
+
+statements:
+  - name: Q1
+    query: "SELECT avg(number) FROM numbers_mt(10000000000);"
+  - name: Q2
+    query: "SELECT sum(number) FROM numbers_mt(10000000000);"
+  - name: Q3
+    query: "SELECT min(number) FROM numbers_mt(10000000000);"
+  - name: Q4
+    query: "SELECT max(number) FROM numbers_mt(10000000000);"
+  - name: Q5
+    query: "SELECT count(number) FROM numbers_mt(10000000000);"
+  - name: Q6
+    query: "SELECT sum(number+number+number) FROM numbers_mt(10000000000);"
+  - name: Q7
+    query: "SELECT sum(number) / count(number) FROM numbers_mt(10000000000);"
+  - name: Q8
+    query: "SELECT sum(number) / count(number), max(number), min(number) FROM numbers_mt(10000000000);"
+  - name: Q9
+    query: "SELECT number FROM numbers_mt(10000000000) ORDER BY number DESC LIMIT 10;"
+  - name: Q10
+    query: "SELECT max(number), sum(number) FROM numbers_mt(10000000000) GROUP BY number % 3, number % 4, number % 5 LIMIT 10;"
