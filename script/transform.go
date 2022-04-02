@@ -46,15 +46,18 @@ func (d *Data) GetSchema(name string) *Schema {
 
 // output
 type Result struct {
-	Title string  `json:"title"`
-	Sql   string  `json:"sql"`
-	Lines []*Line `json:"lines"`
-	Type  string  `json:"-"`
-	Index int     `json:"-"`
+	Title    string   `json:"title"`
+	Sql      string   `json:"sql"`
+	Lines    []*Line  `json:"lines"`
+	Type     string   `json:"-"`
+	Index    int      `json:"-"`
+	Versions []string `json:"version"`
+	Legends  []string `json:"legend"`
+	X        []string `json:"x"`
 }
 type Line struct {
-	Line    string `json:"line"`
-	Samples []string
+	Name string    `json:"name"`
+	Data []float32 `json:"data"`
 }
 
 var (
@@ -99,7 +102,19 @@ func main() {
 		results := PrepareResults(v)
 		WriteResults(results, k)
 	}
+	WriteTypeIndexFile()
+}
 
+func WriteTypeIndexFile() {
+	indexJson, err := json.Marshal(types)
+	if err != nil {
+		fmt.Printf("write index file err: %v\n", err)
+	}
+	err = ioutil.WriteFile(destDir+"/"+"type"+JsonSuffix, indexJson, 0644)
+	if err != nil {
+		fmt.Printf("write file err: %v\n", err)
+		return
+	}
 }
 
 func PrepareDestDir() bool {
@@ -119,6 +134,7 @@ func PrepareDestDir() bool {
 }
 
 var typeMap = make(map[string]*sync.Map)
+var types = make([]string, 0)
 
 func HandleSourceDir() {
 	fmt.Printf("Start reading source dir: %s\n", srcDir)
@@ -132,6 +148,7 @@ func HandleSourceDir() {
 			continue
 		}
 		typeMap[v.Name()] = &sync.Map{}
+		types = append(types, v.Name())
 	}
 	for k, _ := range typeMap {
 		HandleTypeDir(k)
@@ -196,6 +213,8 @@ func HandleData(data *Data, filename string, t string) {
 		r.Sql = schema.Sql
 		r.Type = t
 		SetLine(r, &schema, &data.Meta, filename)
+		r.X = append(r.X, GetDateFromFilename(filename))
+		r.Versions = append(r.Versions, data.Meta.Tag)
 	}
 }
 
@@ -204,9 +223,10 @@ func GetResult(resultMap *sync.Map, k string, index int) *Result {
 	var ok bool
 	if v, ok = resultMap.Load(k); !ok {
 		v = &Result{
-			Title: k,
-			Lines: []*Line{{Line: "min"}, {Line: "max"}},
-			Index: index,
+			Title:   k,
+			Lines:   []*Line{{Name: "min"}, {Name: "max"}},
+			Index:   index,
+			Legends: []string{"min", "max"},
 		}
 		resultMap.Store(k, v)
 	}
@@ -215,10 +235,10 @@ func GetResult(resultMap *sync.Map, k string, index int) *Result {
 
 func SetLine(r *Result, schema *Schema, meta *Meta, filename string) {
 	for _, l := range r.Lines {
-		if l.Line == "min" {
-			l.Samples = append(l.Samples, fmt.Sprintf(sampleTemplate, GetDateFromFilename(filename), schema.Min, meta.Tag))
-		} else if l.Line == "max" {
-			l.Samples = append(l.Samples, fmt.Sprintf(sampleTemplate, GetDateFromFilename(filename), schema.Max, meta.Tag))
+		if l.Name == "min" {
+			l.Data = append(l.Data, schema.Min)
+		} else if l.Name == "max" {
+			l.Data = append(l.Data, schema.Max)
 		}
 	}
 }
@@ -251,8 +271,8 @@ func WriteResults(results []*Result, t string) {
 		indexMap[result.Index] = result.Title + JsonSuffix
 		go WriteResult(result, &wg)
 	}
-	WriteIndexFile(indexMap, t)
 	wg.Wait()
+	WriteIndexFile(indexMap, t)
 }
 
 func WriteResult(r *Result, wg *sync.WaitGroup) {
