@@ -220,7 +220,7 @@ func SetLine(r *Result, schema *Schema, meta *Meta, filename string) {
 
 func PrepareResults(resultMap *sync.Map) []*Result {
 	results := make([]*Result, 0)
-	resultMap.Range(func(key, value any) bool {
+	resultMap.Range(func(key, value interface{}) bool {
 		if v, ok := resultMap.Load(key); ok {
 			r := v.(*Result)
 			results = append(results, r)
