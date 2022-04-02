@@ -23,40 +23,40 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      # - name: Get Databend version
-      #   id: databend_version
-      #   run: |
-      #     LASTEST_TAG=$(curl -s GET https://api.github.com/repos/datafuselabs/databend/tags\?per_page\=1 | jq -r '.[].name')
-      #     echo ::set-output name=VERSION::${LASTEST_TAG}
-      # - name: Get Date
-      #   id: perf_date
-      #   run: |
-      #     THE_DATE=$(date +"%Y-%m-%d")
-      #     echo ::set-output name=DATE::${THE_DATE}
-      # - name: Configure AWS Credentials
-      #   uses: aws-actions/configure-aws-credentials@v1
-      #   with:
-      #     aws-access-key-id: ${{ secrets.REPO_ACCESS_KEY_ID }}
-      #     aws-secret-access-key: ${{ secrets.REPO_SECRET_ACCESS_KEY }}
-      #     aws-region: us-east-2
+      - name: Get Databend version
+        id: databend_version
+        run: |
+          LASTEST_TAG=$(curl -s GET https://api.github.com/repos/datafuselabs/databend/tags\?per_page\=1 | jq -r '.[].name')
+          echo ::set-output name=VERSION::${LASTEST_TAG}
+      - name: Get Date
+        id: perf_date
+        run: |
+          THE_DATE=$(date +"%Y-%m-%d")
+          echo ::set-output name=DATE::${THE_DATE}
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.REPO_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.REPO_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
 
-      # - name: Get perf-tools from S3
-      #   run: |
-      #     aws s3 cp s3://databend-shared/tools/perf-tool/amd64/perf-tool perf-tool
-      # - name: Run Perf
-      #   env:
-      #     WEB_API_USER_EMAIL: ${{ secrets.WEB_API_USER_EMAIL }}
-      #     WEB_API_USER_PASSWORD: ${{ secrets.WEB_API_USER_PASSWORD }}
-      #     WAREHOUSE_TAG: ${{ steps.databend_version.outputs.VERSION }}
-      #     WAREHOUSE_SIZE: ${{ secrets.WAREHOUSE_SIZE }}
-      #   run: |
-      #     chmod +x ./perf-tool
-      #     ./perf-tool --output-format json --test-dir benchmarks -target-dir collector
-      #     mv collector/numbers.json collector/numbers/${{ steps.perf_date.outputs.DATE }}-numbers.json
-      #     mv collector/ontime.json collector/ontime/${{ steps.perf_date.outputs.DATE }}-ontime.json
-      # - uses: stefanzweifel/git-auto-commit-action@v4
-      #   with:
-      #     commit_message: 'perf: collect performance data from the latest release'
+      - name: Get perf-tools from S3
+        run: |
+          aws s3 cp s3://databend-shared/tools/perf-tool/amd64/perf-tool perf-tool
+      - name: Run Perf
+        env:
+          WEB_API_USER_EMAIL: ${{ secrets.WEB_API_USER_EMAIL }}
+          WEB_API_USER_PASSWORD: ${{ secrets.WEB_API_USER_PASSWORD }}
+          WAREHOUSE_TAG: ${{ steps.databend_version.outputs.VERSION }}
+          WAREHOUSE_SIZE: ${{ secrets.WAREHOUSE_SIZE }}
+        run: |
+          chmod +x ./perf-tool
+          ./perf-tool --output-format json --test-dir benchmarks -target-dir collector
+          mv collector/numbers.json collector/numbers/${{ steps.perf_date.outputs.DATE }}-numbers.json
+          mv collector/ontime.json collector/ontime/${{ steps.perf_date.outputs.DATE }}-ontime.json
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 'perf: collect performance data from the latest release'
       - name: Setup Go Env
         uses: actions/setup-go@v3
         with:
