@@ -107,7 +107,7 @@ func PrepareDestDir() bool {
 			fmt.Printf("Prepare destination err: %v\n", err)
 			return false
 		}
-		fmt.Printf("Detination dir Ready")
+		fmt.Println("Detination dir Ready")
 		return true
 	}
 	return true
@@ -178,7 +178,7 @@ func PrepareTypeDir(typeDir string) bool {
 			fmt.Printf("Prepare type dir err: %v\n", err)
 			return false
 		}
-		fmt.Printf("Type dir Ready")
+		fmt.Println("Type dir Ready")
 		return true
 	}
 	return true
@@ -236,7 +236,6 @@ func WriteResults(results []*Result, t string) {
 	var wg sync.WaitGroup
 	wg.Add(len(results))
 	for _, result := range results {
-		fmt.Println(result)
 		indexMap[result.Index] = result.Title + ".json"
 		go WriteResult(result, &wg)
 	}
