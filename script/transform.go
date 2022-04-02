@@ -58,7 +58,7 @@ type Line struct {
 }
 
 var (
-	sampleTemplate  = `('%s',%f,'%s')`
+	sampleTemplate  = `('%s',%.3f,'%s')`
 	srcDir, destDir string
 )
 
@@ -216,11 +216,18 @@ func GetResult(resultMap *sync.Map, k string, index int) *Result {
 func SetLine(r *Result, schema *Schema, meta *Meta, filename string) {
 	for _, l := range r.Lines {
 		if l.Line == "min" {
-			l.Samples = append(l.Samples, fmt.Sprintf(sampleTemplate, filename, schema.Min, meta.Tag))
+			l.Samples = append(l.Samples, fmt.Sprintf(sampleTemplate, GetDateFromFilename(filename), schema.Min, meta.Tag))
 		} else if l.Line == "max" {
-			l.Samples = append(l.Samples, fmt.Sprintf(sampleTemplate, filename, schema.Max, meta.Tag))
+			l.Samples = append(l.Samples, fmt.Sprintf(sampleTemplate, GetDateFromFilename(filename), schema.Max, meta.Tag))
 		}
 	}
+}
+
+func GetDateFromFilename(filename string) string {
+	if len(filename) > 10 {
+		return filename[0:10]
+	}
+	return ""
 }
 
 func PrepareResults(resultMap *sync.Map) []*Result {
