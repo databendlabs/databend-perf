@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"os"
 	"sort"
+	"strings"
 	"sync"
 )
 
@@ -59,6 +60,10 @@ type Line struct {
 var (
 	sampleTemplate  = `('%s',%f,'%s')`
 	srcDir, destDir string
+)
+
+const (
+	JsonSuffix = `.json`
 )
 
 func (r *Result) Bytes() []byte {
@@ -146,7 +151,7 @@ func HandleTypeDir(typeDir string) {
 	}
 	for _, item := range dirs {
 		var err error
-		if item.IsDir() {
+		if item.IsDir() || !strings.HasSuffix(item.Name(), JsonSuffix) {
 			continue
 		}
 		filename := item.Name()
@@ -236,7 +241,7 @@ func WriteResults(results []*Result, t string) {
 	var wg sync.WaitGroup
 	wg.Add(len(results))
 	for _, result := range results {
-		indexMap[result.Index] = result.Title + ".json"
+		indexMap[result.Index] = result.Title + JsonSuffix
 		go WriteResult(result, &wg)
 	}
 	WriteIndexFile(indexMap, t)
@@ -247,7 +252,7 @@ func WriteResult(r *Result, wg *sync.WaitGroup) {
 	defer func() {
 		wg.Done()
 	}()
-	filepath := destDir + "/" + r.Type + "/" + r.Title + ".json"
+	filepath := destDir + "/" + r.Type + "/" + r.Title + JsonSuffix
 	err := ioutil.WriteFile(filepath, r.Bytes(), 0666)
 	if err != nil {
 		fmt.Printf("write file %s err: %v\n", filepath, err)
@@ -269,7 +274,7 @@ func WriteIndexFile(indexeMap map[int]string, t string) {
 	if err != nil {
 		fmt.Printf("write index file err: %v\n", err)
 	}
-	err = ioutil.WriteFile(destDir+"/"+t+"/"+t+".json", indexJson, 0644)
+	err = ioutil.WriteFile(destDir+"/"+t+"/"+t+JsonSuffix, indexJson, 0644)
 	if err != nil {
 		fmt.Printf("write file err: %v\n", err)
 		return
