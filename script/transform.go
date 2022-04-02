@@ -103,7 +103,7 @@ func main() {
 }
 
 func PrepareDestDir() bool {
-	fmt.Println("Prepare destination dir")
+	fmt.Printf("Prepare destination dir: %s\n", destDir)
 	var err error
 	if _, err = os.Stat(destDir); os.IsNotExist(err) {
 		fmt.Println("Destination dir not exist, start making dir")
@@ -121,7 +121,7 @@ func PrepareDestDir() bool {
 var typeMap = make(map[string]*sync.Map)
 
 func HandleSourceDir() {
-	fmt.Println("Start reading source dir")
+	fmt.Printf("Start reading source dir: %s\n", srcDir)
 	fs, err := ioutil.ReadDir(srcDir)
 	if err != nil {
 		fmt.Printf("Failed to read source dir, err: %s\n", err)
@@ -139,8 +139,8 @@ func HandleSourceDir() {
 }
 
 func HandleTypeDir(typeDir string) {
-	fmt.Printf("Start reading type dir: %s\n", typeDir)
 	typePath := srcDir + "/" + typeDir
+	fmt.Printf("Start reading type dir: %s\n", typePath)
 	dirs, err := os.ReadDir(typePath)
 	if err != nil {
 		fmt.Printf("Failed to read type dir, err: %v\n", err)
