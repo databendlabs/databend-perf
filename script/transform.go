@@ -80,7 +80,7 @@ func (r *Result) String() string {
 }
 
 func init() {
-	srcDir = *flag.String("src", "collectors", "source directory")
+	srcDir = *flag.String("src", "collector", "source directory")
 	destDir = *flag.String("desc", "temp", "generated directory")
 	flag.Parse()
 }
