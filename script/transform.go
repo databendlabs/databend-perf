@@ -53,7 +53,7 @@ type Result struct {
 	Index    int      `json:"-"`
 	Versions []string `json:"version"`
 	Legends  []string `json:"legend"`
-	X        []string `json:"x"`
+	X        []string `json:"xAxis"`
 }
 type Line struct {
 	Name string    `json:"name"`
