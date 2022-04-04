@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.181",
     "ahooks": "^3.3.0",
     "antd": "^4.19.5",
     "axios": "^0.26.1",

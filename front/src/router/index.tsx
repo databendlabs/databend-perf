@@ -1,7 +1,8 @@
 
+import { lazy } from "react";
 import { useRoutes } from "react-router-dom";
 import PerfLayout from "../componnent/Layout";
-import Graphs from "../pages/graphs";
+const Graphs = lazy(()=> import('../pages/graphs'));
 interface IRouteObject {
   children?: IRouteObject[];
   element?: React.ReactNode;

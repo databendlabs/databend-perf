@@ -14,4 +14,15 @@ export default defineConfig({
 			'apis': path.resolve(__dirname, 'src/apis')
 		},
 	},
+  build: {
+		rollupOptions: {
+			output:{
+				manualChunks: {
+					lodash: ['lodash'],
+					react: ['react', 'react-dom', 'react-router-dom', 'echarts']
+				}
+        
+			}
+		}
+	}
 })
