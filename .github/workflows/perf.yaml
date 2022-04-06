@@ -71,6 +71,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: temp
-          destination_dir: front/public/json
+          destination_dir: json
           keep_files: false
           commit_message: 'Update Transform Data'
