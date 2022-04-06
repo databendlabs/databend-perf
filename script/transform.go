@@ -61,7 +61,6 @@ type Line struct {
 }
 
 var (
-	sampleTemplate  = `('%s',%.3f,'%s')`
 	srcDir, destDir string
 )
 
@@ -186,6 +185,58 @@ func HandleTypeDir(typeDir string) {
 			continue
 		}
 		HandleData(&data, filename, typeDir)
+		latestFilename = filename
+		latestData = data
+	}
+	WriteLastestResults(&latestData, typeDir, latestFilename)
+}
+
+var (
+	latestFilename string
+	latestData     Data
+)
+
+type Latest struct {
+	Date    string         `json:"date"`
+	Results []LatestResult `json:"results"`
+}
+
+type LatestResult struct {
+	Title   string        `json:"title"`
+	Sql     string        `json:"sql"`
+	Lines   []interface{} `json:"lines"`
+	Version string        `json:"version"`
+	X       []string      `json:"xAxis"`
+}
+
+func WriteLastestResults(data *Data, typeDir, filename string) {
+	if data == nil || filename == "" {
+		return
+	}
+	rs := make([]LatestResult, 0)
+	for _, schema := range data.Schemas {
+		rs = append(rs, LatestResult{
+			Title:   schema.Name,
+			Sql:     schema.Sql,
+			Lines:   []interface{}{schema.Min, schema.Max, schema.Median, schema.Mean},
+			Version: data.Meta.Tag,
+			X:       []string{"min", "max", "median", "mean"},
+		})
+	}
+	latest := Latest{
+		Date:    GetDateFromFilename(filename),
+		Results: rs,
+	}
+	result, err := json.Marshal(latest)
+	if err != nil {
+		fmt.Printf("marshal lastest result err: %v", err)
+		return
+	}
+	filepath := destDir + "/" + typeDir + "/" + "latest" + JsonSuffix
+	err = ioutil.WriteFile(filepath, result, 0666)
+	if err != nil {
+		fmt.Printf("write file %s err: %v\n", filepath, err)
+		return
 	}
 }
 
