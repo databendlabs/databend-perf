@@ -12,7 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     name: build
     steps:
-      # check out the repository
       - name: Checkout    
         uses: actions/checkout@v2
 
@@ -22,7 +21,7 @@ jobs:
         run: yarn build
       
 
-       - name: Upload Result
+      - name: Upload Result
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
