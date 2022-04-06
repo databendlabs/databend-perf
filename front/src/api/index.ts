@@ -9,3 +9,6 @@ export function getApiListByCategory(category: string): Promise<any> {
 export function getGraph(category: string, which: string): Promise<any> {
 	return service.get(`${category}/${which}`);
 }
+export function getLatestByCategory(category:string): Promise<any>  {
+  return service.get(`${category}/latest.json`);
+}

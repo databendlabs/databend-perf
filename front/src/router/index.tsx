@@ -3,6 +3,8 @@ import { lazy } from "react";
 import { useRoutes } from "react-router-dom";
 import PerfLayout from "../componnent/Layout";
 const Graphs = lazy(()=> import('../pages/graphs'));
+const Compare = lazy(()=> import('../pages/compare'));
+const Status = lazy(()=> import('../pages/status'));
 interface IRouteObject {
   children?: IRouteObject[];
   element?: React.ReactNode;
@@ -24,12 +26,12 @@ export const allRouter: IRouteObject[] = [
       },
       {
         path: 'compare',
-        element: <>compare</>
+        element: <Compare></Compare>
       }
       ,
       {
         path: 'status',
-        element: <>status</>
+        element: <Status></Status>
       }
     ]
 	},
