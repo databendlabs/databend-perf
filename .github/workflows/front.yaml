@@ -18,7 +18,7 @@ jobs:
       - name: Install Dependencies
         run: cd ./front && yarn
       - name: Build
-        run: yarn build
+        run: cd ./front && yarn build
       
 
       - name: Upload Result
