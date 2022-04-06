@@ -27,6 +27,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: dist
-          destination_dir: '.'
           keep_files: true
           commit_message: 'Update front dist'
