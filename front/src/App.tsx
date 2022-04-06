@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { HashRouter as Router } from 'react-router-dom'
 import 'antd/dist/antd.min.css'
 import { AppRouters } from './router';
 import './App.css';
