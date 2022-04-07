@@ -1,11 +1,11 @@
-import { FC, ReactElement, useState, useEffect } from 'react';
-import { useMount, useUnmount } from 'ahooks';
+import { FC, ReactElement, useState } from 'react';
+import { useMount } from 'ahooks';
 import { DatePicker, Form, Row, Col, Select, Button, message, Table, Tag } from 'antd';
 import moment from 'moment';
 import { getApiListByCategory, getCategories, getGraph } from '../api';
-const { RangePicker } = DatePicker;
+import { DATE_FORMATTER, formatterDate } from '../utils/tools';
 const { Option } = Select;
-const a: FC = (): ReactElement=> {
+const Compare: FC = (): ReactElement=> {
   const [formRef] = Form.useForm();
   const [category, setCategory] = useState([]);
   const [defaultCategory, setDefaultCategory] = useState<any>('');
@@ -17,12 +17,6 @@ const a: FC = (): ReactElement=> {
     before: undefined,
     after: undefined
   });
-  const [graphKind] = useState([
-    {
-      name: 'Raw',
-      value: 'raw'
-    }
-  ]);
   const [tableData, setTableData] = useState<any>([]);
   const columns = [
     {
@@ -66,15 +60,12 @@ const a: FC = (): ReactElement=> {
   });
   const submit = ()=>{
     const { before, after, category } = formRef.getFieldsValue();
-    formRef.setFieldsValue({
-      category: category
-    });
     let b = before;
     if (before) {
-      b = moment(before).format('yyyy-MM-DD');
+      b = formatterDate(before);
     }
     setDefaultCategory(category);
-    getAllDateByCategory(b, moment(after).format('yyyy-MM-DD'), category);
+    getAllDateByCategory(b, formatterDate(after), category);
   }
   async function getAllInfo() {
     let allCategory = await getCategories();
@@ -103,21 +94,19 @@ const a: FC = (): ReactElement=> {
           setCompareDate({
             before: `${before} (${beforeVersion})`, after: `${after} (${afterVersion})`
           })
-          // formRef.setFieldsValue({
-          //   before, after
-          // });
           compareData = lines.map((item:any)=>{
             return {
               name: item.name,
               data: item.data.slice(-2)
             };
           });
-
+          formRef.setFieldsValue({
+            before: moment(before, DATE_FORMATTER),
+            after: moment(after, DATE_FORMATTER)
+          })
         } else {
-          console.log(before, after, 'before-after', xAxis);
           let beforexAxis = xAxis.indexOf(before);
           let afterxAxis = xAxis.indexOf(after);
-          console.log(beforexAxis, afterxAxis)
 
           if (beforexAxis===-1 || afterxAxis===-1) {
             let tip: string | undefined = before;
@@ -222,4 +211,4 @@ const a: FC = (): ReactElement=> {
     </div>
   );
 };
-export default a;
+export default Compare;
