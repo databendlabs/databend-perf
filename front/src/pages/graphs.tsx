@@ -118,7 +118,7 @@ const Graphs: FC = (): ReactElement=> {
           return [point[0]+10, 0];
         },
         formatter(parames:any){
-          let str =`<div style="font-size: '12px';">${sql}</div>${parames[0].axisValue}<span style="display:inline-block;padding-left: 20px;">${version[parames[0].dataIndex]}</span></br>`;
+          let str =`<div style="width: 500px; white-space: normal;word-wrap: break-word;">${sql}</div>${parames[0].axisValue}<span style="display:inline-block;padding-left: 20px;">${version[parames[0].dataIndex]}</span></br>`;
           parames.forEach((item:any, index:number) => {
             str +=
                `<div>${item.marker} ${item.seriesName}:${item.data}</div>`;
