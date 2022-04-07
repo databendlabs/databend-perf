@@ -22,7 +22,7 @@ type Schema struct {
 	Sql      string    `json:"sql"`
 	Min      float32   `json:"min"`
 	Max      float32   `json:"max"`
-	Median   float64   `json:"median"`
+	Median   float32   `json:"median"`
 	StdDev   float64   `json:"std_dev"`
 	ReadRow  uint64    `json:"read_row"`
 	ReadByte uint64    `json:"read_byte"`
@@ -56,8 +56,8 @@ type Result struct {
 	X        []string `json:"xAxis"`
 }
 type Line struct {
-	Name string    `json:"name"`
-	Data []float32 `json:"data"`
+	Name string        `json:"name"`
+	Data []interface{} `json:"data"`
 }
 
 var (
@@ -275,9 +275,9 @@ func GetResult(resultMap *sync.Map, k string, index int) *Result {
 	if v, ok = resultMap.Load(k); !ok {
 		v = &Result{
 			Title:   k,
-			Lines:   []*Line{{Name: "min"}, {Name: "max"}},
+			Lines:   []*Line{{Name: "min"}, {Name: "max"}, {Name: "median"}, {Name: "mean"}},
 			Index:   index,
-			Legends: []string{"min", "max"},
+			Legends: []string{"min", "max", "median", "mean"},
 		}
 		resultMap.Store(k, v)
 	}
@@ -290,6 +290,10 @@ func SetLine(r *Result, schema *Schema, meta *Meta, filename string) {
 			l.Data = append(l.Data, schema.Min)
 		} else if l.Name == "max" {
 			l.Data = append(l.Data, schema.Max)
+		} else if l.Name == "median" {
+			l.Data = append(l.Data, schema.Median)
+		} else if l.Name == "mean" {
+			l.Data = append(l.Data, schema.Mean)
 		}
 	}
 }
