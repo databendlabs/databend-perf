@@ -16,7 +16,7 @@ const PerfLayout: FC = (): ReactElement=> {
   return (
     <Layout>
       <Header style={{ position: 'fixed', zIndex: 1, width: '100%', display: 'flex', alignItems: 'center' }}>
-        <LogoDarkHorizon></LogoDarkHorizon>
+        <Link style={{display: 'flex'}} to={'/'}><LogoDarkHorizon></LogoDarkHorizon></Link>
         <Menu onClick={menuClick} style={{minWidth: '400px', marginLeft: '40px'}} theme="dark" mode="horizontal" selectedKeys={[selectKey]}>
           <Menu.Item key='graphs'>
             <Link to={'/'}>Graphs</Link>  
