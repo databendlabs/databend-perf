@@ -139,7 +139,6 @@ const Graphs: FC = (): ReactElement=> {
   }
   function disabledRangeTime(current:any) {
     return current > moment().add(0, 'days');
- 
   }
   async function submit(){
     const {category, date, kind} = formRef.getFieldsValue();
