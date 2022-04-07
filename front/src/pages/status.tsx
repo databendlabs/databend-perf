@@ -95,8 +95,15 @@ const Status: FC = (): ReactElement=> {
       },
       series: [
         {
-          data: element.lines,
-          type: 'line'
+          data: element.lines.map((data:number)=> data.toFixed(4)),
+          type: 'line',
+          itemStyle: {
+            normal: {
+              label: {
+                show: true
+              }
+            }
+          }
         }
       ]
     });
