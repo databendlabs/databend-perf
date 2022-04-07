@@ -90,6 +90,10 @@ const Status: FC = (): ReactElement=> {
             normal: {
               label: {
                 show: true
+              },
+              color: function(params:any) {
+                var colorList = ['#5470c6','#91cc75', '#fac858', '#ee6666'];
+                return colorList[params.dataIndex]
               }
             }
           }
