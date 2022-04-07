@@ -131,7 +131,7 @@ const Graphs: FC = (): ReactElement=> {
         name: 'date'
       },
       yAxis: {
-        name: 'ms'
+        name: 's'
       },
       series: lines
     });

@@ -61,7 +61,7 @@ const Status: FC = (): ReactElement=> {
       },
       yAxis: {
         type: 'value',
-        name: 'ms'
+        name: 's'
       },
       tooltip: {
         trigger: 'axis',
@@ -85,7 +85,7 @@ const Status: FC = (): ReactElement=> {
       series: [
         {
           data: element.lines.map((data:number)=> data.toFixed(4)),
-          type: 'line',
+          type: 'bar',
           itemStyle: {
             normal: {
               label: {

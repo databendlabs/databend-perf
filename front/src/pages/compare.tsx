@@ -163,11 +163,11 @@ const a: FC = (): ReactElement=> {
     if (comp[0] - comp[1]===0) {
       return '0%';
     }
-    return (((comp[0] - comp[1]) / comp[0]) * 100).toFixed(4) + '%';
+    return (((comp[1] - comp[0]) / comp[0]) * 100).toFixed(4) + '%';
   }
   function renderText(text: string) {
     let n = parseFloat(text)
-    return <span style={{color: n>=0?'red':'green'}}>{text}</span>
+    return <span style={{color: n>0?'red':'green'}}>{text}</span>
   }
   function disabledRangeTime(current:any) {
     return current > moment().add(0, 'days');
