@@ -34,7 +34,6 @@ const a: FC = (): ReactElement=> {
     {
       title: 'sql',
       dataIndex: 'sql',
-      width: 300,
       key: 'sql',
     },
     {
@@ -160,7 +159,10 @@ const a: FC = (): ReactElement=> {
   function countGrowthRate(comp: number[]){
     if (comp.length<=1) {
       return "-"
-    } 
+    }
+    if (comp[0] - comp[1]===0) {
+      return '0%';
+    }
     return (((comp[0] - comp[1]) / comp[0]) * 100).toFixed(4) + '%';
   }
   function renderText(text: string) {

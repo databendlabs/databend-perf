@@ -1,33 +1,16 @@
-import { FC, ReactElement, useState, useEffect } from 'react';
-import { useMount, useUnmount } from 'ahooks';
-import { DatePicker, Form, Row, Col, Select, Button, message } from 'antd';
-import { getApiListByCategory, getCategories, getGraph, getLatestByCategory } from '../api';
-import { Link } from "react-router-dom";
+import { FC, ReactElement, useState } from 'react';
+import { useMount } from 'ahooks';
+import { Form, Row, Col, Select, Spin } from 'antd';
+import { getCategories, getLatestByCategory } from '../api';
 import * as echarts from 'echarts';
 const { Option } = Select;
-const mock = [
-  {
-    title: 'Q1',
-    sql: '222',
-    lines: [1.1, 3.1],
-    version: '',
-    xAxis: ['min', 'max'],
-
-  },
-  {
-    title: 'Q2',
-    sql: '22222',
-    lines: [2.1, 3.5],
-    version: '',
-    xAxis: ['min', 'max'],
-  }
-]
 const Status: FC = (): ReactElement=> {
   const [formRef] = Form.useForm();
   const [category, setCategory] = useState([]);
   const [container, setContainer] = useState<any>([]);
   const [defaultCategory, setDefaultCategory] = useState<any>('');
   const [date, setDate] = useState('');
+  const [loading, setLoading] = useState(false);
   useMount(()=>{
     getAllInfo();
   });
@@ -43,11 +26,17 @@ const Status: FC = (): ReactElement=> {
   }
 
   async function getLatest(category: string){
-    setDefaultCategory(category);
-    let {date, results} = await getLatestByCategory(category);
-    setDate(date);
-    setContainer(results);
-    getAllGraph(category, results)
+    setLoading(true);
+    try {
+      setDefaultCategory(category);
+      let {date, results} = await getLatestByCategory(category);
+      setDate(date);
+      setContainer(results);
+      getAllGraph(category, results)
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
   }
   function getAllGraph(category: string, results: any){
     console.log(results)
@@ -134,20 +123,22 @@ const Status: FC = (): ReactElement=> {
           </Col>
           <Col span={6}>
            <Form.Item label="Latest">
-            <span>{date}</span>
+            <span>{date} ({container && container.length>0 && container[0].version})</span>
            </Form.Item>
           </Col>
         </Row>
       </Form>
-      <Row>
-        {
-          container?.map((item:any)=>{
-            return <Col span={8}  key={item.title} style={{marginBottom: '20px'}}>
-              <div style={{height: '300px', width: '100%'}} id={`${defaultCategory}-${item.title}`}></div>
-            </Col>
-          })
-        } 
-      </Row>
+      <Spin spinning={loading}>
+        <Row style={{minHeight: '400px'}}>
+          {
+            container?.map((item:any)=>{
+              return <Col span={8}  key={item.title} style={{marginBottom: '20px'}}>
+                <div style={{height: '300px', width: '100%'}} id={`${defaultCategory}-${item.title}`}></div>
+              </Col>
+            })
+          } 
+        </Row>
+      </Spin>
     </div>
   );
 };
