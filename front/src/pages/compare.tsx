@@ -167,7 +167,7 @@ const a: FC = (): ReactElement=> {
   }
   function renderText(text: string) {
     let n = parseFloat(text)
-    return <span style={{color: n>0?'red':'green'}}>{text}</span>
+    return <span style={{color: n>0?'red':'green'}}>{n>0?'+'+text:text}</span>
   }
   function disabledRangeTime(current:any) {
     return current > moment().add(0, 'days');
