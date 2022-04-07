@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { message } from 'antd';
 
 const axiosInstance: AxiosInstance = axios.create({
-	baseURL: 'https://zqxul.github.io/pages/public/json',
+	baseURL: 'https://datafuselabs.github.io/databend-perf/json',
 	headers: {
 		'Content-Type': 'application/json;'
 	}
