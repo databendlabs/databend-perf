@@ -27,7 +27,7 @@ type Schema struct {
 	ReadRow  uint64    `json:"read_row"`
 	ReadByte uint64    `json:"read_byte"`
 	Times    []float32 `json:"time"`
-	Errors   []error   `json:"error"`
+	Errors   []string  `json:"error"`
 	Mean     float64   `json:"mean"`
 }
 type Data struct {
@@ -259,6 +259,9 @@ func PrepareTypeDir(typeDir string) bool {
 
 func HandleData(data *Data, filename string, t string) {
 	for i, schema := range data.Schemas {
+		if len(schema.Errors) > 0 {
+			return
+		}
 		resultMap := typeMap[t]
 		r := GetResult(resultMap, schema.Name, i)
 		r.Sql = schema.Sql
