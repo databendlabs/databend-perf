@@ -1,19 +1,20 @@
 import { FC, ReactElement, useState, useEffect } from 'react';
-import { useMount, useUnmount } from 'ahooks';
+import { useMount } from 'ahooks';
 import { DatePicker, Form, Row, Col, Select, Button, message } from 'antd';
 import { getApiListByCategory, getCategories, getGraph } from '../api';
 import { Link } from "react-router-dom";
 import * as echarts from 'echarts';
 import moment from 'moment';
+import { formatterDate } from '../utils/tools';
 const { RangePicker } = DatePicker;
 const { Option } = Select;
-let chartInstance:any = {};
 const Graphs: FC = (): ReactElement=> {
   const [category, setCategory] = useState([]);
   const [defaultCategory, setDefaultCategory] = useState<any>('');
   const [formRef] = Form.useForm();
   const [xAxisdate, setXAxisdate] = useState([]);
   const [isFullDate, setIsFullDate] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [filterDateObj, setFilterDate] = useState({
     filterDate: [],
     startIndex: 0,
@@ -28,9 +29,6 @@ const Graphs: FC = (): ReactElement=> {
   const [container, setContainer] = useState([]);
   useMount(()=>{
     getAllInfo();
-  });
-  useUnmount(()=>{
-    chartInstance = {};
   });
   useEffect(()=>{
     if (!isFullDate) {
@@ -58,12 +56,18 @@ const Graphs: FC = (): ReactElement=> {
   }
   async function  getAllGraph(category:string, graphList:string, isFullDate: boolean) {
     const len = graphList.length;
-    for (let i = 0; i < len; i++) {
-      const graph = graphList[i];
-      const graphData =  await getGraph(category, graph)
-      i===0 && setXAxisdate(graphData?.xAxis);
-      drawCharts(category, graph, graphData, i, isFullDate);
-      
+    setLoading(true)
+    try {
+      for (let i = 0; i < len; i++) {
+        const graph = graphList[i];
+        const graphData =  await getGraph(category, graph)
+        i===0 && setXAxisdate(graphData?.xAxis);
+        drawCharts(category, graph, graphData, i, isFullDate);
+      }
+      setLoading(false)
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
     }
   }
   function drawCharts(category: string,graph: string, graphData: any, i:number, isFullDate: boolean) {
@@ -145,14 +149,29 @@ const Graphs: FC = (): ReactElement=> {
     setDefaultCategory(category)
     let starDate = null;
     let endDate = null;
+    let newStart: null |string|number = starDate;
     if (date && date.length>1) {
-      starDate = moment(date[0]).format('yyyy-MM-DD');
-      endDate = moment(date[1]).format('yyyy-MM-DD');
+      starDate = formatterDate(date[0]),
+      endDate = formatterDate(date[1])
+
+      /*newStart = starDate;
+      let i  = 0;
+      while(xAxisdate.indexOf(newStart as never) === -1) {
+        newStart = moment(newStart).add(1, 'd').format('yyyy-MM-DD');
+        i++;
+
+        if (endDate && new Date(newStart).getTime() > new Date(endDate).getTime()) {
+          newStart = starDate;
+          break;
+        }
+      }
+
+      starDate = newStart;*/
     }
    
     const start = xAxisdate.indexOf(starDate as never);
     const end =  xAxisdate.indexOf(endDate as never);
-
+    // console.log(newStart)
     const startIndex = start ===-1 ? 0 : start;
     const endIndex = end;
     let realDate = [];
@@ -162,11 +181,10 @@ const Graphs: FC = (): ReactElement=> {
       realDate = xAxisdate.slice(startIndex, endIndex+1)
     }
     if (realDate.length<=0) {
-      message.warning('There is no birth data for this time range');
+      message.warning('No data was generated for this time range');
       return
     }
     setIsFullDate(false)
-    console.log('realDate:', xAxisdate, startIndex, endIndex, realDate)
     setFilterDate({
       filterDate: realDate,
       startIndex,
@@ -216,7 +234,7 @@ const Graphs: FC = (): ReactElement=> {
               </Select>
             </Form.Item>
           </Col>
-          <Button type='primary' onClick={submit}>Submit</Button>
+          <Button loading={loading} type='primary' onClick={submit}>Submit</Button>
         </Row>
       </Form>
       <div>

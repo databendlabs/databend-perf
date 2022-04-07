@@ -39,7 +39,6 @@ const Status: FC = (): ReactElement=> {
     }
   }
   function getAllGraph(category: string, results: any){
-    console.log(results)
     for (let i = 0; i < results.length; i++) {
       const element = results[i];
       drawChart(element, category, i)
