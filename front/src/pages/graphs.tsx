@@ -60,9 +60,12 @@ const Graphs: FC = (): ReactElement=> {
     try {
       for (let i = 0; i < len; i++) {
         const graph = graphList[i];
-        const graphData =  await getGraph(category, graph)
-        i===0 && setXAxisdate(graphData?.xAxis);
-        drawCharts(category, graph, graphData, i, isFullDate);
+        getGraph(category, graph)
+          .then((graphData)=>{
+            console.log(graphData, 'graphData');
+            i===0 && setXAxisdate(graphData?.xAxis);
+            drawCharts(category, graph, graphData, i, isFullDate);
+          })
       }
       setLoading(false)
     } catch (error) {
@@ -73,73 +76,75 @@ const Graphs: FC = (): ReactElement=> {
   function drawCharts(category: string,graph: string, graphData: any, i:number, isFullDate: boolean) {
     const name = `${category}-${graph}`;
     const container = document.getElementById(`${name}`) as HTMLElement;
-    let chart:any = echarts.init(container);
-    let {
-      legend,
-      lines,
-      sql,
-      title,
-      version,
-      xAxis
-    } = graphData;
-    if (!isFullDate){
-      const { startIndex, endIndex, filterDate } = filterDateObj;
-      if (filterDateObj.endIndex ===-1){
-        xAxis = filterDate;
-        lines.map((item:any)=>{
-          item.data = item.data.slice(startIndex);
-        });
-        version = version.slice(startIndex);
-      } else {
-        xAxis = filterDate;
-        lines.map((item:any)=>{
-          item.data = item.data.slice(startIndex, endIndex+1);
-        });
-        version = version.slice(startIndex, endIndex+1);
-      }
-    }
-    lines?.map((item:any)=>{
-      return item.type = 'line'
-    })
-    setIsFullDate(true)
-    chart.setOption({
-      legend: {
-        data: legend,
-        y: 'bottom'
-      },
-      title: {
-        left: 'center',
-        text:`${title}`
-      },
-      tooltip: {
-        trigger: 'axis',
-        position: function(point:any[]){
-          if (i%3 == 2) {
-            return 'right';
-          } else if (i%3 == 1) {
-            return point;
-          }
-          return [point[0]+10, 0];
-        },
-        formatter(parames:any){
-          let str =`<div style="width: 500px; white-space: normal;word-wrap: break-word;">${sql}</div>${parames[0].axisValue}<span style="display:inline-block;padding-left: 20px;">${version[parames[0].dataIndex]}</span></br>`;
-          parames.forEach((item:any, index:number) => {
-            str +=
-               `<div>${item.marker} ${item.seriesName}:${item.data}</div>`;
+    if (container) {
+      let chart:any = echarts.init(container);
+      let {
+        legend,
+        lines,
+        sql,
+        title,
+        version,
+        xAxis
+      } = graphData;
+      if (!isFullDate){
+        const { startIndex, endIndex, filterDate } = filterDateObj;
+        if (filterDateObj.endIndex ===-1){
+          xAxis = filterDate;
+          lines.map((item:any)=>{
+            item.data = item.data.slice(startIndex);
           });
-          return str;
+          version = version.slice(startIndex);
+        } else {
+          xAxis = filterDate;
+          lines.map((item:any)=>{
+            item.data = item.data.slice(startIndex, endIndex+1);
+          });
+          version = version.slice(startIndex, endIndex+1);
         }
-      },
-      xAxis: {
-        data: xAxis,
-        name: 'date'
-      },
-      yAxis: {
-        name: 's'
-      },
-      series: lines
-    });
-    chart = null;
+      }
+      lines?.map((item:any)=>{
+        return item.type = 'line'
+      })
+      setIsFullDate(true)
+      chart.setOption({
+        legend: {
+          data: legend,
+          y: 'bottom'
+        },
+        title: {
+          left: 'center',
+          text:`${title}`
+        },
+        tooltip: {
+          trigger: 'axis',
+          position: function(point:any[]){
+            if (i%3 == 2) {
+              return 'right';
+            } else if (i%3 == 1) {
+              return point;
+            }
+            return [point[0]+10, 0];
+          },
+          formatter(parames:any){
+            let str =`<div style="width: 500px; white-space: normal;word-wrap: break-word;">${sql}</div>${parames[0].axisValue}<span style="display:inline-block;padding-left: 20px;">${version[parames[0].dataIndex]}</span></br>`;
+            parames.forEach((item:any, index:number) => {
+              str +=
+                `<div>${item.marker} ${item.seriesName}:${item.data}</div>`;
+            });
+            return str;
+          }
+        },
+        xAxis: {
+          data: xAxis,
+          name: 'date'
+        },
+        yAxis: {
+          name: 's'
+        },
+        series: lines
+      });
+      chart = null;
+    }
   }
   function disabledRangeTime(current:any) {
     return current > moment().add(0, 'days');
