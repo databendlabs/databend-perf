@@ -3,10 +3,12 @@ import { useMount } from 'ahooks';
 import { Form, Row, Col, Select, Spin } from 'antd';
 import { getCategories, getLatestByCategory } from '../api';
 import * as echarts from 'echarts';
-import styles from './css/styles.module.less';
+import styles from './css/styles.module.scss';
 const { Option } = Select;
+import { deviceType } from '../utils/device-type';
 const Status: FC = (): ReactElement=> {
   const [formRef] = Form.useForm();
+  const { isPhone } = deviceType();
   const [category, setCategory] = useState([]);
   const [container, setContainer] = useState<any>([]);
   const [defaultCategory, setDefaultCategory] = useState<any>('');
@@ -107,7 +109,7 @@ const Status: FC = (): ReactElement=> {
         }
       >
       <Row gutter={20}>
-        <Col span={4}>
+        <Col span={isPhone?24:4}>
           <Form.Item
             name="category"
             label="Category">
@@ -120,7 +122,7 @@ const Status: FC = (): ReactElement=> {
             </Select>
             </Form.Item>
           </Col>
-          <Col span={6}>
+          <Col span={isPhone?24:6}>
            <Form.Item label="Latest">
             <span>{date} ({container && container.length>0 && container[0].version})</span>
            </Form.Item>
@@ -131,7 +133,7 @@ const Status: FC = (): ReactElement=> {
         <Row className={styles.allChartWrap} style={{minHeight: '400px'}} gutter={10}>
           {
             container?.map((item:any)=>{
-              return <Col span={8}  key={item.title} style={{marginBottom: '20px'}}>
+              return <Col span={isPhone?24:8}  key={item.title} style={{marginBottom: '20px'}}>
                         <div className={styles.content}>
                           <div className={styles.title} id={`${defaultCategory}-${item.title}-title`}></div>
                           <div style={{height: '300px', width: '100%'}} id={`${defaultCategory}-${item.title}`}></div>

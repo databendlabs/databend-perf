@@ -1,0 +1,153 @@
+@use "sass:math";
+$container-width: 1254px;
+// function
+@function mpx($px:0){
+  @return math.div($px*1920,375)+px;
+}
+
+$phoneW:997px;
+@mixin media($phone:$phoneW){
+  @media screen and (max-width: $phone) {
+    @content;
+  }
+}
+@mixin min-media($width:3000px){
+  @media screen and (min-width: $width) {
+    @content;
+  }
+}
+@mixin pm{
+  [data-pc]{display:block;}
+  [data-phone]{display:none;}
+  @include media{
+    [data-pc]{display:none;}
+    [data-phone]{display:block;}
+  }
+  @content;
+}
+
+@mixin box($direction:row,$align:flex-start,$justify:flex-start){
+    display:flex;
+    flex-direction:$direction;
+    align-items:$align;
+    justify-content:$justify;
+}
+.g-box{
+  @include box;
+}
+@mixin gl-home-main {
+  flex: 1;
+}
+@mixin box-c{
+  @include box($direction:row,$align:center,$justify:center);
+}
+.g-box-c {
+  @include box($direction:row,$align:center,$justify:center);
+}
+@mixin align-c{
+  @include box($direction:row,$align:center,$justify:flex-start);
+}
+.g-align-c {
+  @include box($direction:row,$align:center,$justify:flex-start);
+}
+@mixin align-s{
+  @include box($direction:row,$align:flex-start,$justify:flex-start);
+}
+.g-align-s{
+  @include box($direction:row,$align:flex-start,$justify:flex-start);
+}
+@mixin justify-c{
+  @include box($direction:row,$align:flex-start,$justify:center);
+}
+.g-justify-c {
+  @include box($direction:row,$align:flex-start,$justify:center);
+}
+@mixin box-column{
+  @include box($direction:column,$align:flex-start,$justify:flex-start);
+}
+.g-box-column {
+  @include box($direction:column,$align:flex-start,$justify:flex-start);
+}
+@mixin box-column-e{
+  @include box($direction:column,$align:flex-end,$justify:flex-start);
+}
+.g-box-column-e{
+  @include box($direction:column,$align:flex-end,$justify:flex-start);
+}
+@mixin box-column-c{
+  @include box($direction:column,$align:center,$justify:center);
+}
+.g-box-column-c{
+  @include box($direction:column,$align:center,$justify:center);
+}
+@mixin align-column-c{
+  @include box($direction:column,$align:center,$justify:flex-start);
+}
+.g-align-column-c{
+  @include box($direction:column,$align:center,$justify:flex-start);
+}
+@mixin justify-column-c{
+  @include box($direction:column,$align:flex-start,$justify:center);
+}
+.g-justify-column-c {
+  @include box($direction:column,$align:flex-start,$justify:center);
+}
+@mixin box-flex {flex: 1;}
+@mixin box-shadow($shadow:5px,$color:$borColor-3){
+    box-shadow:0 0 $shadow 0 $color;
+}
+@mixin ellipsis($line:1){
+  @if $line==1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $line;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+@mixin phonePadding {
+  padding-left: mpx(15);
+  padding-right: mpx(15);
+}
+
+
+@mixin cardHover{
+  &,*{transition:all .4s ease;}
+  &:hover{transition:all .4s ease !important;box-shadow:0 0 20px rgba(0, 0, 0, 0.1); transform: translateY(-10px) !important;}
+  @content;
+  @include media{
+    &:hover{
+      transform: unset;
+      // box-shadow:0 0 mpx(20) rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+@mixin ellipse-n($line-num: 3) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line-num;
+  overflow: hidden;
+}
+
+%clearfix{zoom:1;
+  &::before,&::after{content:"";display:table;}
+  &::after {clear:both;}
+}
+
+.global-card-hover{
+  @include cardHover;
+}
+.global-container-width{
+  width: $container-width;
+  margin: 0 auto;
+  @include media{
+    width: 100%;
+  }
+}

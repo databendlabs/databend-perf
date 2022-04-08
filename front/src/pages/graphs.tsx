@@ -6,10 +6,12 @@ import { Link } from "react-router-dom";
 import * as echarts from 'echarts';
 import moment from 'moment';
 import { formatterDate } from '../utils/tools';
-import styles from './css/styles.module.less';
+import styles from './css/styles.module.scss';
+import { deviceType } from '../utils/device-type';
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 const Graphs: FC = (): ReactElement=> {
+  const { isPhone } = deviceType();
   const [category, setCategory] = useState([]);
   const [defaultCategory, setDefaultCategory] = useState<any>('');
   const [formRef] = Form.useForm();
@@ -90,8 +92,8 @@ const Graphs: FC = (): ReactElement=> {
         xAxis
       } = graphData;
       t.innerHTML = `
-        <span style='display: flex'>
-          <span style='font-weight: bold; padding-right: 10px;'>${title}:</span><span>${sql}</span>
+        <span style='display: flex;'>
+          <span style='font-weight: bold; padding-right: 10px;'>${title}:</span><span style="font-size: 12px;">${sql}</span>
         </span>
       `;
       if (!isFullDate){
@@ -121,6 +123,7 @@ const Graphs: FC = (): ReactElement=> {
         },
         tooltip: {
           trigger: 'axis',
+          position: isPhone?['20%', '-30%']: undefined,
           formatter(parames:any){
             let str =`${parames[0].axisValue}<span style="display:inline-block;padding-left: 20px;">${version[parames[0].dataIndex]}</span></br>`;
             parames.forEach((item:any, index:number) => {
@@ -132,7 +135,7 @@ const Graphs: FC = (): ReactElement=> {
         },
         xAxis: {
           data: xAxis,
-          name: 'date'
+          name: isPhone?'':'date'
         },
         yAxis: {
           name: 's'
@@ -204,7 +207,7 @@ const Graphs: FC = (): ReactElement=> {
         }
       >
         <Row gutter={10}>
-          <Col span={6}>
+          <Col span={isPhone?24:6}>
             <Form.Item
               name="date"
               label="Date range">
@@ -213,7 +216,7 @@ const Graphs: FC = (): ReactElement=> {
                 style={{width: '100%'}}/>
             </Form.Item>
           </Col>
-          <Col span={4}>
+          <Col span={isPhone?12:4}>
             <Form.Item
               name="kind"
               label="Graph kind">
@@ -224,7 +227,7 @@ const Graphs: FC = (): ReactElement=> {
               </Select>
             </Form.Item>
           </Col>
-          <Col span={4}>
+          <Col span={isPhone?12:4}>
             <Form.Item
               name="category"
               label="Category">
@@ -235,18 +238,18 @@ const Graphs: FC = (): ReactElement=> {
               </Select>
             </Form.Item>
           </Col>
-          <Button loading={loading} type='primary' onClick={submit}>Submit</Button>
+          <Button style={isPhone?{width: '100%', marginBottom: '20px'}:{width: 'auto'}} loading={loading} type='primary' onClick={submit}>Submit</Button>
         </Row>
       </Form>
       <div>
         <div style={{marginBottom: '20px'}}>
           <div>See <Link to="/compare">compare page</Link> for descriptions of what the names mean.</div>
-          <Tag color="blue">Environment: {environment}</Tag>
+          <Tag style={{marginTop: '5px'}} color="blue">Environment: {environment}</Tag>
         </div>
         <Row className={styles.allChartWrap} id='allChartWrap' gutter={10}>
             {
               container?.map((item)=>{
-                return <Col span={8}  key={item} style={{marginBottom: '20px'}}>
+                return <Col span={isPhone?24:8}  key={item} style={{marginBottom: '20px'}}>
                         <div className={styles.content}>
                           <div className={styles.title} id={`${defaultCategory}-${item}-title`}></div>
                           <div style={{height: '300px', width: '100%', background: '#fff'}} id={`${defaultCategory}-${item}`}></div>

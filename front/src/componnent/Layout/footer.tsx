@@ -1,5 +1,5 @@
 import { FC, ReactElement } from 'react';
-import styles from './footer.module.less';
+import styles from './footer.module.scss';
 import LinkIcon from '../../assets/icon/link';
 const Footer: FC = (): ReactElement=> {
   const links: {

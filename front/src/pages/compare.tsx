@@ -4,8 +4,11 @@ import { DatePicker, Form, Row, Col, Select, Button, message, Table, Tag } from 
 import moment from 'moment';
 import { getApiListByCategory, getCategories, getGraph } from '../api';
 import { DATE_FORMATTER, formatterDate } from '../utils/tools';
+import { deviceType } from '../utils/device-type';
+import styles from './css/compare.module.scss';
 const { Option } = Select;
 const Compare: FC = (): ReactElement=> {
+  const { isPhone } = deviceType();
   const [formRef] = Form.useForm();
   const [category, setCategory] = useState([]);
   const [defaultCategory, setDefaultCategory] = useState<any>('');
@@ -18,17 +21,17 @@ const Compare: FC = (): ReactElement=> {
     after: undefined
   });
   const [tableData, setTableData] = useState<any>([]);
-  const columns = [
+  const columns:any = [
     {
       title: 'benchmark',
       dataIndex: 'title',
-      key: 'title',
-      width: 150
+      key: 'title'
     },
     {
       title: 'sql',
       dataIndex: 'sql',
       key: 'sql',
+      fixed: 'left',
     },
     {
       title: 'min',
@@ -172,21 +175,21 @@ const Compare: FC = (): ReactElement=> {
         }
       >
         <Row gutter={10}>
-          <Col span={4}>
+          <Col span={isPhone?12:4}>
             <Form.Item
               name="before"
               label="Before">
               <DatePicker disabledDate={disabledRangeTime} style={{width: '100%'}}/>
             </Form.Item>
           </Col>
-          <Col span={4}>
+          <Col span={isPhone?12:4}>
             <Form.Item
               name="after"
               label="After">
               <DatePicker disabledDate={disabledRangeTime} style={{width: '100%'}}/>
             </Form.Item>
           </Col>
-          <Col span={4}>
+          <Col span={isPhone?24:4}>
             <Form.Item
               name="category"
               label="Category">
@@ -197,10 +200,10 @@ const Compare: FC = (): ReactElement=> {
               </Select>
             </Form.Item>
           </Col>
-          <Button type='primary' onClick={submit}>Compare</Button>
+          <Button style={isPhone?{width: '100%', marginBottom: '20px'}:{width: 'auto'}} type='primary' onClick={submit}>Compare</Button>
         </Row>
       </Form>
-      <div style={{textAlign: 'center', marginBottom: '20px', fontWeight: 'bold'}}>
+      <div className={styles.compareTitle}>
         Comparing <Tag color="#108ee9">{defaultCategory}</Tag>between <Tag color="blue">{compareDate.before || ' '}</Tag>and <Tag color="blue">{compareDate.after || ' '}</Tag>
       </div>
       <Table

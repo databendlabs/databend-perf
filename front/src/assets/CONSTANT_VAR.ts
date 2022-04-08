@@ -1,0 +1,1 @@
+export const ICON_LINSK = '//at.alicdn.com/t/font_2976183_ycvsowfaqti.js'; // alibaba iconfont

@@ -1,0 +1,37 @@
+.menuCollapse{
+  color: #fff;
+  font-size: 50px;
+}
+.header{
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+  display: flex;
+  @include media{
+    padding: 0 15px;
+  }
+  .headerLeft{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @include media{
+      width: 100%;
+    }
+  }
+}
+.contentWrap{
+  @include media{
+    background-color: #fff;
+  }
+  .content {
+    min-height: 100vh;
+    background: #fff;
+    overflow-x: hidden;
+    padding-bottom: 40px;
+    padding: 20px;
+    @include media{
+      padding: 0;
+    }
+  }
+
+}
