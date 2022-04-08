@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import * as echarts from 'echarts';
 import moment from 'moment';
 import { formatterDate } from '../utils/tools';
+import styles from './css/styles.module.less';
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 const Graphs: FC = (): ReactElement=> {
@@ -78,6 +79,7 @@ const Graphs: FC = (): ReactElement=> {
     const name = `${category}-${graph}`;
     const container = document.getElementById(`${name}`) as HTMLElement;
     if (container) {
+      let t = document.getElementById(`${name}-title`) as HTMLElement;
       let chart:any = echarts.init(container);
       let {
         legend,
@@ -87,6 +89,11 @@ const Graphs: FC = (): ReactElement=> {
         version,
         xAxis
       } = graphData;
+      t.innerHTML = `
+        <span style='display: flex'>
+          <span style='font-weight: bold; padding-right: 10px;'>${title}:</span><span>${sql}</span>
+        </span>
+      `;
       if (!isFullDate){
         const { startIndex, endIndex, filterDate } = filterDateObj;
         if (filterDateObj.endIndex ===-1){
@@ -112,22 +119,10 @@ const Graphs: FC = (): ReactElement=> {
           data: legend,
           y: 'bottom'
         },
-        title: {
-          left: 'center',
-          text:`${title}`
-        },
         tooltip: {
           trigger: 'axis',
-          position: function(point:any[]){
-            if (i%3 == 2) {
-              return 'right';
-            } else if (i%3 == 1) {
-              return point;
-            }
-            return [point[0]+10, 0];
-          },
           formatter(parames:any){
-            let str =`<div style="width: 500px; white-space: normal;word-wrap: break-word;">${sql}</div>${parames[0].axisValue}<span style="display:inline-block;padding-left: 20px;">${version[parames[0].dataIndex]}</span></br>`;
+            let str =`${parames[0].axisValue}<span style="display:inline-block;padding-left: 20px;">${version[parames[0].dataIndex]}</span></br>`;
             parames.forEach((item:any, index:number) => {
               str +=
                 `<div>${item.marker} ${item.seriesName}:${item.data}</div>`;
@@ -248,14 +243,15 @@ const Graphs: FC = (): ReactElement=> {
           <div>See <Link to="/compare">compare page</Link> for descriptions of what the names mean.</div>
           <Tag color="blue">Environment: {environment}</Tag>
         </div>
-        <Row id='allChartWrap'>
+        <Row className={styles.allChartWrap} id='allChartWrap' gutter={10}>
             {
               container?.map((item)=>{
                 return <Col span={8}  key={item} style={{marginBottom: '20px'}}>
-                  <div style={{height: '300px', width: '100%'}} id={`${defaultCategory}-${item}`}>
-                   
-                  </div>
-                </Col>
+                        <div className={styles.content}>
+                          <div className={styles.title} id={`${defaultCategory}-${item}-title`}></div>
+                          <div style={{height: '300px', width: '100%', background: '#fff'}} id={`${defaultCategory}-${item}`}></div>
+                        </div>
+                      </Col>
               })
             } 
         </Row>
