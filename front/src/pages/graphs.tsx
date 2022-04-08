@@ -122,6 +122,7 @@ const Graphs: FC = (): ReactElement=> {
           y: 'bottom'
         },
         tooltip: {
+          extraCssText: 'z-index: 10',
           trigger: 'axis',
           position: isPhone?['20%', '-30%']: undefined,
           formatter(parames:any){
