@@ -1,6 +1,6 @@
 import { FC, ReactElement, useState, useEffect } from 'react';
 import { useMount } from 'ahooks';
-import { DatePicker, Form, Row, Col, Select, Button, message } from 'antd';
+import { DatePicker, Form, Row, Col, Select, Button, message, Tag } from 'antd';
 import { getApiListByCategory, getCategories, getGraph } from '../api';
 import { Link } from "react-router-dom";
 import * as echarts from 'echarts';
@@ -15,6 +15,7 @@ const Graphs: FC = (): ReactElement=> {
   const [xAxisdate, setXAxisdate] = useState([]);
   const [isFullDate, setIsFullDate] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [environment, setEnvironment] = useState('');
   const [filterDateObj, setFilterDate] = useState({
     filterDate: [],
     startIndex: 0,
@@ -41,7 +42,8 @@ const Graphs: FC = (): ReactElement=> {
     getAllGraph(defaultCategory, defaultCategoryList, false);
   }
   async function getAllInfo(){
-    const { types: allCategory } = await getCategories();
+    const { types: allCategory, env } = await getCategories();
+    setEnvironment(env);
     setCategory(allCategory || []);
     if (allCategory.length>0) {
       formRef.setFieldsValue({
@@ -244,7 +246,7 @@ const Graphs: FC = (): ReactElement=> {
       <div>
         <div style={{marginBottom: '20px'}}>
           <div>See <Link to="/compare">compare page</Link> for descriptions of what the names mean.</div>
-          <div>Note: pink in the graphs represent data points that are interpolated due to missing data. Interpolated data is simply the last known data point repeated until another known data point is found.</div>
+          <Tag color="blue">Environment: {environment}</Tag>
         </div>
         <Row id='allChartWrap'>
             {
