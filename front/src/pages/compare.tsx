@@ -152,7 +152,7 @@ const Compare: FC = (): ReactElement=> {
     if (comp[0] - comp[1]===0) {
       return '0%';
     }
-    return (((comp[1] - comp[0]) / comp[0]) * 100).toFixed(4) + '%';
+    return (((comp[1] - comp[0]) / comp[0]) * 100).toFixed(2) + '%';
   }
   function renderText(text: string) {
     let n = parseFloat(text)

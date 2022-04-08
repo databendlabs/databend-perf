@@ -83,7 +83,7 @@ const Status: FC = (): ReactElement=> {
       },
       series: [
         {
-          data: element.lines.map((data:number)=> data.toFixed(4)),
+          data: element.lines.map((data:number)=> data.toFixed(3)),
           type: 'bar',
           itemStyle: {
             normal: {
