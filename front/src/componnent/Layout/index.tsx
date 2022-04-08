@@ -14,12 +14,11 @@ const PerfLayout: FC = (): ReactElement=> {
   useEffect(()=>{
     setSelectKey(pathname.split('/')[1] || 'graphs')
   }, [pathname]);
-  const jump = ()=>{
-    window.open('https://github.com/datafuselabs/databend-perf');
-  }
   return (
     <Layout>
-      <img style={{height: '149px', width: '149px', position: 'fixed', right: 0, top: 0, zIndex:10, cursor: 'pointer'}} onClick={jump} src={ForkImg} alt="fork-me" />
+      <a href="https://github.com/datafuselabs/databend-perf" target={"_blank"}>
+        <img style={{position: 'fixed', right: 0, top: 0, zIndex:10, cursor: 'pointer', clipPath: 'polygon(8% 0%, 100% 92%, 100% 0%)', width: '149px', height: '149px'}} src={ForkImg} alt="fork-me" />
+      </a>
       <Header style={{ position: 'fixed', zIndex: 1, width: '100%', display: 'flex', alignItems: 'center' }}>
         <Link style={{display: 'flex'}} to={'/'}><LogoDarkHorizon></LogoDarkHorizon></Link>
         <Menu onClick={menuClick} style={{minWidth: '400px', marginLeft: '40px'}} theme="dark" mode="horizontal" selectedKeys={[selectKey]}>
