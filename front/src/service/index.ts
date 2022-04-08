@@ -1,8 +1,8 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { message } from 'antd';
-const { VITE_APP_BASEN_URL } = import.meta.env;
+
 const axiosInstance: AxiosInstance = axios.create({
-	baseURL: `${VITE_APP_BASEN_URL}`,
+	baseURL: 'https://datafuselabs.github.io/databend-perf/json',
 	headers: {
 		'Content-Type': 'application/json;'
 	}
