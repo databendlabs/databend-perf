@@ -25,5 +25,13 @@ export default defineConfig({
         
 			}
 		}
-	}
+	},
+  css: {
+		preprocessorOptions: {
+			scss: {
+				charset: false,
+				additionalData: '@import "@/assets/css/_mixins.scss";'
+			}
+		}
+	},
 })

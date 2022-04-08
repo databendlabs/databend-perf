@@ -1,0 +1,35 @@
+body {
+  @include pm;
+  font-family: 'Roboto', sans-serif;
+}
+#databend-collapse {
+  path {
+    fill: currentColor;
+  }
+}
+.ant-menu-item-selected{
+  background-color: unset!important;
+}
+.ant-menu-item-selected {
+  a{
+    color: #2775f6!important;
+    &.out-link{
+      color: #fff!important;
+    }
+  }
+  
+}
+.ant-menu-horizontal>.ant-menu-item:hover{
+  background-color: unset!important;
+}
+.ant-picker-panels{
+  @include media{
+    display: flex;
+    flex-direction: column;
+  }
+}
+.ant-table-wrapper{
+  @include media{
+    overflow-x: auto;
+  }
+}

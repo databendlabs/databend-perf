@@ -1,0 +1,10 @@
+.compareTitle {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+  line-height: 30px;
+  font-size: 12px;
+  @include media{
+    text-align: left;
+  }
+}
