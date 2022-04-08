@@ -70,6 +70,7 @@ const Status: FC = (): ReactElement=> {
       },
       tooltip: {
         trigger: 'axis',
+        extraCssText: 'z-index: 10',
         formatter(parames:any){
           let str = '';
           parames.forEach((item:any, index:number) => {

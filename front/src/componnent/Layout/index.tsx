@@ -45,7 +45,7 @@ const PerfLayout: FC = (): ReactElement=> {
   return (
     <Layout style={{overflowX: 'hidden'}}>
       <a data-pc href="https://github.com/datafuselabs/databend-perf" target={"_blank"}>
-        <img style={{position: 'fixed', right: 0, top: 0, zIndex:10, cursor: 'pointer', clipPath: 'polygon(8% 0%, 100% 92%, 100% 0%)', width: '149px', height: '149px'}} src={ForkImg} alt="fork-me" />
+        <img style={{position: 'fixed', right: 0, top: 0, zIndex:2000, cursor: 'pointer', clipPath: 'polygon(8% 0%, 100% 92%, 100% 0%)', width: '149px', height: '149px'}} src={ForkImg} alt="fork-me" />
       </a>
       <Header className={styles.header}>
         <div className={styles.headerLeft}>
