@@ -1,7 +1,7 @@
 import service from "../service";
 
 export function getCategories(): Promise<any> {
-	return service.get('/type.json');
+	return service.get('/index.json');
 }
 export function getApiListByCategory(category: string): Promise<any> {
 	return service.get(`${category}/${category}.json`);

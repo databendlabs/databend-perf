@@ -15,7 +15,7 @@ const Status: FC = (): ReactElement=> {
     getAllInfo();
   });
   async function getAllInfo() {
-    let allCategory = await getCategories();
+    const { types: allCategory } = await getCategories();
     setCategory(allCategory || []);
     if (allCategory.length>0) {
       formRef.setFieldsValue({
