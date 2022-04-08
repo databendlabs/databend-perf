@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import { HashRouter as Router } from 'react-router-dom'
 import 'antd/dist/antd.min.css'
 import { AppRouters } from './router';
-import './App.css';
+import './App.less';
 import Fallback from './componnent/Fallback';
 
 function App() {

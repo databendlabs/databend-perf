@@ -3,6 +3,7 @@ import { useMount } from 'ahooks';
 import { Form, Row, Col, Select, Spin } from 'antd';
 import { getCategories, getLatestByCategory } from '../api';
 import * as echarts from 'echarts';
+import styles from './css/styles.module.less';
 const { Option } = Select;
 const Status: FC = (): ReactElement=> {
   const [formRef] = Form.useForm();
@@ -49,14 +50,17 @@ const Status: FC = (): ReactElement=> {
     const name = `${category}-${element.title}`;
     const container = document.getElementById(`${name}`) as HTMLElement;
     let chart:any = echarts.init(container);
+    let t = document.getElementById(`${name}-title`) as HTMLElement;
+    const { xAxis, title, lines, sql} = element;
+    t.innerHTML = `
+        <span style='display: flex'>
+          <span style='font-weight: bold; padding-right: 10px;'>${title}:</span><span>${sql}</span>
+        </span>
+      `;
     chart.setOption({
       xAxis: {
         type: 'category',
-        data: element.xAxis
-      },
-      title: {
-        left: 'center',
-        text:`${element?.title}`
+        data: xAxis
       },
       yAxis: {
         type: 'value',
@@ -64,16 +68,8 @@ const Status: FC = (): ReactElement=> {
       },
       tooltip: {
         trigger: 'axis',
-        position: function(point:any[]){
-          if (i%3 == 2) {
-            return 'right';
-          } else if (i%3 == 1) {
-            return point;
-          }
-          return [point[0]+10, 0];
-        },
         formatter(parames:any){
-          let str =`<div style="width: 500px; white-space: normal;word-wrap: break-word;">${element.sql}</div>$<span style="display:inline-block;">${element.version}</span></br>`;
+          let str = '';
           parames.forEach((item:any, index:number) => {
             str +=
               `<div>${item.marker} ${item.name}:${item.data}</div>`;
@@ -83,7 +79,7 @@ const Status: FC = (): ReactElement=> {
       },
       series: [
         {
-          data: element.lines.map((data:number)=> data.toFixed(3)),
+          data: lines.map((data:number)=> data.toFixed(3)),
           type: 'bar',
           itemStyle: {
             normal: {
@@ -132,12 +128,15 @@ const Status: FC = (): ReactElement=> {
         </Row>
       </Form>
       <Spin spinning={loading}>
-        <Row style={{minHeight: '400px'}}>
+        <Row className={styles.allChartWrap} style={{minHeight: '400px'}} gutter={10}>
           {
             container?.map((item:any)=>{
               return <Col span={8}  key={item.title} style={{marginBottom: '20px'}}>
-                <div style={{height: '300px', width: '100%'}} id={`${defaultCategory}-${item.title}`}></div>
-              </Col>
+                        <div className={styles.content}>
+                          <div className={styles.title} id={`${defaultCategory}-${item.title}-title`}></div>
+                          <div style={{height: '300px', width: '100%'}} id={`${defaultCategory}-${item.title}`}></div>
+                        </div>
+                      </Col>
             })
           } 
         </Row>

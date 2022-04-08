@@ -71,13 +71,13 @@ const Footer: FC = (): ReactElement=> {
     <div className={styles.footer}>
       <div className={styles.links}>
         {
-          links?.map((item)=>{
-            return  <div className={styles.item}>
+          links?.map((item, i)=>{
+            return  <div className={styles.item} key={i}>
                       <div className={styles.title}>{item.title}</div>
                       <div>
                         {
-                          item.list.map((item)=>{
-                            return <div className={styles.itemLink}>
+                          item.list.map((item, index)=>{
+                            return <div key={index} className={styles.itemLink}>
                                     <a target={"_blank"} href={item.link}>{item.name} {item?.linkIcon ? <LinkIcon></LinkIcon>: ''}</a>
                                   </div>
                           })
