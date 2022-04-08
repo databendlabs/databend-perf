@@ -65,7 +65,8 @@ var (
 )
 
 const (
-	JsonSuffix = `.json`
+	JsonSuffix    = `.json`
+	IndexFilename = `index`
 )
 
 func (r *Result) Bytes() []byte {
@@ -105,11 +106,11 @@ func main() {
 }
 
 func WriteTypeIndexFile() {
-	indexJson, err := json.Marshal(types)
+	indexJson, err := json.Marshal(perf)
 	if err != nil {
 		fmt.Printf("write index file err: %v\n", err)
 	}
-	err = ioutil.WriteFile(destDir+"/"+"type"+JsonSuffix, indexJson, 0644)
+	err = ioutil.WriteFile(destDir+"/"+IndexFilename+JsonSuffix, indexJson, 0644)
 	if err != nil {
 		fmt.Printf("write file err: %v\n", err)
 		return
@@ -132,8 +133,17 @@ func PrepareDestDir() bool {
 	return true
 }
 
+type DatabendPerf struct {
+	Env   string   `json:"env"`
+	Types []string `json:"types"`
+}
+
+const env = "Amazon EC2 c5n.9xlarge"
+
+var perf = DatabendPerf{
+	Env: env,
+}
 var typeMap = make(map[string]*sync.Map)
-var types = make([]string, 0)
 
 func HandleSourceDir() {
 	fmt.Printf("Start reading source dir: %s\n", srcDir)
@@ -147,7 +157,7 @@ func HandleSourceDir() {
 			continue
 		}
 		typeMap[v.Name()] = &sync.Map{}
-		types = append(types, v.Name())
+		perf.Types = append(perf.Types, v.Name())
 	}
 	for k, _ := range typeMap {
 		HandleTypeDir(k)
