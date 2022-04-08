@@ -41,7 +41,7 @@ const Graphs: FC = (): ReactElement=> {
     getAllGraph(defaultCategory, defaultCategoryList, false);
   }
   async function getAllInfo(){
-    let allCategory = await getCategories();
+    const { types: allCategory } = await getCategories();
     setCategory(allCategory || []);
     if (allCategory.length>0) {
       formRef.setFieldsValue({
@@ -62,7 +62,6 @@ const Graphs: FC = (): ReactElement=> {
         const graph = graphList[i];
         getGraph(category, graph)
           .then((graphData)=>{
-            console.log(graphData, 'graphData');
             i===0 && setXAxisdate(graphData?.xAxis);
             drawCharts(category, graph, graphData, i, isFullDate);
           })
