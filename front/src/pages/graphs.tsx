@@ -1,7 +1,6 @@
 import { FC, ReactElement, useState, useEffect, useRef } from 'react';
 import { useMount } from 'ahooks';
 import { DatePicker, Form, Row, Col, Select, Button, message, Tag } from 'antd';
-import { Calendar } from 'antd-mobile';
 import { getApiListByCategory, getCategories, getGraph } from '../api';
 import { Link } from "react-router-dom";
 import * as echarts from 'echarts';
