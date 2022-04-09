@@ -4,7 +4,28 @@
   font-weight: bold;
   line-height: 30px;
   font-size: 12px;
+  display: flex;
+  justify-content: center;
+  .commonli{
+    color: green;
+    margin-right: 20px;
+    i{
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: green;
+      margin-right: 5px;
+    }
+    &.degradation{
+      color: red;
+      i{
+        background-color: red;
+      }
+    }
+  }
   @include media{
     text-align: left;
+    flex-direction: column;
   }
 }
