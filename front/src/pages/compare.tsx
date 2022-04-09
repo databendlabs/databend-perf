@@ -6,6 +6,7 @@ import { getApiListByCategory, getCategories, getGraph } from '../api';
 import { DATE_FORMATTER, formatterDate } from '../utils/tools';
 import { deviceType } from '../utils/device-type';
 import styles from './css/compare.module.scss';
+import clsx from 'clsx';
 const { Option } = Select;
 const Compare: FC = (): ReactElement=> {
   const { isPhone } = deviceType();
@@ -31,31 +32,27 @@ const Compare: FC = (): ReactElement=> {
       title: 'sql',
       dataIndex: 'sql',
       key: 'sql',
-      fixed: 'left',
+      fixed: 'left'
     },
     {
       title: 'min',
       dataIndex: 'min',
-      key: 'min',
-      render: (text:string)=> renderText(text)
+      key: 'min'
     },
     {
       title: 'max',
       key: 'max',
-      dataIndex: 'max',
-      render: (text:string)=> renderText(text)
+      dataIndex: 'max'
     },
     {
       title: 'median',
       dataIndex: 'median',
-      key: 'median',
-      render: (text:string)=> renderText(text)
+      key: 'median'
     },
     {
       title: 'mean',
       key: 'mean',
-      dataIndex: 'mean',
-      render: (text:string)=> renderText(text)
+      dataIndex: 'mean'
     }
   ];
   useMount(()=>{
@@ -155,12 +152,18 @@ const Compare: FC = (): ReactElement=> {
     if (comp[0] - comp[1]===0) {
       return '0%';
     }
-    return (((comp[1] - comp[0]) / comp[0]) * 100).toFixed(2) + '%';
+    const d = ((comp[1] / comp[0]-1)*100);
+    const s = d.toFixed(2);
+    return <span 
+            style={{color: d>0?'red':'green', whiteSpace: 'nowrap'}}>
+            {'(' + comp[0].toFixed(3) + 's) '+ ((d>0?'+'+s: s ))+ '%' + ' (' + comp[1].toFixed(3) + 's)'}
+          </span>;
   }
-  function renderText(text: string) {
-    let n = parseFloat(text)
-    return <span style={{color: n>0?'red':'green'}}>{n>0?'+'+text:text}</span>
-  }
+  // function renderText(text: string) {
+  //   let n = parseFloat(text)
+  //   console.log(n)
+  //   return <span style={{color: n>0?'red':'green', whiteSpace: 'nowrap'}}>{n>0?'+'+text:text}</span>
+  // }
   function disabledRangeTime(current:any) {
     return current > moment().add(0, 'days');
   }
@@ -204,7 +207,21 @@ const Compare: FC = (): ReactElement=> {
         </Row>
       </Form>
       <div className={styles.compareTitle}>
-        Comparing <Tag color="#108ee9">{defaultCategory}</Tag>between <Tag color="blue">{compareDate.before || ' '}</Tag>and <Tag color="blue">{compareDate.after || ' '}</Tag>
+          <div> Comparing <Tag color="#108ee9">{defaultCategory}</Tag>between <Tag color="blue">{compareDate.before || ' '}</Tag>and <Tag color="blue">{compareDate.after || ' '}</Tag></div>
+          <div className={styles.tips}>
+            <span className={clsx(styles.improvement, styles.commonli)}>
+              <i></i>
+              <span>Performance increase</span>
+            </span>
+            <span className={clsx(styles.degradation, styles.commonli)}>
+              <i></i>
+              <span>Performance drop</span>
+            </span>
+            <br data-phone></br>
+            <span>
+              Show: (before) rate (after)
+            </span>
+          </div>
       </div>
       <Table
         loading={loading}
