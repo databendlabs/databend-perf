@@ -179,14 +179,14 @@ const Compare: FC = (): ReactElement=> {
             <Form.Item
               name="before"
               label="Before">
-              <DatePicker disabledDate={disabledRangeTime} style={{width: '100%'}}/>
+              <DatePicker inputReadOnly disabledDate={disabledRangeTime} style={{width: '100%'}}/>
             </Form.Item>
           </Col>
           <Col span={isPhone?12:4}>
             <Form.Item
               name="after"
               label="After">
-              <DatePicker disabledDate={disabledRangeTime} style={{width: '100%'}}/>
+              <DatePicker inputReadOnly disabledDate={disabledRangeTime} style={{width: '100%'}}/>
             </Form.Item>
           </Col>
           <Col span={isPhone?24:4}>

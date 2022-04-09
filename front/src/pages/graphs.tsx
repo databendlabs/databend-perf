@@ -1,6 +1,7 @@
-import { FC, ReactElement, useState, useEffect } from 'react';
+import { FC, ReactElement, useState, useEffect, useRef } from 'react';
 import { useMount } from 'ahooks';
 import { DatePicker, Form, Row, Col, Select, Button, message, Tag } from 'antd';
+import { Calendar } from 'antd-mobile';
 import { getApiListByCategory, getCategories, getGraph } from '../api';
 import { Link } from "react-router-dom";
 import * as echarts from 'echarts';
@@ -19,6 +20,7 @@ const Graphs: FC = (): ReactElement=> {
   const [isFullDate, setIsFullDate] = useState(true);
   const [loading, setLoading] = useState(false);
   const [environment, setEnvironment] = useState('');
+  const dateRef = useRef(null);
   const [filterDateObj, setFilterDate] = useState({
     filterDate: [],
     startIndex: 0,
@@ -213,6 +215,8 @@ const Graphs: FC = (): ReactElement=> {
               name="date"
               label="Date range">
               <RangePicker
+                inputReadOnly
+                ref={dateRef}
                 disabledDate={disabledRangeTime}
                 style={{width: '100%'}}/>
             </Form.Item>
