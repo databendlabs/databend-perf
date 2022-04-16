@@ -9,10 +9,9 @@ export function formatterDate(date: string, format = DATE_FORMATTER) {
 export function noneSecurity(textToCopy: string){
 		const textArea: HTMLTextAreaElement = document.createElement('textarea');
 		textArea.value = textToCopy;
-		textArea.style.position = 'absolute';
+		textArea.style.position = 'fixed';
 		textArea.style.opacity = '0';
 		textArea.style.left = '-999999px';
-		textArea.style.top = '-999999px';
 		document.body.appendChild(textArea);
 		textArea.focus();
 		textArea.select();
