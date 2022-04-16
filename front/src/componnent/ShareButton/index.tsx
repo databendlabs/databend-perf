@@ -12,9 +12,8 @@ interface IProps {
 }
 const ShareButton: FC<IProps> = ({category, graph, type, title}): ReactElement=> {
   // @ts-ignore
-  const { VITE_APP_SHARE_URL } = import.meta.env;
   const share = ()=>{
-    copyToClipboard(`${VITE_APP_SHARE_URL}?category=${category}&graph=${graph}&type=${type}&title=${title}`);
+    copyToClipboard(`${window.location.origin}/#/share?category=${category}&graph=${graph}&type=${type}&title=${title}`);
     notification.open({
       message: 'Tips',
       duration: 1.5,
