@@ -6,6 +6,7 @@ import * as echarts from 'echarts';
 import styles from './css/styles.module.scss';
 const { Option } = Select;
 import { deviceType } from '../utils/device-type';
+import ShareButton from '../componnent/ShareButton';
 const Status: FC = (): ReactElement=> {
   const [formRef] = Form.useForm();
   const { isPhone } = deviceType();
@@ -56,7 +57,7 @@ const Status: FC = (): ReactElement=> {
     const { xAxis, title, lines, sql} = element;
     t.innerHTML = `
         <span style='display: flex'>
-          <span style='font-weight: bold; padding-right: 10px;'>${title}:</span><span>${sql}</span>
+          <span style='font-weight: bold; padding-right: 10px;'>${title}:</span><span style='font-size: 12px;'>${sql}</span>
         </span>
       `;
     chart.setOption({
@@ -138,6 +139,7 @@ const Status: FC = (): ReactElement=> {
                         <div className={styles.content}>
                           <div className={styles.title} id={`${defaultCategory}-${item.title}-title`}></div>
                           <div style={{height: '300px', width: '100%'}} id={`${defaultCategory}-${item.title}`}></div>
+                          <ShareButton type="bar" category={defaultCategory} graph={`${item.title}.json`} title={item.title}></ShareButton>
                         </div>
                       </Col>
             })

@@ -5,6 +5,7 @@ import PerfLayout from "../componnent/Layout";
 const Graphs = lazy(()=> import('../pages/graphs'));
 const Compare = lazy(()=> import('../pages/compare'));
 const Status = lazy(()=> import('../pages/status'));
+const Share = lazy(()=> import('../pages/share'));
 interface IRouteObject {
   children?: IRouteObject[];
   element?: React.ReactNode;
@@ -32,6 +33,10 @@ export const allRouter: IRouteObject[] = [
       {
         path: 'status',
         element: <Status></Status>
+      },
+      {
+        path: 'share',
+        element: <Share></Share>
       }
     ]
 	},
