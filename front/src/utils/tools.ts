@@ -6,14 +6,7 @@ export const DATE_FORMATTER = 'yyyy-MM-DD';
 export function formatterDate(date: string, format = DATE_FORMATTER) {
   return moment(date).format(format)
 }
-
-// copy text
-export function copyToClipboard(textToCopy: string) {
-	if (navigator.clipboard && window.isSecureContext) {
-		// secure
-		return navigator.clipboard.writeText(textToCopy);
-	} else {
-		// non-secure
+export function noneSecurity(textToCopy: string){
 		const textArea: HTMLTextAreaElement = document.createElement('textarea');
 		textArea.value = textToCopy;
 		textArea.style.position = 'absolute';
@@ -27,6 +20,18 @@ export function copyToClipboard(textToCopy: string) {
 			document.execCommand('copy') ? res() : rej();
 			textArea.remove();
 		});
+}
+
+// copy text
+export function copyToClipboard(textToCopy: string) {
+	if (navigator.clipboard && window.isSecureContext) {
+    // Compatible with mobile terminals
+    noneSecurity(textToCopy);
+		// secure  when 'document.execCommand' not working, it will have effected.
+		return navigator.clipboard.writeText(textToCopy);
+	} else {
+    // non-secure
+    noneSecurity(textToCopy);
 	}
 }
 
