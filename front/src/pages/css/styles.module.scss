@@ -1,13 +1,15 @@
 .allChartWrap{
   .content{
+    position: relative;
     border: 1px solid #d9d9d9;
     height: 100%;
     padding-bottom: 20px;
     padding-right: 10px;
     border-radius: 6px;
     .title{
-      padding-left: 30px;
+      padding-left: 20px;
       padding-top: 20px;
+      padding-right: 50px;
     }
   }
 }

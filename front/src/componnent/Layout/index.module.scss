@@ -24,13 +24,14 @@
     background-color: #fff;
   }
   .content {
-    min-height: 100vh;
+    min-height: 89vh;
     background: #fff;
     overflow-x: hidden;
     padding-bottom: 40px;
     padding: 20px;
     @include media{
       padding: 0;
+      min-height: 550px;
     }
   }
 
