@@ -33,6 +33,7 @@ const Graphs: FC = (): ReactElement=> {
     }
   ]);
   const [container, setContainer] = useState([]);
+  // const [cacheCategory, setcaCheCategory] = useLocalStorageState("CATEGORY")
   useMount(()=>{
     getAllInfo();
   });
@@ -126,6 +127,10 @@ const Graphs: FC = (): ReactElement=> {
         dataZoom: [
           {
             type: 'inside',
+            zoomLock: true,
+            moveOnMouseMove: true,
+            preventDefaultMouseMove: false,
+            zoomOnMouseWheel: false,
           },
           {
             type: 'slider',
