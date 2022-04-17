@@ -113,7 +113,7 @@ const Compare: FC = (): ReactElement=> {
             if (afterxAxis===-1){
               tip = after;
             }
-            message.warning(`${tip} No data generated, Please select another date for comparison`);
+            message.warning(`${tip} ${title} No data generated, Please select another date for comparison`);
             break;
           }
           
@@ -146,7 +146,7 @@ const Compare: FC = (): ReactElement=> {
   }
 
   function countGrowthRate(comp: number[]){
-    if (comp.length<=1) {
+    if (comp.length<=1 || comp[0] === 0) {
       return "-"
     }
     if (comp[0] - comp[1]===0) {
@@ -159,11 +159,6 @@ const Compare: FC = (): ReactElement=> {
             {'(' + comp[0].toFixed(3) + 's) '+ ((d>0?'+'+s: s ))+ '%' + ' (' + comp[1].toFixed(3) + 's)'}
           </span>;
   }
-  // function renderText(text: string) {
-  //   let n = parseFloat(text)
-  //   console.log(n)
-  //   return <span style={{color: n>0?'red':'green', whiteSpace: 'nowrap'}}>{n>0?'+'+text:text}</span>
-  // }
   function disabledRangeTime(current:any) {
     return current > moment().add(0, 'days');
   }
