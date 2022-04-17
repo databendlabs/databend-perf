@@ -9,6 +9,8 @@ import { formatterDate } from '../utils/tools';
 import styles from './css/styles.module.scss';
 import { deviceType } from '../utils/device-type';
 import ShareButton from '../componnent/ShareButton';
+import { union } from 'lodash-es';
+import { intersection } from 'lodash';
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 const Graphs: FC = (): ReactElement=> {
@@ -99,6 +101,7 @@ const Graphs: FC = (): ReactElement=> {
           <span style='font-weight: bold; padding-right: 10px;'>${title}:</span><span style="font-size: 12px;">${sql}</span>
         </span>
       `;
+      let xAxisClone = xAxis;
       if (!isFullDate){
         const { startIndex, endIndex, filterDate } = filterDateObj;
         if (filterDateObj.endIndex ===-1){
@@ -152,7 +155,7 @@ const Graphs: FC = (): ReactElement=> {
           }
         },
         xAxis: {
-          data: xAxis,
+          data: intersection(xAxisClone, xAxis),
           name: isPhone?'':'date'
         },
         yAxis: {
