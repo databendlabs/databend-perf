@@ -159,7 +159,7 @@ func HandleSourceDir() {
 		typeMap[v.Name()] = &sync.Map{}
 		perf.Types = append(perf.Types, v.Name())
 	}
-	for k, _ := range typeMap {
+	for k := range typeMap {
 		HandleTypeDir(k)
 	}
 }
@@ -269,9 +269,6 @@ func PrepareTypeDir(typeDir string) bool {
 
 func HandleData(data *Data, filename string, t string) {
 	for i, schema := range data.Schemas {
-		if len(schema.Errors) > 0 {
-			return
-		}
 		resultMap := typeMap[t]
 		r := GetResult(resultMap, schema.Name, i)
 		r.Sql = schema.Sql
@@ -312,7 +309,7 @@ func SetLine(r *Result, schema *Schema, meta *Meta, filename string) {
 }
 
 func GetDateFromFilename(filename string) string {
-	if len(filename) > 10 {
+	if len(filename) >= 10 {
 		return filename[0:10]
 	}
 	return ""
