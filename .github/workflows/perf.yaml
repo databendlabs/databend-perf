@@ -91,8 +91,8 @@ jobs:
         with:
           server_address: smtp.feishu.cn
           server_port: 465
-          username: ${{secrets.WEB_API_USER_EMAIL}}
-          password: ${{secrets.WEB_API_USER_PASSWORD}}
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
           subject: Databend Perf Github Actions job result
           to: xuzhiqing2014@outlook.com, xuzhiqing2014@163.com
           from: databend-perf
