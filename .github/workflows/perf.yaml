@@ -52,7 +52,7 @@ jobs:
         run: |
           chmod +x ./perf-tool
           ./perf-tool --output-format json --test-dir benchmarks -target-dir collector >> detail.log 2>&1
-          mv collector/numbers.json collector/numbers/${{ steps.perf_date.outputs.DATE }}-numbers.json
+          mv collectorss/numbers.json collector/numbers/${{ steps.perf_date.outputs.DATE }}-numbers.json
           mv collector/ontime.json collector/ontime/${{ steps.perf_date.outputs.DATE }}-ontime.json
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
@@ -76,6 +76,7 @@ jobs:
           commit_message: 'Update Transform Data'
 
       - name: Make summary log
+        if: ${{ failure() }}
         run: |
           head -10 detail.log 
           tail -30 detail.log > summary.log
