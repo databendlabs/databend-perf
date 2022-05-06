@@ -84,7 +84,7 @@ jobs:
           username: ${{secrets.MAIL_USERNAME}}
           password: ${{secrets.MAIL_PASSWORD}}
           subject: Databend Perf Github Actions Run Failed
-          to: xuzhiqing2014@outlook.com, xuzhiqing2014@163.com
+          to: cloud.dev@datafuselabs.com
           from: databend-perf
           secure: true
           body: "Build job of ${{github.repository}} run failed"
