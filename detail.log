@@ -1,0 +1,530 @@
+2022/05/06 10:50:47 org: orgchasen-slug-test warehouse status: &models.DtoWarehouseStatusDTO{ID:"query-perf", ReadyInstances:1, Size:"XXXLarge", State:"Running", TotalInstances:1}
+2022/05/06 10:50:47 warehouse go ready
+2022/05/06 10:50:47 start to run query Q1 : SELECT avg(number) FROM numbers_mt(10000000000);
+2022/05/06 10:50:49 finish warm up 3 for query Q1 : SELECT avg(number) FROM numbers_mt(10000000000);
+2022/05/06 10:50:49 the 0 time to run query Q1 : SELECT avg(number) FROM numbers_mt(10000000000);
+2022/05/06 10:50:50 the 0 time result in raw: &{RunningTimeMS:275.804861 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:50:50 the 1 time to run query Q1 : SELECT avg(number) FROM numbers_mt(10000000000);
+2022/05/06 10:50:50 the 1 time result in raw: &{RunningTimeMS:279.342779 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:50:50 the 2 time to run query Q1 : SELECT avg(number) FROM numbers_mt(10000000000);
+2022/05/06 10:50:51 the 2 time result in raw: &{RunningTimeMS:291.36192 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:50:51 the 3 time to run query Q1 : SELECT avg(number) FROM numbers_mt(10000000000);
+2022/05/06 10:50:51 the 3 time result in raw: &{RunningTimeMS:311.07884 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:50:51 the 4 time to run query Q1 : SELECT avg(number) FROM numbers_mt(10000000000);
+2022/05/06 10:50:52 the 4 time result in raw: &{RunningTimeMS:281.089649 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:50:52 the 5 time to run query Q1 : SELECT avg(number) FROM numbers_mt(10000000000);
+2022/05/06 10:50:52 the 5 time result in raw: &{RunningTimeMS:280.269338 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:50:52 the 6 time to run query Q1 : SELECT avg(number) FROM numbers_mt(10000000000);
+2022/05/06 10:50:53 the 6 time result in raw: &{RunningTimeMS:274.63399 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:50:53 the 7 time to run query Q1 : SELECT avg(number) FROM numbers_mt(10000000000);
+2022/05/06 10:50:53 the 7 time result in raw: &{RunningTimeMS:278.175576 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:50:53 the 8 time to run query Q1 : SELECT avg(number) FROM numbers_mt(10000000000);
+2022/05/06 10:50:54 the 8 time result in raw: &{RunningTimeMS:270.78246099999996 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:50:54 the 9 time to run query Q1 : SELECT avg(number) FROM numbers_mt(10000000000);
+2022/05/06 10:50:54 the 9 time result in raw: &{RunningTimeMS:276.17062 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:50:54 start to run query Q2 : SELECT sum(number) FROM numbers_mt(10000000000);
+2022/05/06 10:50:56 finish warm up 3 for query Q2 : SELECT sum(number) FROM numbers_mt(10000000000);
+2022/05/06 10:50:56 the 0 time to run query Q2 : SELECT sum(number) FROM numbers_mt(10000000000);
+2022/05/06 10:50:56 the 0 time result in raw: &{RunningTimeMS:285.333306 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:50:56 the 1 time to run query Q2 : SELECT sum(number) FROM numbers_mt(10000000000);
+2022/05/06 10:50:57 the 1 time result in raw: &{RunningTimeMS:286.112185 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:50:57 the 2 time to run query Q2 : SELECT sum(number) FROM numbers_mt(10000000000);
+2022/05/06 10:50:57 the 2 time result in raw: &{RunningTimeMS:280.39104799999996 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:50:57 the 3 time to run query Q2 : SELECT sum(number) FROM numbers_mt(10000000000);
+2022/05/06 10:50:57 the 3 time result in raw: &{RunningTimeMS:281.58042 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:50:57 the 4 time to run query Q2 : SELECT sum(number) FROM numbers_mt(10000000000);
+2022/05/06 10:50:58 the 4 time result in raw: &{RunningTimeMS:276.198664 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:50:58 the 5 time to run query Q2 : SELECT sum(number) FROM numbers_mt(10000000000);
+2022/05/06 10:50:58 the 5 time result in raw: &{RunningTimeMS:286.232877 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:50:58 the 6 time to run query Q2 : SELECT sum(number) FROM numbers_mt(10000000000);
+2022/05/06 10:50:59 the 6 time result in raw: &{RunningTimeMS:287.93825899999996 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:50:59 the 7 time to run query Q2 : SELECT sum(number) FROM numbers_mt(10000000000);
+2022/05/06 10:50:59 the 7 time result in raw: &{RunningTimeMS:279.519403 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:50:59 the 8 time to run query Q2 : SELECT sum(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:00 the 8 time result in raw: &{RunningTimeMS:262.63905 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:00 the 9 time to run query Q2 : SELECT sum(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:01 the 9 time result in raw: &{RunningTimeMS:265.060093 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:01 start to run query Q3 : SELECT min(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:03 finish warm up 3 for query Q3 : SELECT min(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:03 the 0 time to run query Q3 : SELECT min(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:03 the 0 time result in raw: &{RunningTimeMS:532.066498 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:03 the 1 time to run query Q3 : SELECT min(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:04 the 1 time result in raw: &{RunningTimeMS:528.767024 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:04 the 2 time to run query Q3 : SELECT min(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:05 the 2 time result in raw: &{RunningTimeMS:506.780801 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:05 the 3 time to run query Q3 : SELECT min(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:06 the 3 time result in raw: &{RunningTimeMS:516.2941089999999 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:06 the 4 time to run query Q3 : SELECT min(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:06 the 4 time result in raw: &{RunningTimeMS:506.223312 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:06 the 5 time to run query Q3 : SELECT min(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:07 the 5 time result in raw: &{RunningTimeMS:526.538675 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:07 the 6 time to run query Q3 : SELECT min(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:08 the 6 time result in raw: &{RunningTimeMS:514.425376 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:08 the 7 time to run query Q3 : SELECT min(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:09 the 7 time result in raw: &{RunningTimeMS:501.97167600000006 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:09 the 8 time to run query Q3 : SELECT min(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:09 the 8 time result in raw: &{RunningTimeMS:521.18911 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:09 the 9 time to run query Q3 : SELECT min(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:10 the 9 time result in raw: &{RunningTimeMS:508.182257 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:10 start to run query Q4 : SELECT max(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:12 finish warm up 3 for query Q4 : SELECT max(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:12 the 0 time to run query Q4 : SELECT max(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:13 the 0 time result in raw: &{RunningTimeMS:414.11856 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:13 the 1 time to run query Q4 : SELECT max(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:13 the 1 time result in raw: &{RunningTimeMS:405.523423 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:13 the 2 time to run query Q4 : SELECT max(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:14 the 2 time result in raw: &{RunningTimeMS:402.342513 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:14 the 3 time to run query Q4 : SELECT max(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:15 the 3 time result in raw: &{RunningTimeMS:400.656978 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:15 the 4 time to run query Q4 : SELECT max(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:15 the 4 time result in raw: &{RunningTimeMS:406.79024000000004 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:15 the 5 time to run query Q4 : SELECT max(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:16 the 5 time result in raw: &{RunningTimeMS:407.237421 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:16 the 6 time to run query Q4 : SELECT max(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:16 the 6 time result in raw: &{RunningTimeMS:405.715404 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:16 the 7 time to run query Q4 : SELECT max(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:17 the 7 time result in raw: &{RunningTimeMS:407.785891 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:17 the 8 time to run query Q4 : SELECT max(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:18 the 8 time result in raw: &{RunningTimeMS:412.329434 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:18 the 9 time to run query Q4 : SELECT max(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:18 the 9 time result in raw: &{RunningTimeMS:407.605819 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:18 start to run query Q5 : SELECT count(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:20 finish warm up 3 for query Q5 : SELECT count(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:20 the 0 time to run query Q5 : SELECT count(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:20 the 0 time result in raw: &{RunningTimeMS:232.076312 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:20 the 1 time to run query Q5 : SELECT count(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:21 the 1 time result in raw: &{RunningTimeMS:234.366502 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:21 the 2 time to run query Q5 : SELECT count(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:21 the 2 time result in raw: &{RunningTimeMS:244.58891999999997 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:21 the 3 time to run query Q5 : SELECT count(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:21 the 3 time result in raw: &{RunningTimeMS:229.900362 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:21 the 4 time to run query Q5 : SELECT count(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:22 the 4 time result in raw: &{RunningTimeMS:251.685176 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:22 the 5 time to run query Q5 : SELECT count(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:22 the 5 time result in raw: &{RunningTimeMS:225.68200199999998 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:22 the 6 time to run query Q5 : SELECT count(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:23 the 6 time result in raw: &{RunningTimeMS:230.99646099999998 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:23 the 7 time to run query Q5 : SELECT count(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:23 the 7 time result in raw: &{RunningTimeMS:236.12698300000002 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:23 the 8 time to run query Q5 : SELECT count(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:24 the 8 time result in raw: &{RunningTimeMS:230.719803 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:24 the 9 time to run query Q5 : SELECT count(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:24 the 9 time result in raw: &{RunningTimeMS:234.00954900000002 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:24 start to run query Q6 : SELECT sum(number+number+number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:27 finish warm up 3 for query Q6 : SELECT sum(number+number+number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:27 the 0 time to run query Q6 : SELECT sum(number+number+number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:28 the 0 time result in raw: &{RunningTimeMS:820.108885 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:28 the 1 time to run query Q6 : SELECT sum(number+number+number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:29 the 1 time result in raw: &{RunningTimeMS:816.1042309999999 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:29 the 2 time to run query Q6 : SELECT sum(number+number+number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:30 the 2 time result in raw: &{RunningTimeMS:769.239136 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:30 the 3 time to run query Q6 : SELECT sum(number+number+number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:31 the 3 time result in raw: &{RunningTimeMS:829.4247230000001 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:31 the 4 time to run query Q6 : SELECT sum(number+number+number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:32 the 4 time result in raw: &{RunningTimeMS:817.052274 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:32 the 5 time to run query Q6 : SELECT sum(number+number+number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:33 the 5 time result in raw: &{RunningTimeMS:810.003736 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:33 the 6 time to run query Q6 : SELECT sum(number+number+number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:34 the 6 time result in raw: &{RunningTimeMS:820.804098 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:34 the 7 time to run query Q6 : SELECT sum(number+number+number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:35 the 7 time result in raw: &{RunningTimeMS:816.7623309999999 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:35 the 8 time to run query Q6 : SELECT sum(number+number+number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:36 the 8 time result in raw: &{RunningTimeMS:775.8672009999999 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:36 the 9 time to run query Q6 : SELECT sum(number+number+number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:37 the 9 time result in raw: &{RunningTimeMS:826.817606 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:37 start to run query Q7 : SELECT sum(number) / count(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:39 finish warm up 3 for query Q7 : SELECT sum(number) / count(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:39 the 0 time to run query Q7 : SELECT sum(number) / count(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:39 the 0 time result in raw: &{RunningTimeMS:294.001845 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:39 the 1 time to run query Q7 : SELECT sum(number) / count(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:40 the 1 time result in raw: &{RunningTimeMS:285.131594 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:40 the 2 time to run query Q7 : SELECT sum(number) / count(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:41 the 2 time result in raw: &{RunningTimeMS:286.502192 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:41 the 3 time to run query Q7 : SELECT sum(number) / count(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:41 the 3 time result in raw: &{RunningTimeMS:300.885401 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:41 the 4 time to run query Q7 : SELECT sum(number) / count(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:42 the 4 time result in raw: &{RunningTimeMS:283.765477 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:42 the 5 time to run query Q7 : SELECT sum(number) / count(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:42 the 5 time result in raw: &{RunningTimeMS:291.96900999999997 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:42 the 6 time to run query Q7 : SELECT sum(number) / count(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:43 the 6 time result in raw: &{RunningTimeMS:303.604294 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:43 the 7 time to run query Q7 : SELECT sum(number) / count(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:43 the 7 time result in raw: &{RunningTimeMS:277.00455 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:43 the 8 time to run query Q7 : SELECT sum(number) / count(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:44 the 8 time result in raw: &{RunningTimeMS:281.274446 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:44 the 9 time to run query Q7 : SELECT sum(number) / count(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:44 the 9 time result in raw: &{RunningTimeMS:285.034363 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:44 start to run query Q8 : SELECT sum(number) / count(number), max(number), min(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:47 finish warm up 3 for query Q8 : SELECT sum(number) / count(number), max(number), min(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:47 the 0 time to run query Q8 : SELECT sum(number) / count(number), max(number), min(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:48 the 0 time result in raw: &{RunningTimeMS:830.658259 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:48 the 1 time to run query Q8 : SELECT sum(number) / count(number), max(number), min(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:49 the 1 time result in raw: &{RunningTimeMS:837.654669 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:49 the 2 time to run query Q8 : SELECT sum(number) / count(number), max(number), min(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:50 the 2 time result in raw: &{RunningTimeMS:841.9834940000001 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:50 the 3 time to run query Q8 : SELECT sum(number) / count(number), max(number), min(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:51 the 3 time result in raw: &{RunningTimeMS:836.343037 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:51 the 4 time to run query Q8 : SELECT sum(number) / count(number), max(number), min(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:53 the 4 time result in raw: &{RunningTimeMS:843.25137 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:53 the 5 time to run query Q8 : SELECT sum(number) / count(number), max(number), min(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:54 the 5 time result in raw: &{RunningTimeMS:824.68173 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:54 the 6 time to run query Q8 : SELECT sum(number) / count(number), max(number), min(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:55 the 6 time result in raw: &{RunningTimeMS:852.710836 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:55 the 7 time to run query Q8 : SELECT sum(number) / count(number), max(number), min(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:56 the 7 time result in raw: &{RunningTimeMS:836.8294109999999 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:56 the 8 time to run query Q8 : SELECT sum(number) / count(number), max(number), min(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:57 the 8 time result in raw: &{RunningTimeMS:878.9845379999999 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:57 the 9 time to run query Q8 : SELECT sum(number) / count(number), max(number), min(number) FROM numbers_mt(10000000000);
+2022/05/06 10:51:58 the 9 time result in raw: &{RunningTimeMS:830.636764 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:51:58 start to run query Q9 : SELECT number FROM numbers_mt(10000000000) ORDER BY number DESC LIMIT 10;
+2022/05/06 10:52:03 finish warm up 3 for query Q9 : SELECT number FROM numbers_mt(10000000000) ORDER BY number DESC LIMIT 10;
+2022/05/06 10:52:03 the 0 time to run query Q9 : SELECT number FROM numbers_mt(10000000000) ORDER BY number DESC LIMIT 10;
+2022/05/06 10:52:05 the 0 time result in raw: &{RunningTimeMS:1413.952302 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:52:05 the 1 time to run query Q9 : SELECT number FROM numbers_mt(10000000000) ORDER BY number DESC LIMIT 10;
+2022/05/06 10:52:06 the 1 time result in raw: &{RunningTimeMS:1425.268016 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:52:06 the 2 time to run query Q9 : SELECT number FROM numbers_mt(10000000000) ORDER BY number DESC LIMIT 10;
+2022/05/06 10:52:08 the 2 time result in raw: &{RunningTimeMS:1409.5480300000002 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:52:08 the 3 time to run query Q9 : SELECT number FROM numbers_mt(10000000000) ORDER BY number DESC LIMIT 10;
+2022/05/06 10:52:09 the 3 time result in raw: &{RunningTimeMS:1420.824777 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:52:09 the 4 time to run query Q9 : SELECT number FROM numbers_mt(10000000000) ORDER BY number DESC LIMIT 10;
+2022/05/06 10:52:11 the 4 time result in raw: &{RunningTimeMS:1426.8147529999999 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:52:11 the 5 time to run query Q9 : SELECT number FROM numbers_mt(10000000000) ORDER BY number DESC LIMIT 10;
+2022/05/06 10:52:13 the 5 time result in raw: &{RunningTimeMS:1412.069994 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:52:13 the 6 time to run query Q9 : SELECT number FROM numbers_mt(10000000000) ORDER BY number DESC LIMIT 10;
+2022/05/06 10:52:14 the 6 time result in raw: &{RunningTimeMS:1415.304699 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:52:14 the 7 time to run query Q9 : SELECT number FROM numbers_mt(10000000000) ORDER BY number DESC LIMIT 10;
+2022/05/06 10:52:16 the 7 time result in raw: &{RunningTimeMS:1419.6147749999998 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:52:16 the 8 time to run query Q9 : SELECT number FROM numbers_mt(10000000000) ORDER BY number DESC LIMIT 10;
+2022/05/06 10:52:18 the 8 time result in raw: &{RunningTimeMS:1424.064825 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:52:18 the 9 time to run query Q9 : SELECT number FROM numbers_mt(10000000000) ORDER BY number DESC LIMIT 10;
+2022/05/06 10:52:19 the 9 time result in raw: &{RunningTimeMS:1413.3567639999999 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:52:19 start to run query Q10 : SELECT max(number), sum(number) FROM numbers_mt(10000000000) GROUP BY number % 3, number % 4, number % 5 LIMIT 10;
+2022/05/06 10:52:45 finish warm up 3 for query Q10 : SELECT max(number), sum(number) FROM numbers_mt(10000000000) GROUP BY number % 3, number % 4, number % 5 LIMIT 10;
+2022/05/06 10:52:45 the 0 time to run query Q10 : SELECT max(number), sum(number) FROM numbers_mt(10000000000) GROUP BY number % 3, number % 4, number % 5 LIMIT 10;
+2022/05/06 10:52:54 the 0 time result in raw: &{RunningTimeMS:8485.867044999999 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:52:54 the 1 time to run query Q10 : SELECT max(number), sum(number) FROM numbers_mt(10000000000) GROUP BY number % 3, number % 4, number % 5 LIMIT 10;
+2022/05/06 10:53:03 the 1 time result in raw: &{RunningTimeMS:8509.635692 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:53:03 the 2 time to run query Q10 : SELECT max(number), sum(number) FROM numbers_mt(10000000000) GROUP BY number % 3, number % 4, number % 5 LIMIT 10;
+2022/05/06 10:53:12 the 2 time result in raw: &{RunningTimeMS:8521.686033 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:53:12 the 3 time to run query Q10 : SELECT max(number), sum(number) FROM numbers_mt(10000000000) GROUP BY number % 3, number % 4, number % 5 LIMIT 10;
+2022/05/06 10:53:20 the 3 time result in raw: &{RunningTimeMS:8527.179838 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:53:20 the 4 time to run query Q10 : SELECT max(number), sum(number) FROM numbers_mt(10000000000) GROUP BY number % 3, number % 4, number % 5 LIMIT 10;
+2022/05/06 10:53:29 the 4 time result in raw: &{RunningTimeMS:8515.558115 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:53:29 the 5 time to run query Q10 : SELECT max(number), sum(number) FROM numbers_mt(10000000000) GROUP BY number % 3, number % 4, number % 5 LIMIT 10;
+2022/05/06 10:53:38 the 5 time result in raw: &{RunningTimeMS:8492.465580999999 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:53:38 the 6 time to run query Q10 : SELECT max(number), sum(number) FROM numbers_mt(10000000000) GROUP BY number % 3, number % 4, number % 5 LIMIT 10;
+2022/05/06 10:53:47 the 6 time result in raw: &{RunningTimeMS:8513.570189 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:53:47 the 7 time to run query Q10 : SELECT max(number), sum(number) FROM numbers_mt(10000000000) GROUP BY number % 3, number % 4, number % 5 LIMIT 10;
+2022/05/06 10:53:55 the 7 time result in raw: &{RunningTimeMS:8461.781798 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:53:55 the 8 time to run query Q10 : SELECT max(number), sum(number) FROM numbers_mt(10000000000) GROUP BY number % 3, number % 4, number % 5 LIMIT 10;
+2022/05/06 10:54:04 the 8 time result in raw: &{RunningTimeMS:8468.410184 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:54:04 the 9 time to run query Q10 : SELECT max(number), sum(number) FROM numbers_mt(10000000000) GROUP BY number % 3, number % 4, number % 5 LIMIT 10;
+2022/05/06 10:54:13 the 9 time result in raw: &{RunningTimeMS:8503.049432 ScanProgress:{Bytes:80000000000 Rows:10000000000}}
+2022/05/06 10:54:13 start to run query Q1 : SELECT DayOfWeek, count(*) AS c FROM default.ontime WHERE Year >= 2000 AND Year <= 2008 GROUP BY DayOfWeek ORDER BY c DESC;
+2022/05/06 10:54:15 finish warm up 3 for query Q1 : SELECT DayOfWeek, count(*) AS c FROM default.ontime WHERE Year >= 2000 AND Year <= 2008 GROUP BY DayOfWeek ORDER BY c DESC;
+2022/05/06 10:54:15 the 0 time to run query Q1 : SELECT DayOfWeek, count(*) AS c FROM default.ontime WHERE Year >= 2000 AND Year <= 2008 GROUP BY DayOfWeek ORDER BY c DESC;
+2022/05/06 10:54:16 the 0 time result in raw: &{RunningTimeMS:245.51831900000002 ScanProgress:{Bytes:366000000 Rows:122000000}}
+2022/05/06 10:54:16 the 1 time to run query Q1 : SELECT DayOfWeek, count(*) AS c FROM default.ontime WHERE Year >= 2000 AND Year <= 2008 GROUP BY DayOfWeek ORDER BY c DESC;
+2022/05/06 10:54:16 the 1 time result in raw: &{RunningTimeMS:239.97249200000002 ScanProgress:{Bytes:366000000 Rows:122000000}}
+2022/05/06 10:54:16 the 2 time to run query Q1 : SELECT DayOfWeek, count(*) AS c FROM default.ontime WHERE Year >= 2000 AND Year <= 2008 GROUP BY DayOfWeek ORDER BY c DESC;
+2022/05/06 10:54:17 the 2 time result in raw: &{RunningTimeMS:248.723207 ScanProgress:{Bytes:366000000 Rows:122000000}}
+2022/05/06 10:54:17 the 3 time to run query Q1 : SELECT DayOfWeek, count(*) AS c FROM default.ontime WHERE Year >= 2000 AND Year <= 2008 GROUP BY DayOfWeek ORDER BY c DESC;
+2022/05/06 10:54:17 the 3 time result in raw: &{RunningTimeMS:227.260943 ScanProgress:{Bytes:366000000 Rows:122000000}}
+2022/05/06 10:54:17 the 4 time to run query Q1 : SELECT DayOfWeek, count(*) AS c FROM default.ontime WHERE Year >= 2000 AND Year <= 2008 GROUP BY DayOfWeek ORDER BY c DESC;
+2022/05/06 10:54:18 the 4 time result in raw: &{RunningTimeMS:238.300924 ScanProgress:{Bytes:366000000 Rows:122000000}}
+2022/05/06 10:54:18 the 5 time to run query Q1 : SELECT DayOfWeek, count(*) AS c FROM default.ontime WHERE Year >= 2000 AND Year <= 2008 GROUP BY DayOfWeek ORDER BY c DESC;
+2022/05/06 10:54:18 the 5 time result in raw: &{RunningTimeMS:227.85033299999998 ScanProgress:{Bytes:366000000 Rows:122000000}}
+2022/05/06 10:54:18 the 6 time to run query Q1 : SELECT DayOfWeek, count(*) AS c FROM default.ontime WHERE Year >= 2000 AND Year <= 2008 GROUP BY DayOfWeek ORDER BY c DESC;
+2022/05/06 10:54:18 the 6 time result in raw: &{RunningTimeMS:255.83507100000003 ScanProgress:{Bytes:366000000 Rows:122000000}}
+2022/05/06 10:54:18 the 7 time to run query Q1 : SELECT DayOfWeek, count(*) AS c FROM default.ontime WHERE Year >= 2000 AND Year <= 2008 GROUP BY DayOfWeek ORDER BY c DESC;
+2022/05/06 10:54:19 the 7 time result in raw: &{RunningTimeMS:247.852036 ScanProgress:{Bytes:366000000 Rows:122000000}}
+2022/05/06 10:54:19 the 8 time to run query Q1 : SELECT DayOfWeek, count(*) AS c FROM default.ontime WHERE Year >= 2000 AND Year <= 2008 GROUP BY DayOfWeek ORDER BY c DESC;
+2022/05/06 10:54:19 the 8 time result in raw: &{RunningTimeMS:233.154589 ScanProgress:{Bytes:366000000 Rows:122000000}}
+2022/05/06 10:54:19 the 9 time to run query Q1 : SELECT DayOfWeek, count(*) AS c FROM default.ontime WHERE Year >= 2000 AND Year <= 2008 GROUP BY DayOfWeek ORDER BY c DESC;
+2022/05/06 10:54:20 the 9 time result in raw: &{RunningTimeMS:245.266701 ScanProgress:{Bytes:366000000 Rows:122000000}}
+2022/05/06 10:54:20 start to run query Q2 : SELECT DayOfWeek, count(*) AS c FROM default.ontime WHERE DepDelay>10 AND Year >= 2000 AND Year <= 2008 GROUP BY DayOfWeek ORDER BY c DESC;
+2022/05/06 10:54:22 finish warm up 3 for query Q2 : SELECT DayOfWeek, count(*) AS c FROM default.ontime WHERE DepDelay>10 AND Year >= 2000 AND Year <= 2008 GROUP BY DayOfWeek ORDER BY c DESC;
+2022/05/06 10:54:22 the 0 time to run query Q2 : SELECT DayOfWeek, count(*) AS c FROM default.ontime WHERE DepDelay>10 AND Year >= 2000 AND Year <= 2008 GROUP BY DayOfWeek ORDER BY c DESC;
+2022/05/06 10:54:23 the 0 time result in raw: &{RunningTimeMS:353.06121099999996 ScanProgress:{Bytes:854000000 Rows:122000000}}
+2022/05/06 10:54:23 the 1 time to run query Q2 : SELECT DayOfWeek, count(*) AS c FROM default.ontime WHERE DepDelay>10 AND Year >= 2000 AND Year <= 2008 GROUP BY DayOfWeek ORDER BY c DESC;
+2022/05/06 10:54:23 the 1 time result in raw: &{RunningTimeMS:353.360595 ScanProgress:{Bytes:854000000 Rows:122000000}}
+2022/05/06 10:54:23 the 2 time to run query Q2 : SELECT DayOfWeek, count(*) AS c FROM default.ontime WHERE DepDelay>10 AND Year >= 2000 AND Year <= 2008 GROUP BY DayOfWeek ORDER BY c DESC;
+2022/05/06 10:54:24 the 2 time result in raw: &{RunningTimeMS:360.731782 ScanProgress:{Bytes:854000000 Rows:122000000}}
+2022/05/06 10:54:24 the 3 time to run query Q2 : SELECT DayOfWeek, count(*) AS c FROM default.ontime WHERE DepDelay>10 AND Year >= 2000 AND Year <= 2008 GROUP BY DayOfWeek ORDER BY c DESC;
+2022/05/06 10:54:24 the 3 time result in raw: &{RunningTimeMS:348.44973699999997 ScanProgress:{Bytes:854000000 Rows:122000000}}
+2022/05/06 10:54:24 the 4 time to run query Q2 : SELECT DayOfWeek, count(*) AS c FROM default.ontime WHERE DepDelay>10 AND Year >= 2000 AND Year <= 2008 GROUP BY DayOfWeek ORDER BY c DESC;
+2022/05/06 10:54:25 the 4 time result in raw: &{RunningTimeMS:348.43098 ScanProgress:{Bytes:854000000 Rows:122000000}}
+2022/05/06 10:54:25 the 5 time to run query Q2 : SELECT DayOfWeek, count(*) AS c FROM default.ontime WHERE DepDelay>10 AND Year >= 2000 AND Year <= 2008 GROUP BY DayOfWeek ORDER BY c DESC;
+2022/05/06 10:54:26 the 5 time result in raw: &{RunningTimeMS:343.097381 ScanProgress:{Bytes:854000000 Rows:122000000}}
+2022/05/06 10:54:26 the 6 time to run query Q2 : SELECT DayOfWeek, count(*) AS c FROM default.ontime WHERE DepDelay>10 AND Year >= 2000 AND Year <= 2008 GROUP BY DayOfWeek ORDER BY c DESC;
+2022/05/06 10:54:26 the 6 time result in raw: &{RunningTimeMS:343.057361 ScanProgress:{Bytes:854000000 Rows:122000000}}
+2022/05/06 10:54:26 the 7 time to run query Q2 : SELECT DayOfWeek, count(*) AS c FROM default.ontime WHERE DepDelay>10 AND Year >= 2000 AND Year <= 2008 GROUP BY DayOfWeek ORDER BY c DESC;
+2022/05/06 10:54:27 the 7 time result in raw: &{RunningTimeMS:356.598063 ScanProgress:{Bytes:854000000 Rows:122000000}}
+2022/05/06 10:54:27 the 8 time to run query Q2 : SELECT DayOfWeek, count(*) AS c FROM default.ontime WHERE DepDelay>10 AND Year >= 2000 AND Year <= 2008 GROUP BY DayOfWeek ORDER BY c DESC;
+2022/05/06 10:54:27 the 8 time result in raw: &{RunningTimeMS:358.145928 ScanProgress:{Bytes:854000000 Rows:122000000}}
+2022/05/06 10:54:27 the 9 time to run query Q2 : SELECT DayOfWeek, count(*) AS c FROM default.ontime WHERE DepDelay>10 AND Year >= 2000 AND Year <= 2008 GROUP BY DayOfWeek ORDER BY c DESC;
+2022/05/06 10:54:28 the 9 time result in raw: &{RunningTimeMS:357.698821 ScanProgress:{Bytes:854000000 Rows:122000000}}
+2022/05/06 10:54:28 start to run query Q3 : SELECT Origin, count(*) AS c FROM default.ontime WHERE DepDelay>10 AND Year >= 2000 AND Year <= 2008 GROUP BY Origin ORDER BY c DESC LIMIT 10;
+2022/05/06 10:54:30 finish warm up 3 for query Q3 : SELECT Origin, count(*) AS c FROM default.ontime WHERE DepDelay>10 AND Year >= 2000 AND Year <= 2008 GROUP BY Origin ORDER BY c DESC LIMIT 10;
+2022/05/06 10:54:30 the 0 time to run query Q3 : SELECT Origin, count(*) AS c FROM default.ontime WHERE DepDelay>10 AND Year >= 2000 AND Year <= 2008 GROUP BY Origin ORDER BY c DESC LIMIT 10;
+2022/05/06 10:54:31 the 0 time result in raw: &{RunningTimeMS:482.694605 ScanProgress:{Bytes:2074000976 Rows:122000000}}
+2022/05/06 10:54:31 the 1 time to run query Q3 : SELECT Origin, count(*) AS c FROM default.ontime WHERE DepDelay>10 AND Year >= 2000 AND Year <= 2008 GROUP BY Origin ORDER BY c DESC LIMIT 10;
+2022/05/06 10:54:32 the 1 time result in raw: &{RunningTimeMS:492.391622 ScanProgress:{Bytes:2074000976 Rows:122000000}}
+2022/05/06 10:54:32 the 2 time to run query Q3 : SELECT Origin, count(*) AS c FROM default.ontime WHERE DepDelay>10 AND Year >= 2000 AND Year <= 2008 GROUP BY Origin ORDER BY c DESC LIMIT 10;
+2022/05/06 10:54:32 the 2 time result in raw: &{RunningTimeMS:491.790593 ScanProgress:{Bytes:2074000976 Rows:122000000}}
+2022/05/06 10:54:32 the 3 time to run query Q3 : SELECT Origin, count(*) AS c FROM default.ontime WHERE DepDelay>10 AND Year >= 2000 AND Year <= 2008 GROUP BY Origin ORDER BY c DESC LIMIT 10;
+2022/05/06 10:54:33 the 3 time result in raw: &{RunningTimeMS:488.476404 ScanProgress:{Bytes:2074000976 Rows:122000000}}
+2022/05/06 10:54:33 the 4 time to run query Q3 : SELECT Origin, count(*) AS c FROM default.ontime WHERE DepDelay>10 AND Year >= 2000 AND Year <= 2008 GROUP BY Origin ORDER BY c DESC LIMIT 10;
+2022/05/06 10:54:34 the 4 time result in raw: &{RunningTimeMS:478.385114 ScanProgress:{Bytes:2074000976 Rows:122000000}}
+2022/05/06 10:54:34 the 5 time to run query Q3 : SELECT Origin, count(*) AS c FROM default.ontime WHERE DepDelay>10 AND Year >= 2000 AND Year <= 2008 GROUP BY Origin ORDER BY c DESC LIMIT 10;
+2022/05/06 10:54:35 the 5 time result in raw: &{RunningTimeMS:489.74712 ScanProgress:{Bytes:2074000976 Rows:122000000}}
+2022/05/06 10:54:35 the 6 time to run query Q3 : SELECT Origin, count(*) AS c FROM default.ontime WHERE DepDelay>10 AND Year >= 2000 AND Year <= 2008 GROUP BY Origin ORDER BY c DESC LIMIT 10;
+2022/05/06 10:54:35 the 6 time result in raw: &{RunningTimeMS:498.890065 ScanProgress:{Bytes:2074000976 Rows:122000000}}
+2022/05/06 10:54:35 the 7 time to run query Q3 : SELECT Origin, count(*) AS c FROM default.ontime WHERE DepDelay>10 AND Year >= 2000 AND Year <= 2008 GROUP BY Origin ORDER BY c DESC LIMIT 10;
+2022/05/06 10:54:36 the 7 time result in raw: &{RunningTimeMS:498.54471099999995 ScanProgress:{Bytes:2074000976 Rows:122000000}}
+2022/05/06 10:54:36 the 8 time to run query Q3 : SELECT Origin, count(*) AS c FROM default.ontime WHERE DepDelay>10 AND Year >= 2000 AND Year <= 2008 GROUP BY Origin ORDER BY c DESC LIMIT 10;
+2022/05/06 10:54:37 the 8 time result in raw: &{RunningTimeMS:475.64276 ScanProgress:{Bytes:2074000976 Rows:122000000}}
+2022/05/06 10:54:37 the 9 time to run query Q3 : SELECT Origin, count(*) AS c FROM default.ontime WHERE DepDelay>10 AND Year >= 2000 AND Year <= 2008 GROUP BY Origin ORDER BY c DESC LIMIT 10;
+2022/05/06 10:54:37 the 9 time result in raw: &{RunningTimeMS:485.961025 ScanProgress:{Bytes:2074000976 Rows:122000000}}
+2022/05/06 10:54:37 start to run query Q4 : SELECT IATA_CODE_Reporting_Airline AS Carrier, count() FROM default.ontime WHERE DepDelay>10 AND Year = 2007 GROUP BY Carrier ORDER BY count() DESC;
+2022/05/06 10:54:38 finish warm up 3 for query Q4 : SELECT IATA_CODE_Reporting_Airline AS Carrier, count() FROM default.ontime WHERE DepDelay>10 AND Year = 2007 GROUP BY Carrier ORDER BY count() DESC;
+2022/05/06 10:54:38 the 0 time to run query Q4 : SELECT IATA_CODE_Reporting_Airline AS Carrier, count() FROM default.ontime WHERE DepDelay>10 AND Year = 2007 GROUP BY Carrier ORDER BY count() DESC;
+2022/05/06 10:54:39 the 0 time result in raw: &{RunningTimeMS:129.302199 ScanProgress:{Bytes:256000128 Rows:16000000}}
+2022/05/06 10:54:39 the 1 time to run query Q4 : SELECT IATA_CODE_Reporting_Airline AS Carrier, count() FROM default.ontime WHERE DepDelay>10 AND Year = 2007 GROUP BY Carrier ORDER BY count() DESC;
+2022/05/06 10:54:39 the 1 time result in raw: &{RunningTimeMS:128.07016099999998 ScanProgress:{Bytes:256000128 Rows:16000000}}
+2022/05/06 10:54:39 the 2 time to run query Q4 : SELECT IATA_CODE_Reporting_Airline AS Carrier, count() FROM default.ontime WHERE DepDelay>10 AND Year = 2007 GROUP BY Carrier ORDER BY count() DESC;
+2022/05/06 10:54:40 the 2 time result in raw: &{RunningTimeMS:145.325276 ScanProgress:{Bytes:256000128 Rows:16000000}}
+2022/05/06 10:54:40 the 3 time to run query Q4 : SELECT IATA_CODE_Reporting_Airline AS Carrier, count() FROM default.ontime WHERE DepDelay>10 AND Year = 2007 GROUP BY Carrier ORDER BY count() DESC;
+2022/05/06 10:54:40 the 3 time result in raw: &{RunningTimeMS:132.788868 ScanProgress:{Bytes:256000128 Rows:16000000}}
+2022/05/06 10:54:40 the 4 time to run query Q4 : SELECT IATA_CODE_Reporting_Airline AS Carrier, count() FROM default.ontime WHERE DepDelay>10 AND Year = 2007 GROUP BY Carrier ORDER BY count() DESC;
+2022/05/06 10:54:40 the 4 time result in raw: &{RunningTimeMS:135.714237 ScanProgress:{Bytes:256000128 Rows:16000000}}
+2022/05/06 10:54:40 the 5 time to run query Q4 : SELECT IATA_CODE_Reporting_Airline AS Carrier, count() FROM default.ontime WHERE DepDelay>10 AND Year = 2007 GROUP BY Carrier ORDER BY count() DESC;
+2022/05/06 10:54:41 the 5 time result in raw: &{RunningTimeMS:135.975019 ScanProgress:{Bytes:256000128 Rows:16000000}}
+2022/05/06 10:54:41 the 6 time to run query Q4 : SELECT IATA_CODE_Reporting_Airline AS Carrier, count() FROM default.ontime WHERE DepDelay>10 AND Year = 2007 GROUP BY Carrier ORDER BY count() DESC;
+2022/05/06 10:54:41 the 6 time result in raw: &{RunningTimeMS:132.813297 ScanProgress:{Bytes:256000128 Rows:16000000}}
+2022/05/06 10:54:41 the 7 time to run query Q4 : SELECT IATA_CODE_Reporting_Airline AS Carrier, count() FROM default.ontime WHERE DepDelay>10 AND Year = 2007 GROUP BY Carrier ORDER BY count() DESC;
+2022/05/06 10:54:41 the 7 time result in raw: &{RunningTimeMS:126.299665 ScanProgress:{Bytes:256000128 Rows:16000000}}
+2022/05/06 10:54:41 the 8 time to run query Q4 : SELECT IATA_CODE_Reporting_Airline AS Carrier, count() FROM default.ontime WHERE DepDelay>10 AND Year = 2007 GROUP BY Carrier ORDER BY count() DESC;
+2022/05/06 10:54:42 the 8 time result in raw: &{RunningTimeMS:145.78270199999997 ScanProgress:{Bytes:256000128 Rows:16000000}}
+2022/05/06 10:54:42 the 9 time to run query Q4 : SELECT IATA_CODE_Reporting_Airline AS Carrier, count() FROM default.ontime WHERE DepDelay>10 AND Year = 2007 GROUP BY Carrier ORDER BY count() DESC;
+2022/05/06 10:54:42 the 9 time result in raw: &{RunningTimeMS:137.07596999999998 ScanProgress:{Bytes:256000128 Rows:16000000}}
+2022/05/06 10:54:42 start to run query Q5 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(cast(DepDelay>10 as Int8))*1000 AS c3 FROM default.ontime WHERE Year=2007 GROUP BY Carrier ORDER BY c3 DESC;
+2022/05/06 10:54:43 finish warm up 3 for query Q5 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(cast(DepDelay>10 as Int8))*1000 AS c3 FROM default.ontime WHERE Year=2007 GROUP BY Carrier ORDER BY c3 DESC;
+2022/05/06 10:54:43 the 0 time to run query Q5 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(cast(DepDelay>10 as Int8))*1000 AS c3 FROM default.ontime WHERE Year=2007 GROUP BY Carrier ORDER BY c3 DESC;
+2022/05/06 10:54:44 the 0 time result in raw: &{RunningTimeMS:325.513996 ScanProgress:{Bytes:256000128 Rows:16000000}}
+2022/05/06 10:54:44 the 1 time to run query Q5 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(cast(DepDelay>10 as Int8))*1000 AS c3 FROM default.ontime WHERE Year=2007 GROUP BY Carrier ORDER BY c3 DESC;
+2022/05/06 10:54:44 the 1 time result in raw: &{RunningTimeMS:156.997927 ScanProgress:{Bytes:256000128 Rows:16000000}}
+2022/05/06 10:54:44 the 2 time to run query Q5 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(cast(DepDelay>10 as Int8))*1000 AS c3 FROM default.ontime WHERE Year=2007 GROUP BY Carrier ORDER BY c3 DESC;
+2022/05/06 10:54:44 the 2 time result in raw: &{RunningTimeMS:156.761574 ScanProgress:{Bytes:256000128 Rows:16000000}}
+2022/05/06 10:54:44 the 3 time to run query Q5 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(cast(DepDelay>10 as Int8))*1000 AS c3 FROM default.ontime WHERE Year=2007 GROUP BY Carrier ORDER BY c3 DESC;
+2022/05/06 10:54:45 the 3 time result in raw: &{RunningTimeMS:191.065804 ScanProgress:{Bytes:256000128 Rows:16000000}}
+2022/05/06 10:54:45 the 4 time to run query Q5 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(cast(DepDelay>10 as Int8))*1000 AS c3 FROM default.ontime WHERE Year=2007 GROUP BY Carrier ORDER BY c3 DESC;
+2022/05/06 10:54:45 the 4 time result in raw: &{RunningTimeMS:151.247668 ScanProgress:{Bytes:256000128 Rows:16000000}}
+2022/05/06 10:54:45 the 5 time to run query Q5 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(cast(DepDelay>10 as Int8))*1000 AS c3 FROM default.ontime WHERE Year=2007 GROUP BY Carrier ORDER BY c3 DESC;
+2022/05/06 10:54:46 the 5 time result in raw: &{RunningTimeMS:195.24636900000002 ScanProgress:{Bytes:256000128 Rows:16000000}}
+2022/05/06 10:54:46 the 6 time to run query Q5 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(cast(DepDelay>10 as Int8))*1000 AS c3 FROM default.ontime WHERE Year=2007 GROUP BY Carrier ORDER BY c3 DESC;
+2022/05/06 10:54:46 the 6 time result in raw: &{RunningTimeMS:156.24576100000002 ScanProgress:{Bytes:256000128 Rows:16000000}}
+2022/05/06 10:54:46 the 7 time to run query Q5 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(cast(DepDelay>10 as Int8))*1000 AS c3 FROM default.ontime WHERE Year=2007 GROUP BY Carrier ORDER BY c3 DESC;
+2022/05/06 10:54:46 the 7 time result in raw: &{RunningTimeMS:157.582461 ScanProgress:{Bytes:256000128 Rows:16000000}}
+2022/05/06 10:54:46 the 8 time to run query Q5 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(cast(DepDelay>10 as Int8))*1000 AS c3 FROM default.ontime WHERE Year=2007 GROUP BY Carrier ORDER BY c3 DESC;
+2022/05/06 10:54:47 the 8 time result in raw: &{RunningTimeMS:144.31526 ScanProgress:{Bytes:256000128 Rows:16000000}}
+2022/05/06 10:54:47 the 9 time to run query Q5 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(cast(DepDelay>10 as Int8))*1000 AS c3 FROM default.ontime WHERE Year=2007 GROUP BY Carrier ORDER BY c3 DESC;
+2022/05/06 10:54:47 the 9 time result in raw: &{RunningTimeMS:169.847618 ScanProgress:{Bytes:256000128 Rows:16000000}}
+2022/05/06 10:54:47 start to run query Q6 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(cast(DepDelay>10 as Int8))*1000 AS c3 FROM default.ontime WHERE Year>=2000 AND Year <=2008 GROUP BY Carrier ORDER BY c3 DESC;
+2022/05/06 10:54:50 finish warm up 3 for query Q6 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(cast(DepDelay>10 as Int8))*1000 AS c3 FROM default.ontime WHERE Year>=2000 AND Year <=2008 GROUP BY Carrier ORDER BY c3 DESC;
+2022/05/06 10:54:50 the 0 time to run query Q6 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(cast(DepDelay>10 as Int8))*1000 AS c3 FROM default.ontime WHERE Year>=2000 AND Year <=2008 GROUP BY Carrier ORDER BY c3 DESC;
+2022/05/06 10:54:51 the 0 time result in raw: &{RunningTimeMS:577.657035 ScanProgress:{Bytes:1952000976 Rows:122000000}}
+2022/05/06 10:54:51 the 1 time to run query Q6 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(cast(DepDelay>10 as Int8))*1000 AS c3 FROM default.ontime WHERE Year>=2000 AND Year <=2008 GROUP BY Carrier ORDER BY c3 DESC;
+2022/05/06 10:54:52 the 1 time result in raw: &{RunningTimeMS:575.386827 ScanProgress:{Bytes:1952000976 Rows:122000000}}
+2022/05/06 10:54:52 the 2 time to run query Q6 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(cast(DepDelay>10 as Int8))*1000 AS c3 FROM default.ontime WHERE Year>=2000 AND Year <=2008 GROUP BY Carrier ORDER BY c3 DESC;
+2022/05/06 10:54:53 the 2 time result in raw: &{RunningTimeMS:565.429953 ScanProgress:{Bytes:1952000976 Rows:122000000}}
+2022/05/06 10:54:53 the 3 time to run query Q6 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(cast(DepDelay>10 as Int8))*1000 AS c3 FROM default.ontime WHERE Year>=2000 AND Year <=2008 GROUP BY Carrier ORDER BY c3 DESC;
+2022/05/06 10:54:54 the 3 time result in raw: &{RunningTimeMS:726.2259 ScanProgress:{Bytes:1952000976 Rows:122000000}}
+2022/05/06 10:54:54 the 4 time to run query Q6 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(cast(DepDelay>10 as Int8))*1000 AS c3 FROM default.ontime WHERE Year>=2000 AND Year <=2008 GROUP BY Carrier ORDER BY c3 DESC;
+2022/05/06 10:54:54 the 4 time result in raw: &{RunningTimeMS:556.487043 ScanProgress:{Bytes:1952000976 Rows:122000000}}
+2022/05/06 10:54:54 the 5 time to run query Q6 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(cast(DepDelay>10 as Int8))*1000 AS c3 FROM default.ontime WHERE Year>=2000 AND Year <=2008 GROUP BY Carrier ORDER BY c3 DESC;
+2022/05/06 10:54:55 the 5 time result in raw: &{RunningTimeMS:565.2481310000001 ScanProgress:{Bytes:1952000976 Rows:122000000}}
+2022/05/06 10:54:55 the 6 time to run query Q6 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(cast(DepDelay>10 as Int8))*1000 AS c3 FROM default.ontime WHERE Year>=2000 AND Year <=2008 GROUP BY Carrier ORDER BY c3 DESC;
+2022/05/06 10:54:56 the 6 time result in raw: &{RunningTimeMS:578.116848 ScanProgress:{Bytes:1952000976 Rows:122000000}}
+2022/05/06 10:54:56 the 7 time to run query Q6 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(cast(DepDelay>10 as Int8))*1000 AS c3 FROM default.ontime WHERE Year>=2000 AND Year <=2008 GROUP BY Carrier ORDER BY c3 DESC;
+2022/05/06 10:54:57 the 7 time result in raw: &{RunningTimeMS:590.038607 ScanProgress:{Bytes:1952000976 Rows:122000000}}
+2022/05/06 10:54:57 the 8 time to run query Q6 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(cast(DepDelay>10 as Int8))*1000 AS c3 FROM default.ontime WHERE Year>=2000 AND Year <=2008 GROUP BY Carrier ORDER BY c3 DESC;
+2022/05/06 10:54:58 the 8 time result in raw: &{RunningTimeMS:550.6069580000001 ScanProgress:{Bytes:1952000976 Rows:122000000}}
+2022/05/06 10:54:58 the 9 time to run query Q6 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(cast(DepDelay>10 as Int8))*1000 AS c3 FROM default.ontime WHERE Year>=2000 AND Year <=2008 GROUP BY Carrier ORDER BY c3 DESC;
+2022/05/06 10:54:58 the 9 time result in raw: &{RunningTimeMS:580.665428 ScanProgress:{Bytes:1952000976 Rows:122000000}}
+2022/05/06 10:54:58 start to run query Q7 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(DepDelay) * 1000 AS c3 FROM default.ontime WHERE Year >= 2000 AND Year <= 2008 GROUP BY Carrier;
+2022/05/06 10:55:01 finish warm up 3 for query Q7 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(DepDelay) * 1000 AS c3 FROM default.ontime WHERE Year >= 2000 AND Year <= 2008 GROUP BY Carrier;
+2022/05/06 10:55:01 the 0 time to run query Q7 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(DepDelay) * 1000 AS c3 FROM default.ontime WHERE Year >= 2000 AND Year <= 2008 GROUP BY Carrier;
+2022/05/06 10:55:02 the 0 time result in raw: &{RunningTimeMS:557.854996 ScanProgress:{Bytes:1952000976 Rows:122000000}}
+2022/05/06 10:55:02 the 1 time to run query Q7 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(DepDelay) * 1000 AS c3 FROM default.ontime WHERE Year >= 2000 AND Year <= 2008 GROUP BY Carrier;
+2022/05/06 10:55:02 the 1 time result in raw: &{RunningTimeMS:599.451949 ScanProgress:{Bytes:1952000976 Rows:122000000}}
+2022/05/06 10:55:02 the 2 time to run query Q7 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(DepDelay) * 1000 AS c3 FROM default.ontime WHERE Year >= 2000 AND Year <= 2008 GROUP BY Carrier;
+2022/05/06 10:55:03 the 2 time result in raw: &{RunningTimeMS:559.252905 ScanProgress:{Bytes:1952000976 Rows:122000000}}
+2022/05/06 10:55:03 the 3 time to run query Q7 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(DepDelay) * 1000 AS c3 FROM default.ontime WHERE Year >= 2000 AND Year <= 2008 GROUP BY Carrier;
+2022/05/06 10:55:04 the 3 time result in raw: &{RunningTimeMS:540.988998 ScanProgress:{Bytes:1952000976 Rows:122000000}}
+2022/05/06 10:55:04 the 4 time to run query Q7 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(DepDelay) * 1000 AS c3 FROM default.ontime WHERE Year >= 2000 AND Year <= 2008 GROUP BY Carrier;
+2022/05/06 10:55:05 the 4 time result in raw: &{RunningTimeMS:570.670836 ScanProgress:{Bytes:1952000976 Rows:122000000}}
+2022/05/06 10:55:05 the 5 time to run query Q7 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(DepDelay) * 1000 AS c3 FROM default.ontime WHERE Year >= 2000 AND Year <= 2008 GROUP BY Carrier;
+2022/05/06 10:55:05 the 5 time result in raw: &{RunningTimeMS:591.667561 ScanProgress:{Bytes:1952000976 Rows:122000000}}
+2022/05/06 10:55:05 the 6 time to run query Q7 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(DepDelay) * 1000 AS c3 FROM default.ontime WHERE Year >= 2000 AND Year <= 2008 GROUP BY Carrier;
+2022/05/06 10:55:06 the 6 time result in raw: &{RunningTimeMS:526.941994 ScanProgress:{Bytes:1952000976 Rows:122000000}}
+2022/05/06 10:55:06 the 7 time to run query Q7 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(DepDelay) * 1000 AS c3 FROM default.ontime WHERE Year >= 2000 AND Year <= 2008 GROUP BY Carrier;
+2022/05/06 10:55:07 the 7 time result in raw: &{RunningTimeMS:567.136521 ScanProgress:{Bytes:1952000976 Rows:122000000}}
+2022/05/06 10:55:07 the 8 time to run query Q7 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(DepDelay) * 1000 AS c3 FROM default.ontime WHERE Year >= 2000 AND Year <= 2008 GROUP BY Carrier;
+2022/05/06 10:55:08 the 8 time result in raw: &{RunningTimeMS:554.712979 ScanProgress:{Bytes:1952000976 Rows:122000000}}
+2022/05/06 10:55:08 the 9 time to run query Q7 : SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(DepDelay) * 1000 AS c3 FROM default.ontime WHERE Year >= 2000 AND Year <= 2008 GROUP BY Carrier;
+2022/05/06 10:55:09 the 9 time result in raw: &{RunningTimeMS:565.787044 ScanProgress:{Bytes:1952000976 Rows:122000000}}
+2022/05/06 10:55:09 start to run query Q8 : SELECT Year, avg(DepDelay) FROM default.ontime GROUP BY Year;
+2022/05/06 10:55:13 finish warm up 3 for query Q8 : SELECT Year, avg(DepDelay) FROM default.ontime GROUP BY Year;
+2022/05/06 10:55:13 the 0 time to run query Q8 : SELECT Year, avg(DepDelay) FROM default.ontime GROUP BY Year;
+2022/05/06 10:55:14 the 0 time result in raw: &{RunningTimeMS:789.670034 ScanProgress:{Bytes:2432251848 Rows:405375308}}
+2022/05/06 10:55:14 the 1 time to run query Q8 : SELECT Year, avg(DepDelay) FROM default.ontime GROUP BY Year;
+2022/05/06 10:55:15 the 1 time result in raw: &{RunningTimeMS:739.622014 ScanProgress:{Bytes:2432251848 Rows:405375308}}
+2022/05/06 10:55:15 the 2 time to run query Q8 : SELECT Year, avg(DepDelay) FROM default.ontime GROUP BY Year;
+2022/05/06 10:55:16 the 2 time result in raw: &{RunningTimeMS:739.2394300000001 ScanProgress:{Bytes:2432251848 Rows:405375308}}
+2022/05/06 10:55:16 the 3 time to run query Q8 : SELECT Year, avg(DepDelay) FROM default.ontime GROUP BY Year;
+2022/05/06 10:55:17 the 3 time result in raw: &{RunningTimeMS:743.479183 ScanProgress:{Bytes:2432251848 Rows:405375308}}
+2022/05/06 10:55:17 the 4 time to run query Q8 : SELECT Year, avg(DepDelay) FROM default.ontime GROUP BY Year;
+2022/05/06 10:55:18 the 4 time result in raw: &{RunningTimeMS:843.452309 ScanProgress:{Bytes:2432251848 Rows:405375308}}
+2022/05/06 10:55:18 the 5 time to run query Q8 : SELECT Year, avg(DepDelay) FROM default.ontime GROUP BY Year;
+2022/05/06 10:55:19 the 5 time result in raw: &{RunningTimeMS:938.5068399999999 ScanProgress:{Bytes:2432251848 Rows:405375308}}
+2022/05/06 10:55:19 the 6 time to run query Q8 : SELECT Year, avg(DepDelay) FROM default.ontime GROUP BY Year;
+2022/05/06 10:55:20 the 6 time result in raw: &{RunningTimeMS:711.277719 ScanProgress:{Bytes:2432251848 Rows:405375308}}
+2022/05/06 10:55:20 the 7 time to run query Q8 : SELECT Year, avg(DepDelay) FROM default.ontime GROUP BY Year;
+2022/05/06 10:55:21 the 7 time result in raw: &{RunningTimeMS:732.385853 ScanProgress:{Bytes:2432251848 Rows:405375308}}
+2022/05/06 10:55:21 the 8 time to run query Q8 : SELECT Year, avg(DepDelay) FROM default.ontime GROUP BY Year;
+2022/05/06 10:55:22 the 8 time result in raw: &{RunningTimeMS:752.2950099999999 ScanProgress:{Bytes:2432251848 Rows:405375308}}
+2022/05/06 10:55:22 the 9 time to run query Q8 : SELECT Year, avg(DepDelay) FROM default.ontime GROUP BY Year;
+2022/05/06 10:55:23 the 9 time result in raw: &{RunningTimeMS:742.9593060000001 ScanProgress:{Bytes:2432251848 Rows:405375308}}
+2022/05/06 10:55:23 start to run query Q9 : SELECT Year, count(*) as c1 FROM default.ontime GROUP BY Year;
+2022/05/06 10:55:25 finish warm up 3 for query Q9 : SELECT Year, count(*) as c1 FROM default.ontime GROUP BY Year;
+2022/05/06 10:55:25 the 0 time to run query Q9 : SELECT Year, count(*) as c1 FROM default.ontime GROUP BY Year;
+2022/05/06 10:55:26 the 0 time result in raw: &{RunningTimeMS:463.866333 ScanProgress:{Bytes:810750616 Rows:405375308}}
+2022/05/06 10:55:26 the 1 time to run query Q9 : SELECT Year, count(*) as c1 FROM default.ontime GROUP BY Year;
+2022/05/06 10:55:26 the 1 time result in raw: &{RunningTimeMS:456.477075 ScanProgress:{Bytes:810750616 Rows:405375308}}
+2022/05/06 10:55:26 the 2 time to run query Q9 : SELECT Year, count(*) as c1 FROM default.ontime GROUP BY Year;
+2022/05/06 10:55:27 the 2 time result in raw: &{RunningTimeMS:442.835831 ScanProgress:{Bytes:810750616 Rows:405375308}}
+2022/05/06 10:55:27 the 3 time to run query Q9 : SELECT Year, count(*) as c1 FROM default.ontime GROUP BY Year;
+2022/05/06 10:55:28 the 3 time result in raw: &{RunningTimeMS:454.19806 ScanProgress:{Bytes:810750616 Rows:405375308}}
+2022/05/06 10:55:28 the 4 time to run query Q9 : SELECT Year, count(*) as c1 FROM default.ontime GROUP BY Year;
+2022/05/06 10:55:28 the 4 time result in raw: &{RunningTimeMS:477.17285799999996 ScanProgress:{Bytes:810750616 Rows:405375308}}
+2022/05/06 10:55:28 the 5 time to run query Q9 : SELECT Year, count(*) as c1 FROM default.ontime GROUP BY Year;
+2022/05/06 10:55:29 the 5 time result in raw: &{RunningTimeMS:477.1603 ScanProgress:{Bytes:810750616 Rows:405375308}}
+2022/05/06 10:55:29 the 6 time to run query Q9 : SELECT Year, count(*) as c1 FROM default.ontime GROUP BY Year;
+2022/05/06 10:55:30 the 6 time result in raw: &{RunningTimeMS:684.374571 ScanProgress:{Bytes:810750616 Rows:405375308}}
+2022/05/06 10:55:30 the 7 time to run query Q9 : SELECT Year, count(*) as c1 FROM default.ontime GROUP BY Year;
+2022/05/06 10:55:31 the 7 time result in raw: &{RunningTimeMS:453.062567 ScanProgress:{Bytes:810750616 Rows:405375308}}
+2022/05/06 10:55:31 the 8 time to run query Q9 : SELECT Year, count(*) as c1 FROM default.ontime GROUP BY Year;
+2022/05/06 10:55:31 the 8 time result in raw: &{RunningTimeMS:465.23112199999997 ScanProgress:{Bytes:810750616 Rows:405375308}}
+2022/05/06 10:55:31 the 9 time to run query Q9 : SELECT Year, count(*) as c1 FROM default.ontime GROUP BY Year;
+2022/05/06 10:55:32 the 9 time result in raw: &{RunningTimeMS:473.631428 ScanProgress:{Bytes:810750616 Rows:405375308}}
+2022/05/06 10:55:32 start to run query Q10 : SELECT avg(cnt) FROM (SELECT Year,Month,count(*) AS cnt FROM default.ontime WHERE DepDel15=1 GROUP BY Year,Month) a;
+2022/05/06 10:55:36 finish warm up 3 for query Q10 : SELECT avg(cnt) FROM (SELECT Year,Month,count(*) AS cnt FROM default.ontime WHERE DepDel15=1 GROUP BY Year,Month) a;
+2022/05/06 10:55:36 the 0 time to run query Q10 : SELECT avg(cnt) FROM (SELECT Year,Month,count(*) AS cnt FROM default.ontime WHERE DepDel15=1 GROUP BY Year,Month) a;
+2022/05/06 10:55:36 the 0 time result in raw: &{RunningTimeMS:671.886885 ScanProgress:{Bytes:2837627156 Rows:405375308}}
+2022/05/06 10:55:36 the 1 time to run query Q10 : SELECT avg(cnt) FROM (SELECT Year,Month,count(*) AS cnt FROM default.ontime WHERE DepDel15=1 GROUP BY Year,Month) a;
+2022/05/06 10:55:37 the 1 time result in raw: &{RunningTimeMS:638.94514 ScanProgress:{Bytes:2837627156 Rows:405375308}}
+2022/05/06 10:55:37 the 2 time to run query Q10 : SELECT avg(cnt) FROM (SELECT Year,Month,count(*) AS cnt FROM default.ontime WHERE DepDel15=1 GROUP BY Year,Month) a;
+2022/05/06 10:55:38 the 2 time result in raw: &{RunningTimeMS:636.323678 ScanProgress:{Bytes:2837627156 Rows:405375308}}
+2022/05/06 10:55:38 the 3 time to run query Q10 : SELECT avg(cnt) FROM (SELECT Year,Month,count(*) AS cnt FROM default.ontime WHERE DepDel15=1 GROUP BY Year,Month) a;
+2022/05/06 10:55:39 the 3 time result in raw: &{RunningTimeMS:637.672816 ScanProgress:{Bytes:2837627156 Rows:405375308}}
+2022/05/06 10:55:39 the 4 time to run query Q10 : SELECT avg(cnt) FROM (SELECT Year,Month,count(*) AS cnt FROM default.ontime WHERE DepDel15=1 GROUP BY Year,Month) a;
+2022/05/06 10:55:40 the 4 time result in raw: &{RunningTimeMS:639.042963 ScanProgress:{Bytes:2837627156 Rows:405375308}}
+2022/05/06 10:55:40 the 5 time to run query Q10 : SELECT avg(cnt) FROM (SELECT Year,Month,count(*) AS cnt FROM default.ontime WHERE DepDel15=1 GROUP BY Year,Month) a;
+2022/05/06 10:55:41 the 5 time result in raw: &{RunningTimeMS:635.9494540000001 ScanProgress:{Bytes:2837627156 Rows:405375308}}
+2022/05/06 10:55:41 the 6 time to run query Q10 : SELECT avg(cnt) FROM (SELECT Year,Month,count(*) AS cnt FROM default.ontime WHERE DepDel15=1 GROUP BY Year,Month) a;
+2022/05/06 10:55:42 the 6 time result in raw: &{RunningTimeMS:624.346571 ScanProgress:{Bytes:2837627156 Rows:405375308}}
+2022/05/06 10:55:42 the 7 time to run query Q10 : SELECT avg(cnt) FROM (SELECT Year,Month,count(*) AS cnt FROM default.ontime WHERE DepDel15=1 GROUP BY Year,Month) a;
+2022/05/06 10:55:42 the 7 time result in raw: &{RunningTimeMS:632.29116 ScanProgress:{Bytes:2837627156 Rows:405375308}}
+2022/05/06 10:55:42 the 8 time to run query Q10 : SELECT avg(cnt) FROM (SELECT Year,Month,count(*) AS cnt FROM default.ontime WHERE DepDel15=1 GROUP BY Year,Month) a;
+2022/05/06 10:55:43 the 8 time result in raw: &{RunningTimeMS:662.2356900000001 ScanProgress:{Bytes:2837627156 Rows:405375308}}
+2022/05/06 10:55:43 the 9 time to run query Q10 : SELECT avg(cnt) FROM (SELECT Year,Month,count(*) AS cnt FROM default.ontime WHERE DepDel15=1 GROUP BY Year,Month) a;
+2022/05/06 10:55:44 the 9 time result in raw: &{RunningTimeMS:641.19095 ScanProgress:{Bytes:2837627156 Rows:405375308}}
+2022/05/06 10:55:44 start to run query Q11 : SELECT avg(c1) FROM (SELECT Year,Month,count(*) AS c1 FROM default.ontime GROUP BY Year,Month) a;
+2022/05/06 10:55:47 finish warm up 3 for query Q11 : SELECT avg(c1) FROM (SELECT Year,Month,count(*) AS c1 FROM default.ontime GROUP BY Year,Month) a;
+2022/05/06 10:55:47 the 0 time to run query Q11 : SELECT avg(c1) FROM (SELECT Year,Month,count(*) AS c1 FROM default.ontime GROUP BY Year,Month) a;
+2022/05/06 10:55:48 the 0 time result in raw: &{RunningTimeMS:632.107577 ScanProgress:{Bytes:1216125924 Rows:405375308}}
+2022/05/06 10:55:48 the 1 time to run query Q11 : SELECT avg(c1) FROM (SELECT Year,Month,count(*) AS c1 FROM default.ontime GROUP BY Year,Month) a;
+2022/05/06 10:55:48 the 1 time result in raw: &{RunningTimeMS:635.165757 ScanProgress:{Bytes:1216125924 Rows:405375308}}
+2022/05/06 10:55:48 the 2 time to run query Q11 : SELECT avg(c1) FROM (SELECT Year,Month,count(*) AS c1 FROM default.ontime GROUP BY Year,Month) a;
+2022/05/06 10:55:49 the 2 time result in raw: &{RunningTimeMS:620.444377 ScanProgress:{Bytes:1216125924 Rows:405375308}}
+2022/05/06 10:55:49 the 3 time to run query Q11 : SELECT avg(c1) FROM (SELECT Year,Month,count(*) AS c1 FROM default.ontime GROUP BY Year,Month) a;
+2022/05/06 10:55:50 the 3 time result in raw: &{RunningTimeMS:641.53341 ScanProgress:{Bytes:1216125924 Rows:405375308}}
+2022/05/06 10:55:50 the 4 time to run query Q11 : SELECT avg(c1) FROM (SELECT Year,Month,count(*) AS c1 FROM default.ontime GROUP BY Year,Month) a;
+2022/05/06 10:55:51 the 4 time result in raw: &{RunningTimeMS:630.966798 ScanProgress:{Bytes:1216125924 Rows:405375308}}
+2022/05/06 10:55:51 the 5 time to run query Q11 : SELECT avg(c1) FROM (SELECT Year,Month,count(*) AS c1 FROM default.ontime GROUP BY Year,Month) a;
+2022/05/06 10:55:52 the 5 time result in raw: &{RunningTimeMS:638.5957289999999 ScanProgress:{Bytes:1216125924 Rows:405375308}}
+2022/05/06 10:55:52 the 6 time to run query Q11 : SELECT avg(c1) FROM (SELECT Year,Month,count(*) AS c1 FROM default.ontime GROUP BY Year,Month) a;
+2022/05/06 10:55:53 the 6 time result in raw: &{RunningTimeMS:639.295864 ScanProgress:{Bytes:1216125924 Rows:405375308}}
+2022/05/06 10:55:53 the 7 time to run query Q11 : SELECT avg(c1) FROM (SELECT Year,Month,count(*) AS c1 FROM default.ontime GROUP BY Year,Month) a;
+2022/05/06 10:55:54 the 7 time result in raw: &{RunningTimeMS:646.0718370000001 ScanProgress:{Bytes:1216125924 Rows:405375308}}
+2022/05/06 10:55:54 the 8 time to run query Q11 : SELECT avg(c1) FROM (SELECT Year,Month,count(*) AS c1 FROM default.ontime GROUP BY Year,Month) a;
+2022/05/06 10:55:54 the 8 time result in raw: &{RunningTimeMS:622.4966459999999 ScanProgress:{Bytes:1216125924 Rows:405375308}}
+2022/05/06 10:55:54 the 9 time to run query Q11 : SELECT avg(c1) FROM (SELECT Year,Month,count(*) AS c1 FROM default.ontime GROUP BY Year,Month) a;
+2022/05/06 10:55:55 the 9 time result in raw: &{RunningTimeMS:624.3582220000001 ScanProgress:{Bytes:1216125924 Rows:405375308}}
+2022/05/06 10:55:55 start to run query Q12 : SELECT OriginCityName, DestCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName, DestCityName ORDER BY c DESC LIMIT 10;
+2022/05/06 10:56:11 finish warm up 3 for query Q12 : SELECT OriginCityName, DestCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName, DestCityName ORDER BY c DESC LIMIT 10;
+2022/05/06 10:56:11 the 0 time to run query Q12 : SELECT OriginCityName, DestCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName, DestCityName ORDER BY c DESC LIMIT 10;
+2022/05/06 10:56:16 the 0 time result in raw: &{RunningTimeMS:4781.059366 ScanProgress:{Bytes:17155468830 Rows:405375308}}
+2022/05/06 10:56:16 the 1 time to run query Q12 : SELECT OriginCityName, DestCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName, DestCityName ORDER BY c DESC LIMIT 10;
+2022/05/06 10:56:21 the 1 time result in raw: &{RunningTimeMS:4885.643454 ScanProgress:{Bytes:17155468830 Rows:405375308}}
+2022/05/06 10:56:21 the 2 time to run query Q12 : SELECT OriginCityName, DestCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName, DestCityName ORDER BY c DESC LIMIT 10;
+2022/05/06 10:56:26 the 2 time result in raw: &{RunningTimeMS:4776.328463999999 ScanProgress:{Bytes:17155468830 Rows:405375308}}
+2022/05/06 10:56:26 the 3 time to run query Q12 : SELECT OriginCityName, DestCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName, DestCityName ORDER BY c DESC LIMIT 10;
+2022/05/06 10:56:31 the 3 time result in raw: &{RunningTimeMS:4744.490118 ScanProgress:{Bytes:17155468830 Rows:405375308}}
+2022/05/06 10:56:31 the 4 time to run query Q12 : SELECT OriginCityName, DestCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName, DestCityName ORDER BY c DESC LIMIT 10;
+2022/05/06 10:56:36 the 4 time result in raw: &{RunningTimeMS:4737.377245000001 ScanProgress:{Bytes:17155468830 Rows:405375308}}
+2022/05/06 10:56:36 the 5 time to run query Q12 : SELECT OriginCityName, DestCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName, DestCityName ORDER BY c DESC LIMIT 10;
+2022/05/06 10:56:41 the 5 time result in raw: &{RunningTimeMS:4798.9589510000005 ScanProgress:{Bytes:17155468830 Rows:405375308}}
+2022/05/06 10:56:41 the 6 time to run query Q12 : SELECT OriginCityName, DestCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName, DestCityName ORDER BY c DESC LIMIT 10;
+2022/05/06 10:56:46 the 6 time result in raw: &{RunningTimeMS:4798.92767 ScanProgress:{Bytes:17155468830 Rows:405375308}}
+2022/05/06 10:56:46 the 7 time to run query Q12 : SELECT OriginCityName, DestCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName, DestCityName ORDER BY c DESC LIMIT 10;
+2022/05/06 10:56:51 the 7 time result in raw: &{RunningTimeMS:4846.060203 ScanProgress:{Bytes:17155468830 Rows:405375308}}
+2022/05/06 10:56:51 the 8 time to run query Q12 : SELECT OriginCityName, DestCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName, DestCityName ORDER BY c DESC LIMIT 10;
+2022/05/06 10:56:56 the 8 time result in raw: &{RunningTimeMS:4816.621938 ScanProgress:{Bytes:17155468830 Rows:405375308}}
+2022/05/06 10:56:56 the 9 time to run query Q12 : SELECT OriginCityName, DestCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName, DestCityName ORDER BY c DESC LIMIT 10;
+2022/05/06 10:57:01 the 9 time result in raw: &{RunningTimeMS:4812.1259119999995 ScanProgress:{Bytes:17155468830 Rows:405375308}}
+2022/05/06 10:57:01 start to run query Q13 : SELECT OriginCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName ORDER BY c DESC LIMIT 10;
+2022/05/06 10:57:07 finish warm up 3 for query Q13 : SELECT OriginCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName ORDER BY c DESC LIMIT 10;
+2022/05/06 10:57:07 the 0 time to run query Q13 : SELECT OriginCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName ORDER BY c DESC LIMIT 10;
+2022/05/06 10:57:09 the 0 time result in raw: &{RunningTimeMS:1885.709521 ScanProgress:{Bytes:8577794756 Rows:405375308}}
+2022/05/06 10:57:09 the 1 time to run query Q13 : SELECT OriginCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName ORDER BY c DESC LIMIT 10;
+2022/05/06 10:57:11 the 1 time result in raw: &{RunningTimeMS:1863.298892 ScanProgress:{Bytes:8577794756 Rows:405375308}}
+2022/05/06 10:57:11 the 2 time to run query Q13 : SELECT OriginCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName ORDER BY c DESC LIMIT 10;
+2022/05/06 10:57:14 the 2 time result in raw: &{RunningTimeMS:1882.288016 ScanProgress:{Bytes:8577794756 Rows:405375308}}
+2022/05/06 10:57:14 the 3 time to run query Q13 : SELECT OriginCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName ORDER BY c DESC LIMIT 10;
+2022/05/06 10:57:16 the 3 time result in raw: &{RunningTimeMS:1867.427445 ScanProgress:{Bytes:8577794756 Rows:405375308}}
+2022/05/06 10:57:16 the 4 time to run query Q13 : SELECT OriginCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName ORDER BY c DESC LIMIT 10;
+2022/05/06 10:57:18 the 4 time result in raw: &{RunningTimeMS:1867.699595 ScanProgress:{Bytes:8577794756 Rows:405375308}}
+2022/05/06 10:57:18 the 5 time to run query Q13 : SELECT OriginCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName ORDER BY c DESC LIMIT 10;
+2022/05/06 10:57:20 the 5 time result in raw: &{RunningTimeMS:1900.406115 ScanProgress:{Bytes:8577794756 Rows:405375308}}
+2022/05/06 10:57:20 the 6 time to run query Q13 : SELECT OriginCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName ORDER BY c DESC LIMIT 10;
+2022/05/06 10:57:22 the 6 time result in raw: &{RunningTimeMS:1858.743531 ScanProgress:{Bytes:8577794756 Rows:405375308}}
+2022/05/06 10:57:22 the 7 time to run query Q13 : SELECT OriginCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName ORDER BY c DESC LIMIT 10;
+2022/05/06 10:57:24 the 7 time result in raw: &{RunningTimeMS:1865.955392 ScanProgress:{Bytes:8577794756 Rows:405375308}}
+2022/05/06 10:57:24 the 8 time to run query Q13 : SELECT OriginCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName ORDER BY c DESC LIMIT 10;
+2022/05/06 10:57:26 the 8 time result in raw: &{RunningTimeMS:1875.498462 ScanProgress:{Bytes:8577794756 Rows:405375308}}
+2022/05/06 10:57:26 the 9 time to run query Q13 : SELECT OriginCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName ORDER BY c DESC LIMIT 10;
+2022/05/06 10:57:28 the 9 time result in raw: &{RunningTimeMS:1896.858975 ScanProgress:{Bytes:8577794756 Rows:405375308}}
+2022/05/06 10:57:28 start to run query Q14 : SELECT count(*) FROM default.ontime;
+2022/05/06 10:57:29 finish warm up 3 for query Q14 : SELECT count(*) FROM default.ontime;
+2022/05/06 10:57:29 the 0 time to run query Q14 : SELECT count(*) FROM default.ontime;
+2022/05/06 10:57:29 the 0 time result in raw: &{RunningTimeMS:11.540761999999999 ScanProgress:{Bytes:1 Rows:1}}
+2022/05/06 10:57:29 the 1 time to run query Q14 : SELECT count(*) FROM default.ontime;
+2022/05/06 10:57:29 the 1 time result in raw: &{RunningTimeMS:18.607150999999998 ScanProgress:{Bytes:1 Rows:1}}
+2022/05/06 10:57:29 the 2 time to run query Q14 : SELECT count(*) FROM default.ontime;
+2022/05/06 10:57:30 the 2 time result in raw: &{RunningTimeMS:13.429789 ScanProgress:{Bytes:1 Rows:1}}
+2022/05/06 10:57:30 the 3 time to run query Q14 : SELECT count(*) FROM default.ontime;
+2022/05/06 10:57:30 the 3 time result in raw: &{RunningTimeMS:13.662598 ScanProgress:{Bytes:1 Rows:1}}
+2022/05/06 10:57:30 the 4 time to run query Q14 : SELECT count(*) FROM default.ontime;
+2022/05/06 10:57:30 the 4 time result in raw: &{RunningTimeMS:11.482233999999998 ScanProgress:{Bytes:1 Rows:1}}
+2022/05/06 10:57:30 the 5 time to run query Q14 : SELECT count(*) FROM default.ontime;
+2022/05/06 10:57:30 the 5 time result in raw: &{RunningTimeMS:11.536935999999999 ScanProgress:{Bytes:1 Rows:1}}
+2022/05/06 10:57:30 the 6 time to run query Q14 : SELECT count(*) FROM default.ontime;
+2022/05/06 10:57:31 the 6 time result in raw: &{RunningTimeMS:16.669415 ScanProgress:{Bytes:1 Rows:1}}
+2022/05/06 10:57:31 the 7 time to run query Q14 : SELECT count(*) FROM default.ontime;
+2022/05/06 10:57:31 the 7 time result in raw: &{RunningTimeMS:18.243705 ScanProgress:{Bytes:1 Rows:1}}
+2022/05/06 10:57:31 the 8 time to run query Q14 : SELECT count(*) FROM default.ontime;
+2022/05/06 10:57:31 the 8 time result in raw: &{RunningTimeMS:24.179814 ScanProgress:{Bytes:1 Rows:1}}
+2022/05/06 10:57:31 the 9 time to run query Q14 : SELECT count(*) FROM default.ontime;
+2022/05/06 10:57:31 the 9 time result in raw: &{RunningTimeMS:18.065404 ScanProgress:{Bytes:1 Rows:1}}
