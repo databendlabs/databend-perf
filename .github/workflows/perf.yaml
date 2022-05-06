@@ -74,3 +74,26 @@ jobs:
           destination_dir: json
           keep_files: false
           commit_message: 'Update Transform Data'
+
+      - name: Make summary log
+        if: ${{ failure() }}
+        run: tail -30 detail.log > summary.log
+      - name: Read lastest log
+        if: ${{ failure() }}
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: summary.log
+      - name: Nofity By Email
+        uses: dawidd6/action-send-mail@v3
+        if: ${{ failure() }}
+        with:
+          server_address: smtp.feishu.cn
+          server_port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: Databend Perf Github Actions job result
+          to: xuzhiqing2014@outlook.com, xuzhiqing2014@163.com
+          from: databend-perf
+          secure: true
+          body: "Build job of ${{github.repository}} run failed, lastest output: \n${{ steps.package.outputs.content }}\n For detail log, see attachment file."
+          attachments: detail.log
