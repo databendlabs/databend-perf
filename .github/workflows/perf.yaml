@@ -52,7 +52,7 @@ jobs:
         run: |
           chmod +x ./perf-tool
           ./perf-tool --output-format json --test-dir benchmarks -target-dir collector >> detail.log 2>&1
-          mv collector/numbers.json collector/numbers/${{ steps.perf_date.outputs.DATE }}-numbers.json
+          mv collectorss/numbers.json collector/numbers/${{ steps.perf_date.outputs.DATE }}-numbers.json
           mv collector/ontime.json collector/ontime/${{ steps.perf_date.outputs.DATE }}-ontime.json
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
@@ -76,6 +76,7 @@ jobs:
           commit_message: 'Update Transform Data'
 
       - name: Make summary log
+        if: ${{ failure() }}
         run: |
           head -10 detail.log 
           tail -30 detail.log > summary.log
@@ -90,8 +91,8 @@ jobs:
         with:
           server_address: smtp.feishu.cn
           server_port: 465
-          username: ${{secrets.MAIL_USERNAME}}
-          password: ${{secrets.MAIL_PASSWORD}}
+          username: ${{secrets.WEB_API_USER_EMAIL}}
+          password: ${{secrets.WEB_API_USER_PASSWORD}}
           subject: Databend Perf Github Actions job result
           to: xuzhiqing2014@outlook.com, xuzhiqing2014@163.com
           from: databend-perf
