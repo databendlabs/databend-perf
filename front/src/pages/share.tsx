@@ -4,8 +4,29 @@ import styles from './css/share.module.scss';
 import { useMount } from 'ahooks';
 import { getQuery } from '../utils/tools';
 import { getGraph, getLatestByCategory } from '../api';
-import * as echarts from 'echarts';
+import * as echarts from 'echarts/core';
+import {
+	TooltipComponent,
+	TooltipComponentOption,
+	GridComponent,
+	GridComponentOption,
+	LegendComponent,
+	LegendComponentOption,
+	ToolboxComponent,
+	ToolboxComponentOption,
+  DataZoomComponent,
+  DataZoomComponentOption
+} from 'echarts/components';
+import { LineChart, LineSeriesOption, BarChart, BarSeriesOption } from 'echarts/charts';
+import { CanvasRenderer } from 'echarts/renderers';
 import { deviceType } from '../utils/device-type';
+echarts.use([TooltipComponent, GridComponent, LineChart, BarChart, CanvasRenderer, LegendComponent, ToolboxComponent, DataZoomComponent]);
+type EChartsOption = echarts.ComposeOption<
+  TooltipComponentOption | GridComponentOption 
+  | LineSeriesOption | LegendComponentOption 
+  | DataZoomComponentOption | ToolboxComponentOption
+  | BarSeriesOption
+>;
 interface IData {
   lines: number[];
   sql: string;
@@ -49,10 +70,10 @@ const Share: FC = (): ReactElement=> {
                 <span style='font-weight: bold; padding-right: 10px;'>${title}:</span><span>${sql}</span>
               </span>
             `;
-            chart.setOption({
+            const opt: EChartsOption = {
               legend: {
                 data: legend,
-                y: '15'
+                top: '15'
               },
               dataZoom: [
                 {
@@ -85,7 +106,8 @@ const Share: FC = (): ReactElement=> {
                 name: 's'
               },
               series: lines
-            })
+            }
+            chart.setOption(opt)
            
             chart = null;
           }
@@ -107,7 +129,7 @@ const Share: FC = (): ReactElement=> {
                 <span style='font-weight: bold; padding-right: 10px;'>${stateTitle}:</span><span>${sql}</span>
               </span>
             `;
-            chart.setOption({
+            const opt: EChartsOption = {
               xAxis: {
                 type: 'category',
                 data: xAxis
@@ -132,20 +154,19 @@ const Share: FC = (): ReactElement=> {
                 {
                   data: lines.map((data:number)=> data.toFixed(3)),
                   type: 'bar',
+                  label: {
+                    show: true
+                  },
                   itemStyle: {
-                    normal: {
-                      label: {
-                        show: true
-                      },
-                      color: function(params:any) {
-                        var colorList = ['#5470c6','#91cc75', '#fac858', '#ee6666'];
-                        return colorList[params.dataIndex]
-                      }
+                    color: function(params:any) {
+                      var colorList = ['#5470c6','#91cc75', '#fac858', '#ee6666'];
+                      return colorList[params.dataIndex]
                     }
                   }
                 }
               ]
-            });
+            }
+            chart.setOption(opt);
           }
         })
       }
