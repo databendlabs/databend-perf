@@ -2,11 +2,28 @@ import { FC, ReactElement, useState } from 'react';
 import { useMount } from 'ahooks';
 import { Form, Row, Col, Select, Spin } from 'antd';
 import { getCategories, getLatestByCategory } from '../api';
-import * as echarts from 'echarts';
+import * as echarts from 'echarts/core';
+import {
+	TooltipComponent,
+	TooltipComponentOption,
+	GridComponent,
+	GridComponentOption,
+	LegendComponent,
+	LegendComponentOption,
+	ToolboxComponent,
+	ToolboxComponentOption} from 'echarts/components';
+import { BarChart, BarSeriesOption } from 'echarts/charts';
+import { CanvasRenderer } from 'echarts/renderers';
 import styles from './css/styles.module.scss';
 const { Option } = Select;
 import { deviceType } from '../utils/device-type';
 import ShareButton from '../componnent/ShareButton';
+echarts.use([TooltipComponent, GridComponent, BarChart, CanvasRenderer, LegendComponent, ToolboxComponent]);
+type EChartsOption = echarts.ComposeOption<
+  TooltipComponentOption | GridComponentOption 
+  | BarSeriesOption | LegendComponentOption 
+  | ToolboxComponentOption
+>;
 const Status: FC = (): ReactElement=> {
   const [formRef] = Form.useForm();
   const { isPhone } = deviceType();
@@ -60,7 +77,7 @@ const Status: FC = (): ReactElement=> {
           <span style='font-weight: bold; padding-right: 10px;'>${title}:</span><span style='font-size: 12px;'>${sql}</span>
         </span>
       `;
-    chart.setOption({
+    const opt: EChartsOption = {
       xAxis: {
         type: 'category',
         data: xAxis
@@ -85,20 +102,19 @@ const Status: FC = (): ReactElement=> {
         {
           data: lines.map((data:number)=> data.toFixed(3)),
           type: 'bar',
+          label: {
+            show: true
+          },
           itemStyle: {
-            normal: {
-              label: {
-                show: true
-              },
-              color: function(params:any) {
-                var colorList = ['#5470c6','#91cc75', '#fac858', '#ee6666'];
-                return colorList[params.dataIndex]
-              }
+            color: function(params:any) {
+              var colorList = ['#5470c6','#91cc75', '#fac858', '#ee6666'];
+              return colorList[params.dataIndex]
             }
           }
         }
       ]
-    });
+    }
+    chart.setOption(opt);
   }
   return (
     <div>

@@ -3,15 +3,34 @@ import { useMount } from 'ahooks';
 import { DatePicker, Form, Row, Col, Select, Button, message, Tag } from 'antd';
 import { getApiListByCategory, getCategories, getGraph } from '../api';
 import { Link } from "react-router-dom";
-import * as echarts from 'echarts';
+import * as echarts from 'echarts/core';
+import {
+	TooltipComponent,
+	TooltipComponentOption,
+	GridComponent,
+	GridComponentOption,
+	LegendComponent,
+	LegendComponentOption,
+	ToolboxComponent,
+	ToolboxComponentOption,
+  DataZoomComponent,
+  DataZoomComponentOption
+} from 'echarts/components';
+import { LineChart, LineSeriesOption } from 'echarts/charts';
+import { CanvasRenderer } from 'echarts/renderers';
 import moment from 'moment';
 import { formatterDate } from '../utils/tools';
 import styles from './css/styles.module.scss';
 import { deviceType } from '../utils/device-type';
 import ShareButton from '../componnent/ShareButton';
-import { intersection } from 'lodash';
 const { RangePicker } = DatePicker;
 const { Option } = Select;
+echarts.use([TooltipComponent, GridComponent, LineChart, CanvasRenderer, LegendComponent, ToolboxComponent, DataZoomComponent]);
+type EChartsOption = echarts.ComposeOption<
+  TooltipComponentOption | GridComponentOption 
+  | LineSeriesOption | LegendComponentOption 
+  | DataZoomComponentOption | ToolboxComponentOption
+>;
 const Graphs: FC = (): ReactElement=> {
   const { isPhone } = deviceType();
   const [category, setCategory] = useState([]);
@@ -120,10 +139,10 @@ const Graphs: FC = (): ReactElement=> {
         return item.type = 'line'
       })
       setIsFullDate(true)
-      chart.setOption({
+      const opt: EChartsOption = {
         legend: {
           data: legend,
-          y: '10'
+          top: '10'
         },
         dataZoom: [
           {
@@ -160,7 +179,8 @@ const Graphs: FC = (): ReactElement=> {
           name: 's'
         },
         series: lines
-      });
+      }
+      chart.setOption(opt);
       chart = null;
     }
   }
