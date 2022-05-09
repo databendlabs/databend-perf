@@ -20,8 +20,7 @@ export default defineConfig({
 			output:{
 				manualChunks: {
 					lodash: ['lodash'],
-					react: ['react', 'react-dom', 'react-router-dom'],
-          echarts: ['echarts']
+					react: ['react', 'react-dom', 'react-router-dom']
 				}
         
 			}
