@@ -26,12 +26,16 @@ const Compare: FC = (): ReactElement=> {
     {
       title: 'benchmark',
       dataIndex: 'title',
-      key: 'title'
+      key: 'title',
+      fixed: 'left'
     },
     {
       title: 'sql',
       dataIndex: 'sql',
       key: 'sql',
+      render(text: string) {
+        return <span style={{fontSize: '12px'}}>{text}</span>
+      },
       fixed: 'left'
     },
     {
