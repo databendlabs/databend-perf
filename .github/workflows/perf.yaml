@@ -75,7 +75,7 @@ jobs:
           keep_files: false
           commit_message: 'Update Transform Data'
 
-      - name: Nofify
+      - name: Nofify Email
         uses: dawidd6/action-send-mail@v3
         if: ${{ failure() }}
         with:
@@ -87,4 +87,13 @@ jobs:
           to: cloud.dev@datafuselabs.com
           from: databend-perf
           secure: true
-          body: "Build job of ${{github.repository}} run failed"
+          body: Build job of ${{github.repository}} run failed
+      - name: Notify Feishu Group
+        uses: foxundermoon/feishu-action@v2
+        if: ${{ failure() }}
+        with:
+          url: ${{ secrets.FEISHU_BOT_WEBHOOK_URL }}
+          msg_type: text
+          content: |
+            text: |
+              Build job of ${{github.repository}} run failed
