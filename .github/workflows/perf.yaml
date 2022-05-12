@@ -40,9 +40,11 @@ jobs:
           aws-secret-access-key: ${{ secrets.REPO_SECRET_ACCESS_KEY }}
           aws-region: us-east-2
 
-      - name: Get perf-tools from S3
-        run: |
-          aws s3 cp s3://databend-shared/tools/perf-tool/amd64/perf-tool perf-tool
+      # TODO(liyz): add this back when the new account is ready
+      #  - name: Get perf-tools from S3
+      #  run: |
+      #    aws s3 cp s3://databend-shared/tools/perf-tool/amd64/perf-tool script/perf-tool
+
       - name: Run Perf
         env:
           WEB_API_USER_EMAIL: ${{ secrets.WEB_API_USER_EMAIL }}
@@ -50,8 +52,8 @@ jobs:
           WAREHOUSE_TAG: ${{ steps.databend_version.outputs.VERSION }}
           WAREHOUSE_SIZE: ${{ secrets.WAREHOUSE_SIZE }}
         run: |
-          chmod +x ./perf-tool
-          ./perf-tool --output-format json --test-dir benchmarks -target-dir collector
+          chmod +x ./script/perf-tool
+          ./script/perf-tool --output-format json --test-dir benchmarks -target-dir collector
           mv collector/numbers.json collector/numbers/${{ steps.perf_date.outputs.DATE }}-numbers.json
           mv collector/ontime.json collector/ontime/${{ steps.perf_date.outputs.DATE }}-ontime.json
       - uses: stefanzweifel/git-auto-commit-action@v4
