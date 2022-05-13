@@ -12,11 +12,6 @@ jobs:
   perf:
     name: Databend Release Perf
     runs-on: ubuntu-latest
-    env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.REPO_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.REPO_SECRET_ACCESS_KEY }}
-      AWS_DEFAULT_REGION: us-east-2
-      AWS_DEFAULT_OUTPUT: json
 
     strategy:
       fail-fast: false
@@ -35,17 +30,10 @@ jobs:
         run: |
           THE_DATE=$(date +"%Y-%m-%d")
           echo ::set-output name=DATE::${THE_DATE}
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.REPO_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.REPO_SECRET_ACCESS_KEY }}
-          aws-region: us-east-2
 
-      # TODO(liyz): add this back when the new account is ready
-      #  - name: Get perf-tools from S3
-      #  run: |
-      #    aws s3 cp s3://databend-shared/tools/perf-tool/amd64/perf-tool script/perf-tool
+      - name: Get perf-tools from repo
+        run: |
+          curl -fsSLo script/perf-tool https://repo.databend.rs/tools/perf-tool/amd64/perf-tool
 
       - name: Run Perf
         env:
@@ -92,6 +80,7 @@ jobs:
           from: databend-perf
           secure: true
           body: Build job of ${{github.repository}} run failed
+
       - name: Notify Feishu Group
         uses: foxundermoon/feishu-action@v2
         if: ${{ failure() }}
