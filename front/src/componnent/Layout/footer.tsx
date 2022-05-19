@@ -42,7 +42,7 @@ const Footer: FC = (): ReactElement=> {
         {
           name: 'Slack',
           linkIcon: true,
-          link: 'https://join.slack.com/t/datafusecloud/shared_invite/zt-nojrc9up-50IRla1Y1h56rqwCTkkDJA'
+          link: 'https://link.databend.rs/join-slack'
         },
         {
           name: 'Twitter',
