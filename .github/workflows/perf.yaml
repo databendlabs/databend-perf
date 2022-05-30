@@ -63,6 +63,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          force_orphan: true
           publish_branch: gh-pages
           publish_dir: temp
           destination_dir: json
