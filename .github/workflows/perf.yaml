@@ -57,10 +57,13 @@ jobs:
         run: go version
       - name: Do Transform
         run: go run script/transform.go
+
       - name: Upload Result
         uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          force_orphan: true
           publish_branch: gh-pages
           publish_dir: temp
           destination_dir: json
@@ -83,10 +86,10 @@ jobs:
 
       - name: Notify Feishu Group
         uses: foxundermoon/feishu-action@v2
-        if: ${{ failure() }}
+        if: ${{ always() }}
         with:
           url: ${{ secrets.FEISHU_BOT_WEBHOOK_URL }}
           msg_type: text
           content: |
             text: |
-              Build job of ${{github.repository}} run failed
+              Build job of ${{ github.repository }} run ${{ job.status }}
