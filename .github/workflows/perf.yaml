@@ -89,7 +89,10 @@ jobs:
         if: ${{ always() }}
         with:
           url: ${{ secrets.FEISHU_BOT_WEBHOOK_URL }}
-          msg_type: text
+          msg_type: post
           content: |
-            text: |
-              Build job of ${{ github.repository }} run ${{ job.status }}
+            post:
+              zh_cn:
+                title: Build job of ${{ github.repository }} run ${{ job.status }}
+                content:
+                - [{"tag": "a", "text": "link", "href": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}]
