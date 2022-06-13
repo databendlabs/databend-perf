@@ -42,7 +42,7 @@ jobs:
       
       - name: COPY INTO
         run: |
-          curl --request POST '${{ secrets.ENDPOINT_QUERY }}' -H 'Content-Type: application/json' -H 'x-databendcloud-org: ${{ secrets.CLOUD_ORGNAME }}' -H 'x-databendcloud-warehouse: ${{ secrets.WAREHOUSE_NAME }}' -b cookie.txt --data-raw '{"sql": "COPY INTO default.ontime FROM 's3://repo.databend.rs/y_ontime/y_ontime.csv' credentials=(aws_key_id='${{ secrets.REPO_ACCESS_KEY_ID }}' aws_secret_key='${{ secrets.REPO_SECRET_ACCESS_KEY }}') file_format = (type = 'CSV' field_delimiter = '\t'  record_delimiter = '\n' skip_header = 1);"}'
+          curl --request POST '${{ secrets.ENDPOINT_QUERY }}' -H 'Content-Type: application/json' -H 'x-databendcloud-org: ${{ secrets.CLOUD_ORGNAME }}' -H 'x-databendcloud-warehouse: ${{ secrets.WAREHOUSE_NAME }}' -b cookie.txt --data-raw '{"sql": "COPY INTO default.ontime FROM 's3://repo.databend.rs/y_ontime/y_ontime.csv' credentials=(aws_key_id='${{ secrets.REPO_ACCESS_KEY_ID }}' aws_secret_key='${{ secrets.REPO_SECRET_ACCESS_KEY }}') file_format = (type = 'CSV' field_delimiter = '\\t'  record_delimiter = '\\n' skip_header = 1);"}'
 
       - name: Delete warehouse
         run: |
