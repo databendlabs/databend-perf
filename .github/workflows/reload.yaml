@@ -55,7 +55,7 @@ jobs:
       
       - name: Create warehouse
         run: |
-          curl --request POST '${{ secrets.ENDPOINT_WAREHOUSE }}' -H 'Content-Type: application/json' -H 'x-databendcloud-org: ${{ secrets.CLOUD_ORGNAME }}' --data-raw '{"name": "${{ secrets.WAREHOUSE_NAME }}", "size":"${{ secrets.WAREHOUSE_SIZE }}"}' -b cookie.txt
+          curl --request POST '${{ secrets.ENDPOINT_WAREHOUSE }}' -H 'Content-Type: application/json' -H 'x-databendcloud-org: ${{ secrets.CLOUD_ORGNAME }}' --data-raw '{"name": "${{ secrets.WAREHOUSE_NAME }}", "size":"Small"}' -b cookie.txt
 
       - name: Create Table
         run: |
