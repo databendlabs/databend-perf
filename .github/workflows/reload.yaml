@@ -7,6 +7,15 @@ on:
     paths:
       - "reload/**"
       - ".github/reload.yaml"
+  push:
+    branches:
+      - main
+    paths:
+      - "reload/**"
+      - ".github/reload.yaml"
+  schedule:
+    # Runs at 08:25 UTC on Fri. 
+    - cron: '25 8 * * 5'
 
 jobs:
   perf:
@@ -47,6 +56,10 @@ jobs:
           chmod +x ./script/perf-tool
           ./script/perf-tool --output-format json --test-dir reload -target-dir collector/ontime-reload -test-time 1 -warm-time 0
           mv collector/ontime-reload/reload_ontime.json collector/ontime-reload/${{ steps.perf_date.outputs.DATE }}-reload-ontime.json
+          sed -i "s/${{ secrets.REPO_ACCESS_KEY_ID }}/AWS_KEY_ID/g" ./reload/ontime.yaml
+          sed -i "s/${{ secrets.REPO_SECRET_ACCESS_KEY }}/AWS_SECRET_KEY/g" ./reload/ontime.yaml
+          sed -i "s/${{ secrets.REPO_ACCESS_KEY_ID }}/AWS_KEY_ID/g" ./collector/ontime-reload/${{ steps.perf_date.outputs.DATE }}-reload-ontime.json
+          sed -i "s/${{ secrets.REPO_SECRET_ACCESS_KEY }}/AWS_SECRET_KEY/g" ./collector/ontime-reload/${{ steps.perf_date.outputs.DATE }}-reload-ontime.json
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
