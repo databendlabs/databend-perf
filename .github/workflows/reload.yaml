@@ -1,8 +1,21 @@
-name: Perf
+name: Reload
 
 on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "reload/**"
+      - ".github/workflows/reload.yaml"
+  push:
+    branches:
+      - main
+    paths:
+      - "reload/**"
+      - ".github/workflows/reload.yaml"
   schedule:
-    - cron: '25 0 * * *'
+    # Runs at 08:25 UTC on Fri. 
+    - cron: '25 8 * * 5'
 
 jobs:
   perf:
@@ -38,33 +51,19 @@ jobs:
           WAREHOUSE_TAG: ${{ steps.databend_version.outputs.VERSION }}
           WAREHOUSE_SIZE: ${{ secrets.WAREHOUSE_SIZE }}
         run: |
+          sed -i "s/AWS_KEY_ID/${{ secrets.REPO_ACCESS_KEY_ID }}/g"  ./reload/ontime.yaml
+          sed -i "s/AWS_SECRET_KEY/${{ secrets.REPO_SECRET_ACCESS_KEY }}/g"  ./reload/ontime.yaml
           chmod +x ./script/perf-tool
-          ./script/perf-tool --output-format json --test-dir benchmarks -target-dir collector
-          mv collector/numbers.json collector/numbers/${{ steps.perf_date.outputs.DATE }}-numbers.json
-          mv collector/ontime.json collector/ontime/${{ steps.perf_date.outputs.DATE }}-ontime.json
+          ./script/perf-tool --output-format json --test-dir reload -target-dir collector/ontime-reload -test-time 1 -warm-time 0
+          mv collector/ontime-reload/reload_ontime.json collector/ontime-reload/${{ steps.perf_date.outputs.DATE }}-reload-ontime.json
+          sed -i "s/${{ secrets.REPO_ACCESS_KEY_ID }}/AWS_KEY_ID/g" ./reload/ontime.yaml
+          sed -i "s/${{ secrets.REPO_SECRET_ACCESS_KEY }}/AWS_SECRET_KEY/g" ./reload/ontime.yaml
+          sed -i "s/${{ secrets.REPO_ACCESS_KEY_ID }}/AWS_KEY_ID/g" ./collector/ontime-reload/${{ steps.perf_date.outputs.DATE }}-reload-ontime.json
+          sed -i "s/${{ secrets.REPO_SECRET_ACCESS_KEY }}/AWS_SECRET_KEY/g" ./collector/ontime-reload/${{ steps.perf_date.outputs.DATE }}-reload-ontime.json
+
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: 'perf: collect performance data from the latest release'
-      - name: Setup Go Env
-        uses: actions/setup-go@v3
-        with:
-          go-version: '>=1.17.0'
-      - name: Print Go Version
-        run: go version
-      - name: Do Transform
-        run: go run script/transform.go
-
-      - name: Upload Result
-        uses: peaceiris/actions-gh-pages@v3
-        if: github.ref == 'refs/heads/main'
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          force_orphan: true
-          publish_branch: gh-pages
-          publish_dir: temp
-          destination_dir: json
-          keep_files: false
-          commit_message: 'Update Transform Data'
+          commit_message: 'reload: try reload datasets to perf warehouse'
 
       - name: Nofify Email
         uses: dawidd6/action-send-mail@v3
@@ -74,11 +73,11 @@ jobs:
           server_port: 465
           username: ${{secrets.MAIL_USERNAME}}
           password: ${{secrets.MAIL_PASSWORD}}
-          subject: Databend Perf Github Actions Run Failed
+          subject: Databend Perf Github Actions Reload Failed
           to: cloud.dev@datafuselabs.com
           from: databend-perf
           secure: true
-          body: Build job of ${{github.repository}} run failed
+          body: Reload job of ${{github.repository}} run failed
 
       - name: Notify Feishu Group
         uses: foxundermoon/feishu-action@v2
@@ -89,6 +88,6 @@ jobs:
           content: |
             post:
               zh_cn:
-                title: Build job of ${{ github.repository }} run ${{ job.status }}
+                title: Reload job of ${{ github.repository }} run ${{ job.status }}
                 content:
                 - [{"tag": "a", "text": "link", "href": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}]
