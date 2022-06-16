@@ -6,13 +6,13 @@ on:
       - main
     paths:
       - "reload/**"
-      - ".github/reload.yaml"
+      - ".github/workflows/reload.yaml"
   push:
     branches:
       - main
     paths:
       - "reload/**"
-      - ".github/reload.yaml"
+      - ".github/workflows/reload.yaml"
   schedule:
     # Runs at 08:25 UTC on Fri. 
     - cron: '25 8 * * 5'
