@@ -1,8 +1,6 @@
 name: Perf
 
 on:
-  push:
-    branches: [ main ]
   schedule:
     - cron: '25 0 * * *'
 
