@@ -110,6 +110,13 @@ $phoneW:997px;
     text-overflow: ellipsis;
   }
 }
+.g-ellipsis {
+  @include ellipsis(3);
+}
+
+.g-ellipsis5 {
+  @include ellipsis(5);
+}
 
 @mixin phonePadding {
   padding-left: mpx(15);
