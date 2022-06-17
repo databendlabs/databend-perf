@@ -67,7 +67,7 @@ const Share: FC = (): ReactElement=> {
             })
             t.innerHTML = `
               <span style='display: flex; justify-content: center'>
-                <span style='font-weight: bold; padding-right: 10px;'>${title}:</span><span>${sql}</span>
+                <span style='font-weight: bold; padding-right: 10px;'>${title}:</span><span class="g-ellipsis" title="${sql}">${sql}</span>
               </span>
             `;
             const opt: EChartsOption = {

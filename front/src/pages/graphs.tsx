@@ -101,6 +101,7 @@ const Graphs: FC = (): ReactElement=> {
     }
   }
   function drawCharts(category: string,graph: string, graphData: any, i:number, isFullDate: boolean) {
+    console.log(graphData, 'graphDatagraphDatagraphDatagraphDatagraphDatagraphData')
     const name = `${category}-${graph}`;
     const container = document.getElementById(`${name}`) as HTMLElement;
     if (container) {
@@ -116,25 +117,30 @@ const Graphs: FC = (): ReactElement=> {
       } = graphData;
       t.innerHTML = `
         <span style='display: flex;'>
-          <span style='font-weight: bold; padding-right: 10px;'>${title}:</span><span style="font-size: 12px;">${sql}</span>
+          <span style='font-weight: bold; padding-right: 10px;'>${title}:</span><span class="g-ellipsis" title="${sql}" style="font-size: 12px;">${sql}</span>
         </span>
       `;
       if (!isFullDate){
         const { startIndex, endIndex, filterDate } = filterDateObj;
-        if (filterDateObj.endIndex ===-1){
-          xAxis = filterDate;
-          lines.map((item:any)=>{
-            item.data = item.data.slice(startIndex);
-          });
-          version = version.slice(startIndex);
-        } else {
-          xAxis = filterDate;
-          lines.map((item:any)=>{
-            item.data = item.data.slice(startIndex, endIndex+1);
-          });
-          version = version.slice(startIndex, endIndex+1);
+        if (xAxis.length === filterDate.length) {
+          if (filterDateObj.endIndex ===-1){
+            xAxis = filterDate;
+            lines.map((item:any)=>{
+              item.data = item.data.slice(startIndex);
+            });
+            version = version.slice(startIndex);
+          } else {
+            xAxis = filterDate;
+            lines.map((item:any)=>{
+              item.data = item.data.slice(startIndex, endIndex+1);
+            });
+            version = version.slice(startIndex, endIndex+1);
+          }
+
         }
+        
       }
+      console.log(xAxis, 'xAxis')
       lines?.map((item:any)=>{
         return item.type = 'line'
       })
@@ -180,41 +186,23 @@ const Graphs: FC = (): ReactElement=> {
         },
         series: lines
       }
-      chart.setOption(opt);
-      chart = null;
+      chart.setOption(opt, true);
     }
   }
   function disabledRangeTime(current:any) {
     return current > moment().add(0, 'days');
   }
   async function submit(){
-    const {category, date, kind} = formRef.getFieldsValue();
+    const {category, date} = formRef.getFieldsValue();
     setDefaultCategory(category)
     let starDate = null;
     let endDate = null;
-    let newStart: null |string|number = starDate;
     if (date && date.length>1) {
       starDate = formatterDate(date[0]),
       endDate = formatterDate(date[1])
-
-      /*newStart = starDate;
-      let i  = 0;
-      while(xAxisdate.indexOf(newStart as never) === -1) {
-        newStart = moment(newStart).add(1, 'd').format('yyyy-MM-DD');
-        i++;
-
-        if (endDate && new Date(newStart).getTime() > new Date(endDate).getTime()) {
-          newStart = starDate;
-          break;
-        }
-      }
-
-      starDate = newStart;*/
     }
-   
     const start = xAxisdate.indexOf(starDate as never);
     const end =  xAxisdate.indexOf(endDate as never);
-    // console.log(newStart)
     const startIndex = start ===-1 ? 0 : start;
     const endIndex = end;
     let realDate = [];
@@ -289,7 +277,7 @@ const Graphs: FC = (): ReactElement=> {
         </div>
         <Row className={styles.allChartWrap} id='allChartWrap' gutter={10}>
             {
-              container?.map((item)=>{
+              container?.map((item, index)=>{
                 return <Col span={isPhone?24:8}  key={item} style={{marginBottom: '20px'}}>
                         <div className={styles.content}>
                           <div className={styles.title} id={`${defaultCategory}-${item}-title`}></div>

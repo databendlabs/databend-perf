@@ -74,7 +74,7 @@ const Status: FC = (): ReactElement=> {
     const { xAxis, title, lines, sql} = element;
     t.innerHTML = `
         <span style='display: flex'>
-          <span style='font-weight: bold; padding-right: 10px;'>${title}:</span><span style='font-size: 12px;'>${sql}</span>
+          <span style='font-weight: bold; padding-right: 10px;'>${title}:</span><span class="g-ellipsis" title="${sql}" style='font-size: 12px;'>${sql}</span>
         </span>
       `;
     const opt: EChartsOption = {

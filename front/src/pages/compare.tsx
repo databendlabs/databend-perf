@@ -34,7 +34,7 @@ const Compare: FC = (): ReactElement=> {
       dataIndex: 'sql',
       key: 'sql',
       render(text: string) {
-        return <span style={{fontSize: '12px'}}>{text}</span>
+        return <span className="g-ellipsis5" title={text} style={{fontSize: '12px'}}>{text}</span>
       },
       fixed: 'left'
     },
