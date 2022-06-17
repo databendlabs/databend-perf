@@ -122,25 +122,18 @@ const Graphs: FC = (): ReactElement=> {
       `;
       if (!isFullDate){
         const { startIndex, endIndex, filterDate } = filterDateObj;
-        if (xAxis.length === filterDate.length) {
-
-          if (filterDateObj.endIndex ===-1){
-            xAxis = filterDate;
-            lines.map((item:any)=>{
-              item.data = item.data.slice(startIndex);
-            });
-            version = version.slice(startIndex);
-            console.log(111111111111)
-          } else {
-            console.log(22222222222222)
-            xAxis = filterDate;
-            lines.map((item:any)=>{
-              item.data = item.data.slice(startIndex, endIndex+1);
-            });
-            version = version.slice(startIndex, endIndex+1);
-          }
-        
-
+        if (filterDateObj.endIndex ===-1){
+          xAxis = filterDate;
+          lines.map((item:any)=>{
+            item.data = item.data.slice(startIndex);
+          });
+          version = version.slice(startIndex);
+        } else {
+          xAxis = filterDate;
+          lines.map((item:any)=>{
+            item.data = item.data.slice(startIndex, endIndex+1);
+          });
+          version = version.slice(startIndex, endIndex+1);
         }
         
       }
