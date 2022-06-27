@@ -61,6 +61,9 @@ jobs:
           sed -i "s/${{ secrets.REPO_ACCESS_KEY_ID }}/AWS_KEY_ID/g" ./collector/ontime-reload/${{ steps.perf_date.outputs.DATE }}-reload-ontime.json
           sed -i "s/${{ secrets.REPO_SECRET_ACCESS_KEY }}/AWS_SECRET_KEY/g" ./collector/ontime-reload/${{ steps.perf_date.outputs.DATE }}-reload-ontime.json
 
+      - name: Pull Remote Changes
+        run: git pull
+
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: 'reload: try reload datasets to perf warehouse'
