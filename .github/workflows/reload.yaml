@@ -27,7 +27,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
 
       - name: Get Databend version
         id: databend_version
@@ -61,9 +64,35 @@ jobs:
           sed -i "s/${{ secrets.REPO_ACCESS_KEY_ID }}/AWS_KEY_ID/g" ./collector/ontime-reload/${{ steps.perf_date.outputs.DATE }}-reload-ontime.json
           sed -i "s/${{ secrets.REPO_SECRET_ACCESS_KEY }}/AWS_SECRET_KEY/g" ./collector/ontime-reload/${{ steps.perf_date.outputs.DATE }}-reload-ontime.json
 
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - name: Push changes
+        uses: EndBug/add-and-commit@v9
+        with: 
+          message: 'reload: try reload datasets to perf warehouse'
+          pull: '--rebase --autostash origin main'
+          push: origin HEAD:${{ github.head_ref }}
+
+      - name: Setup Go Env
+        uses: actions/setup-go@v3
         with:
-          commit_message: 'reload: try reload datasets to perf warehouse'
+          go-version: '>=1.17.0'
+
+      - name: Print Go Version
+        run: go version
+
+      - name: Do Transform
+        run: go run script/transform.go
+
+      - name: Upload Result
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          force_orphan: true
+          publish_branch: gh-pages
+          publish_dir: temp
+          destination_dir: json
+          keep_files: false
+          commit_message: 'Update Transform Data'
 
       - name: Nofify Email
         uses: dawidd6/action-send-mail@v3
