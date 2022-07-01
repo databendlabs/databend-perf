@@ -69,54 +69,54 @@ jobs:
         with: 
           message: 'reload: try reload datasets to perf warehouse'
           pull: '--rebase --autostash origin main'
-          push: origin HEAD:${{ github.head_ref }}
+          push: origin ${{ github.head_ref }}
 
-      - name: Setup Go Env
-        uses: actions/setup-go@v3
-        with:
-          go-version: '>=1.17.0'
+      # - name: Setup Go Env
+      #   uses: actions/setup-go@v3
+      #   with:
+      #     go-version: '>=1.17.0'
 
-      - name: Print Go Version
-        run: go version
+      # - name: Print Go Version
+      #   run: go version
 
-      - name: Do Transform
-        run: go run script/transform.go
+      # - name: Do Transform
+      #   run: go run script/transform.go
 
-      - name: Upload Result
-        uses: peaceiris/actions-gh-pages@v3
-        if: github.ref == 'refs/heads/main'
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          force_orphan: true
-          publish_branch: gh-pages
-          publish_dir: temp
-          destination_dir: json
-          keep_files: false
-          commit_message: 'Update Transform Data'
+      # - name: Upload Result
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   if: github.ref == 'refs/heads/main'
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     force_orphan: true
+      #     publish_branch: gh-pages
+      #     publish_dir: temp
+      #     destination_dir: json
+      #     keep_files: false
+      #     commit_message: 'Update Transform Data'
 
-      - name: Nofify Email
-        uses: dawidd6/action-send-mail@v3
-        if: ${{ failure() }}
-        with:
-          server_address: smtp.feishu.cn
-          server_port: 465
-          username: ${{secrets.MAIL_USERNAME}}
-          password: ${{secrets.MAIL_PASSWORD}}
-          subject: Databend Perf Github Actions Reload Failed
-          to: cloud.dev@datafuselabs.com
-          from: databend-perf
-          secure: true
-          body: Reload job of ${{github.repository}} run failed
+      # - name: Nofify Email
+      #   uses: dawidd6/action-send-mail@v3
+      #   if: ${{ failure() }}
+      #   with:
+      #     server_address: smtp.feishu.cn
+      #     server_port: 465
+      #     username: ${{secrets.MAIL_USERNAME}}
+      #     password: ${{secrets.MAIL_PASSWORD}}
+      #     subject: Databend Perf Github Actions Reload Failed
+      #     to: cloud.dev@datafuselabs.com
+      #     from: databend-perf
+      #     secure: true
+      #     body: Reload job of ${{github.repository}} run failed
 
-      - name: Notify Feishu Group
-        uses: foxundermoon/feishu-action@v2
-        if: ${{ always() }}
-        with:
-          url: ${{ secrets.FEISHU_BOT_WEBHOOK_URL }}
-          msg_type: post
-          content: |
-            post:
-              zh_cn:
-                title: Reload job of ${{ github.repository }} run ${{ job.status }}
-                content:
-                - [{"tag": "a", "text": "link", "href": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}]
+      # - name: Notify Feishu Group
+      #   uses: foxundermoon/feishu-action@v2
+      #   if: ${{ always() }}
+      #   with:
+      #     url: ${{ secrets.FEISHU_BOT_WEBHOOK_URL }}
+      #     msg_type: post
+      #     content: |
+      #       post:
+      #         zh_cn:
+      #           title: Reload job of ${{ github.repository }} run ${{ job.status }}
+      #           content:
+      #           - [{"tag": "a", "text": "link", "href": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}]
