@@ -65,6 +65,7 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with: 
           message: 'reload: try reload datasets to perf warehouse'
+          pull: '--rebase --autostash origin main'
           push: origin HEAD:${{ github.head_ref }}
 
       # - name: Nofify Email
