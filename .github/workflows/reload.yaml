@@ -61,33 +61,35 @@ jobs:
           sed -i "s/${{ secrets.REPO_ACCESS_KEY_ID }}/AWS_KEY_ID/g" ./collector/ontime-reload/${{ steps.perf_date.outputs.DATE }}-reload-ontime.json
           sed -i "s/${{ secrets.REPO_SECRET_ACCESS_KEY }}/AWS_SECRET_KEY/g" ./collector/ontime-reload/${{ steps.perf_date.outputs.DATE }}-reload-ontime.json
 
-      - uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: 'reload: try reload datasets to perf warehouse'
+      - name: Push changes
+        uses: EndBug/add-and-commit@v7
+        with: 
+          message: 'reload: try reload datasets to perf warehouse'
+          pull: '--rebase --autostash'
 
-      - name: Nofify Email
-        uses: dawidd6/action-send-mail@v3
-        if: ${{ failure() }}
-        with:
-          server_address: smtp.feishu.cn
-          server_port: 465
-          username: ${{secrets.MAIL_USERNAME}}
-          password: ${{secrets.MAIL_PASSWORD}}
-          subject: Databend Perf Github Actions Reload Failed
-          to: cloud.dev@datafuselabs.com
-          from: databend-perf
-          secure: true
-          body: Reload job of ${{github.repository}} run failed
+      # - name: Nofify Email
+      #   uses: dawidd6/action-send-mail@v3
+      #   if: ${{ failure() }}
+      #   with:
+      #     server_address: smtp.feishu.cn
+      #     server_port: 465
+      #     username: ${{secrets.MAIL_USERNAME}}
+      #     password: ${{secrets.MAIL_PASSWORD}}
+      #     subject: Databend Perf Github Actions Reload Failed
+      #     to: cloud.dev@datafuselabs.com
+      #     from: databend-perf
+      #     secure: true
+      #     body: Reload job of ${{github.repository}} run failed
 
-      - name: Notify Feishu Group
-        uses: foxundermoon/feishu-action@v2
-        if: ${{ always() }}
-        with:
-          url: ${{ secrets.FEISHU_BOT_WEBHOOK_URL }}
-          msg_type: post
-          content: |
-            post:
-              zh_cn:
-                title: Reload job of ${{ github.repository }} run ${{ job.status }}
-                content:
-                - [{"tag": "a", "text": "link", "href": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}]
+      # - name: Notify Feishu Group
+      #   uses: foxundermoon/feishu-action@v2
+      #   if: ${{ always() }}
+      #   with:
+      #     url: ${{ secrets.FEISHU_BOT_WEBHOOK_URL }}
+      #     msg_type: post
+      #     content: |
+      #       post:
+      #         zh_cn:
+      #           title: Reload job of ${{ github.repository }} run ${{ job.status }}
+      #           content:
+      #           - [{"tag": "a", "text": "link", "href": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}]
