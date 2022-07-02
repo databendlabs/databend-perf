@@ -28,7 +28,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
 
       - name: Get Databend version
         id: databend_version
@@ -56,13 +59,19 @@ jobs:
           ./script/perf-tool --output-format json --test-dir benchmarks -target-dir collector
           mv collector/numbers.json collector/numbers/${{ steps.perf_date.outputs.DATE }}-numbers.json
           mv collector/ontime.json collector/ontime/${{ steps.perf_date.outputs.DATE }}-ontime.json
-      - uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: 'perf: collect performance data from the latest release'
+
+      - name: Push changes
+        uses: EndBug/add-and-commit@v9
+        with: 
+          message: 'perf: collect performance data from the latest release'
+          pull: '--rebase --autostash origin main'
+          push: origin ${{ github.head_ref }}
+
       - name: Setup Go Env
         uses: actions/setup-go@v3
         with:
           go-version: '>=1.17.0'
+
       - name: Print Go Version
         run: go version
       - name: Do Transform
