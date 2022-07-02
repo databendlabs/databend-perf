@@ -69,7 +69,7 @@ jobs:
         with: 
           message: 'reload: try reload datasets to perf warehouse'
           pull: '--rebase --autostash origin main'
-          push: origin HEAD:${{ github.head_ref }}
+          push: origin ${{ github.head_ref }}
 
       - name: Setup Go Env
         uses: actions/setup-go@v3
