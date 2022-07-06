@@ -19,7 +19,7 @@ on:
 
 jobs:
   perf:
-    name: Databend Release Perf
+    name: Perf Data Reload
     runs-on: ubuntu-latest
 
     strategy:
