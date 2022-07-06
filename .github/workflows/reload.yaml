@@ -47,6 +47,7 @@ jobs:
       - name: Get perf-tools from repo
         run: |
           curl -fsSLo script/perf-tool https://repo.databend.rs/tools/perf-tool/amd64/perf-tool
+          chmod +x ./script/perf-tool
 
       - name: Reload hits
         env:
@@ -58,7 +59,6 @@ jobs:
           sed -i "s/AWS_KEY_ID/${{ secrets.REPO_ACCESS_KEY_ID }}/g"  ./reload/hits/*.yaml
           sed -i "s/AWS_SECRET_KEY/${{ secrets.REPO_SECRET_ACCESS_KEY }}/g"  ./reload/hits/*.yaml
           git diff
-          chmod +x ./script/perf-tool
           ./script/perf-tool --output-format json --test-dir reload/hits -target-dir collector/hits-reload -test-time 1 -warm-time 0
           mv collector/hits-reload/reload_hits.json collector/hits-reload/${{ steps.perf_date.outputs.DATE }}-reload-hits.json
 
@@ -72,7 +72,6 @@ jobs:
           sed -i "s/AWS_KEY_ID/${{ secrets.REPO_ACCESS_KEY_ID }}/g"  ./reload/ontime/*.yaml
           sed -i "s/AWS_SECRET_KEY/${{ secrets.REPO_SECRET_ACCESS_KEY }}/g"  ./reload/ontime/*.yaml
           git diff
-          chmod +x ./script/perf-tool
           ./script/perf-tool --output-format json --test-dir reload/ontime -target-dir collector/ontime-reload -test-time 1 -warm-time 0
           mv collector/ontime-reload/reload_ontime.json collector/ontime-reload/${{ steps.perf_date.outputs.DATE }}-reload-ontime.json
 
