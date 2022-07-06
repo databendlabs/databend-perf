@@ -80,6 +80,7 @@ jobs:
         run: |
           sed -i "s/${{ secrets.REPO_ACCESS_KEY_ID }}/AWS_KEY_ID/g" ./**/*.*
           sed -i "s/${{ secrets.REPO_SECRET_ACCESS_KEY }}/AWS_SECRET_KEY/g" ./**/*.*
+          git diff
 
       - name: Push changes
         uses: EndBug/add-and-commit@v9
