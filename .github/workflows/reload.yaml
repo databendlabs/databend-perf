@@ -55,6 +55,8 @@ jobs:
           WEB_API_USER_PASSWORD: ${{ secrets.WEB_API_USER_PASSWORD }}
           WAREHOUSE_TAG: ${{ steps.databend_version.outputs.VERSION }}
           WAREHOUSE_SIZE: ${{ secrets.WAREHOUSE_SIZE }}
+          AWS_KEY_ID: ${{ secrets.REPO_ACCESS_KEY_ID }}
+          AWS_SECRET_KEY: ${{ secrets.REPO_SECRET_ACCESS_KEY }}
         run: |
           ./script/perf-tool --output-format json --test-dir reload/hits -target-dir collector/hits-reload -test-time 1 -warm-time 0
           mv collector/hits-reload/reload_hits.json collector/hits-reload/${{ steps.perf_date.outputs.DATE }}-reload-hits.json
@@ -66,9 +68,9 @@ jobs:
           WEB_API_USER_PASSWORD: ${{ secrets.WEB_API_USER_PASSWORD }}
           WAREHOUSE_TAG: ${{ steps.databend_version.outputs.VERSION }}
           WAREHOUSE_SIZE: ${{ secrets.WAREHOUSE_SIZE }}
+          AWS_KEY_ID: ${{ secrets.REPO_ACCESS_KEY_ID }}
+          AWS_SECRET_KEY: ${{ secrets.REPO_SECRET_ACCESS_KEY }}
         run: |
-          sed -i "s/AWS_KEY_ID/${{ secrets.REPO_ACCESS_KEY_ID }}/g"  ./reload/ontime/*.yaml
-          sed -i "s/AWS_SECRET_KEY/${{ secrets.REPO_SECRET_ACCESS_KEY }}/g"  ./reload/ontime/*.yaml
           ./script/perf-tool --output-format json --test-dir reload/ontime -target-dir collector/ontime-reload -test-time 1 -warm-time 0
           mv collector/ontime-reload/reload_ontime.json collector/ontime-reload/${{ steps.perf_date.outputs.DATE }}-reload-ontime.json
           git diff
