@@ -46,6 +46,7 @@ jobs:
 
       - name: Get perf-tools from repo
         run: |
+          rm -rf ./script/perf-tool
           curl -fsSLo script/perf-tool https://repo.databend.rs/tools/perf-tool/amd64/perf-tool
           chmod +x ./script/perf-tool
 
