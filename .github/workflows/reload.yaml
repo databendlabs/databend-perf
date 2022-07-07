@@ -56,15 +56,9 @@ jobs:
           WAREHOUSE_TAG: ${{ steps.databend_version.outputs.VERSION }}
           WAREHOUSE_SIZE: ${{ secrets.WAREHOUSE_SIZE }}
         run: |
-          sed -i "s/AWS_KEY_ID/${{ secrets.REPO_ACCESS_KEY_ID }}/g"  ./reload/hits/*.yaml
-          sed -i "s/AWS_SECRET_KEY/${{ secrets.REPO_SECRET_ACCESS_KEY }}/g"  ./reload/hits/*.yaml
-          git diff
           ./script/perf-tool --output-format json --test-dir reload/hits -target-dir collector/hits-reload -test-time 1 -warm-time 0
           mv collector/hits-reload/reload_hits.json collector/hits-reload/${{ steps.perf_date.outputs.DATE }}-reload-hits.json
-          sed -i "s/${{ secrets.REPO_ACCESS_KEY_ID }}/AWS_KEY_ID/g" ./reload/hits/*.yaml
-          sed -i "s/${{ secrets.REPO_SECRET_ACCESS_KEY }}/AWS_SECRET_KEY/g" ./reload/hits/*.yaml
-          sed -i "s/${{ secrets.REPO_ACCESS_KEY_ID }}/AWS_KEY_ID/g" ./collector/hits-reload/*.yaml
-          sed -i "s/${{ secrets.REPO_SECRET_ACCESS_KEY }}/AWS_SECRET_KEY/g" ./collector/hits-reload/*.yaml
+          git diff
 
       - name: Reload ontime
         env:
@@ -75,13 +69,9 @@ jobs:
         run: |
           sed -i "s/AWS_KEY_ID/${{ secrets.REPO_ACCESS_KEY_ID }}/g"  ./reload/ontime/*.yaml
           sed -i "s/AWS_SECRET_KEY/${{ secrets.REPO_SECRET_ACCESS_KEY }}/g"  ./reload/ontime/*.yaml
-          git diff
           ./script/perf-tool --output-format json --test-dir reload/ontime -target-dir collector/ontime-reload -test-time 1 -warm-time 0
           mv collector/ontime-reload/reload_ontime.json collector/ontime-reload/${{ steps.perf_date.outputs.DATE }}-reload-ontime.json
-          sed -i "s/${{ secrets.REPO_ACCESS_KEY_ID }}/AWS_KEY_ID/g" ./reload/ontime/*.yaml
-          sed -i "s/${{ secrets.REPO_SECRET_ACCESS_KEY }}/AWS_SECRET_KEY/g" ./reload/ontime/*.yaml
-          sed -i "s/${{ secrets.REPO_ACCESS_KEY_ID }}/AWS_KEY_ID/g" ./collector/ontime-reload/*.yaml
-          sed -i "s/${{ secrets.REPO_SECRET_ACCESS_KEY }}/AWS_SECRET_KEY/g" ./collector/ontime-reload/*.yaml
+          git diff
 
       - name: Push changes
         uses: EndBug/add-and-commit@v9
