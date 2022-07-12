@@ -46,8 +46,7 @@ jobs:
 
       - name: Get perf-tools from repo
         run: |
-          rm -rf ./script/perf-tool
-          curl -fsSLo script/perf-tool https://repo.databend.rs/tools/perf-tool/amd64/perf-tool-2022-07-07-8f7fb9c
+          curl -fsSLo script/perf-tool https://repo.databend.rs/tools/perf-tool/amd64/perf-tool-2022-07-11-48525b9
           chmod +x ./script/perf-tool
 
       - name: Reload hits
