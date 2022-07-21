@@ -112,7 +112,7 @@ statements:
         RefererHash BIGINT NOT NULL,
         URLHash BIGINT NOT NULL,
         CLID INTEGER NOT NULL
-      ) CLUSTER BY (CounterID, EventDate, UserID, EventTime, WatchID);
+      );
   - name: Reload-hits
     query: |
       COPY INTO hits FROM 's3://repo.databend.rs/hits_p/' credentials=(aws_key_id='{{ "AWS_KEY_ID" | env }}' aws_secret_key='{{ "AWS_SECRET_KEY" | env }}') pattern ='.*[.]tsv' file_format=(type='TSV' field_delimiter='\\t' record_delimiter='\\n' skip_header=1);
