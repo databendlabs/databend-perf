@@ -24,8 +24,8 @@ statements:
   #  query: "SELECT avg(cnt) FROM (SELECT Year,Month,count(*) AS cnt FROM default.ontime WHERE DepDel15=1 GROUP BY Year,Month) a;"
   - name: Q11
     query: "SELECT avg(c1) FROM (SELECT Year,Month,count(*) AS c1 FROM default.ontime GROUP BY Year,Month) a;"
-  - name: Q12
-    query: "SELECT OriginCityName, DestCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName, DestCityName ORDER BY c DESC LIMIT 10;"
+  # - name: Q12
+  #  query: "SELECT OriginCityName, DestCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName, DestCityName ORDER BY c DESC LIMIT 10;"
   - name: Q13
     query: "SELECT OriginCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName ORDER BY c DESC LIMIT 10"
   - name: Q14
