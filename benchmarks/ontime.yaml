@@ -27,6 +27,6 @@ statements:
   - name: Q12
     query: "SELECT OriginCityName, DestCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName, DestCityName ORDER BY c DESC LIMIT 10;"
   - name: Q13
-    query: "SELECT ORIGINCITYNAME, count(*) AS c FROM default.ontime GROUP BY OriginCityName ORDER BY c DESC LIMIT 10"
+    query: "SELECT OriginCityName, count(*) AS c FROM default.ontime GROUP BY OriginCityName ORDER BY c DESC LIMIT 10"
   - name: Q14
     query: "SELECT count(*) FROM default.ontime;"
