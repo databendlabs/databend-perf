@@ -20,12 +20,12 @@ runs:
 
   - name: Run reload script
     shell: bash
+    run: |
+      bash -x ${{ inputs.script }}
     env:
       AWS_KEY_ID: ${{ inputs.repo_secret_key }}
       AWS_SECRET_KEY: ${{ inputs.repo_secret_key }}
       WAREHOUSE: ${{ inputs.warehouse }}
-    run: |
-      bash -x ${{ inputs.script }}
 
   - name: Notify Feishu Group
     uses: foxundermoon/feishu-action@v2
