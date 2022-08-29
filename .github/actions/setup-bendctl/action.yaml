@@ -23,4 +23,4 @@ runs:
       run: |
         bendctl auth login --email=${{ inputs.email }} --password=${{ inputs.password }} --org=${{ inputs.org }}
       env:
-        BENDCTL_API_ENDPOINT: htts://test.datafusecloud.com
+        BENDCTL_API_ENDPOINT: https://test.datafusecloud.com
