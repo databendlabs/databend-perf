@@ -19,7 +19,7 @@ on:
 
 jobs:
   reload-hits:
-    name: Reload data: hits
+    name: Reload hits
     runs-on: ubuntu-latest
 
     steps:
