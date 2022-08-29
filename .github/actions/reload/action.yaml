@@ -1,0 +1,41 @@
+name: Reload data
+description: reload test data for perf test
+inputs:
+  script:
+    required: true
+  warehouse:
+    required: true
+  repo_access_key:
+    required: true
+  repo_secret_key:
+    required: true
+  feishu_webhook_url:
+    required: true
+
+runs:
+  - name: Ensure warehouse
+    shell: bash
+    run: |
+      bendctl warehouse create ${{ inputs.warehouse }} --size=Small
+
+  - name: Run reload script
+    shell: bash
+    env:
+      AWS_KEY_ID: ${{ inputs.repo_secret_key }}
+      AWS_SECRET_KEY: ${{ inputs.repo_secret_key }}
+      WAREHOUSE: ${{ inputs.warehouse }}
+    run: |
+      bash -x ${{ inputs.script }}
+
+  - name: Notify Feishu Group
+    uses: foxundermoon/feishu-action@v2
+    if: ${{ always() }}
+    with:
+      url: ${{ inputs.feishu_webhook_url }}
+      msg_type: post
+      content: |
+        post:
+          zh_cn:
+            title: Reload ${{ inputs.script }} ${{ job.status }}
+            content:
+            - [{"tag": "a", "text": "link", "href": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}]
