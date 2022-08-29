@@ -1,0 +1,18 @@
+name: Setup bendctl
+description: setup bendctl for perf test
+inputs:
+  account_email:
+    required: true
+  account_password:
+    required: true
+  org:
+    required: true
+
+runs:
+  - name: Get bendctl from repo
+    shell: bash
+    run: |
+      curl -fsSLo ./bendctl https://repo.databend.rs/tools/bendctl/amd64/bendctl
+      chmod +x ./bendctl
+
+  - name: bendctl login
