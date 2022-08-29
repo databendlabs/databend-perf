@@ -14,11 +14,13 @@ runs:
     - name: Get bendctl from repo
       shell: bash
       run: |
-        curl -fsSLo ./bendctl https://repo.databend.rs/tools/bendctl/amd64/bendctl-2022-08-29-ac365f7
+        curl -fsSLo ./bendctl https://repo.databend.rs/tools/bendctl/amd64/bendctl-2022-08-29-200af9b
         chmod +x ./bendctl
         sudo cp ./bendctl /usr/bin/bendctl
 
     - name: bendctl login
       shell: bash
       run: |
-        ./bendctl auth login --email=${{ inputs.email }} --password=${{ inputs.password }} --org=${{ inputs.org }}
+        bendctl auth login --email=${{ inputs.email }} --password=${{ inputs.password }} --org=${{ inputs.org }}
+      env:
+        BENDCTL_API_ENDPOINT: htts://test.datafusecloud.com
