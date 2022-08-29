@@ -14,13 +14,13 @@ inputs:
 
 runs:
   using: composite
-  env:
-    BENDCTL_API_ENDPOINT: https://test.datafusecloud.com
   steps:
     - name: Ensure warehouse
       shell: bash
       run: |
         bendctl warehouse create ${{ inputs.warehouse }} --size=Small
+      env:
+        BENDCTL_API_ENDPOINT: https://test.datafusecloud.com
 
     - name: Run reload script
       shell: bash
@@ -30,6 +30,7 @@ runs:
         AWS_KEY_ID: ${{ inputs.repo_secret_key }}
         AWS_SECRET_KEY: ${{ inputs.repo_secret_key }}
         WAREHOUSE: ${{ inputs.warehouse }}
+        BENDCTL_API_ENDPOINT: https://test.datafusecloud.com
 
     - name: Notify Feishu Group
       uses: foxundermoon/feishu-action@v2
