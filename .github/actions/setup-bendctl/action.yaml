@@ -16,3 +16,5 @@ runs:
       chmod +x ./bendctl
 
   - name: bendctl login
+    shell: bash
+      ./bendctl auth login --email=${{ inputs.email }} --password=${{ inputs.password }} --org=${{ inputs.org }}
