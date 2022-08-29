@@ -14,7 +14,7 @@ runs:
     - name: Get bendctl from repo
       shell: bash
       run: |
-        curl -fsSLo ./bendctl https://repo.databend.rs/tools/bendctl/amd64/bendctl
+        curl -fsSLo ./bendctl https://repo.databend.rs/tools/bendctl/amd64/bendctl-2022-08-29-ac365f7
         chmod +x ./bendctl
         sudo cp ./bendctl /usr/bin/bendctl
 
