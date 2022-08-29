@@ -1,9 +1,9 @@
 name: Setup bendctl
 description: setup bendctl for perf test
 inputs:
-  account_email:
+  email:
     required: true
-  account_password:
+  password:
     required: true
   org:
     required: true

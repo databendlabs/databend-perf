@@ -32,8 +32,8 @@ jobs:
       - name: setup bendctl
         uses: ./.github/actions/setup-bendctl
         with:
-          account_email: ${{ secrets.WEB_API_USER_EMAIL }}
-          account_password: ${{ secrets.WEB_API_USER_PASSWORD }}
+          email: ${{ secrets.WEB_API_USER_EMAIL }}
+          password: ${{ secrets.WEB_API_USER_PASSWORD }}
           org: orgchasen-slug-test
 
       - name: Reload
