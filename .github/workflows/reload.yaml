@@ -43,4 +43,4 @@ jobs:
           warehouse: reload
           repo_access_key: ${{ secrets.AWS_KEY_ID }}
           repo_secret_key: ${{ secrets.AWS_SECRET_KEY }}
-          feishu_webhook_url: ${{ secrets.FEISHU_WEBHOOK_URL }
+          feishu_webhook_url: ${{ secrets.FEISHU_WEBHOOK_URL }}
