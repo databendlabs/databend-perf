@@ -41,6 +41,6 @@ jobs:
         with:
           script: ./reload/hits.sh
           warehouse: reload
-          aws_key_id: ${{ secrets.AWS_KEY_ID }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
-          feishu_webhook_url: ${{ secrets.FEISHU_WEBHOOK_URL }}
+          aws_key_id: ${{ secrets.REPO_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.REPO_SECRET_ACCESS_KEY }}
+          feishu_webhook_url: ${{ secrets.FEISHU_BOT_WEBHOOK_URL }}
