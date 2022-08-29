@@ -27,7 +27,7 @@ runs:
       run: |
         bash -x ${{ inputs.script }}
       env:
-        AWS_KEY_ID: ${{ inputs.repo_secret_key }}
+        AWS_KEY_ID: ${{ inputs.repo_access_key }}
         AWS_SECRET_KEY: ${{ inputs.repo_secret_key }}
         WAREHOUSE: ${{ inputs.warehouse }}
         BENDCTL_API_ENDPOINT: https://test.datafusecloud.com
