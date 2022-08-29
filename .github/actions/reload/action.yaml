@@ -13,29 +13,31 @@ inputs:
     required: true
 
 runs:
-  - name: Ensure warehouse
-    shell: bash
-    run: |
-      bendctl warehouse create ${{ inputs.warehouse }} --size=Small
+  using: composite
+  steps:
+    - name: Ensure warehouse
+      shell: bash
+      run: |
+        bendctl warehouse create ${{ inputs.warehouse }} --size=Small
 
-  - name: Run reload script
-    shell: bash
-    run: |
-      bash -x ${{ inputs.script }}
-    env:
-      AWS_KEY_ID: ${{ inputs.repo_secret_key }}
-      AWS_SECRET_KEY: ${{ inputs.repo_secret_key }}
-      WAREHOUSE: ${{ inputs.warehouse }}
+    - name: Run reload script
+      shell: bash
+      run: |
+        bash -x ${{ inputs.script }}
+      env:
+        AWS_KEY_ID: ${{ inputs.repo_secret_key }}
+        AWS_SECRET_KEY: ${{ inputs.repo_secret_key }}
+        WAREHOUSE: ${{ inputs.warehouse }}
 
-  - name: Notify Feishu Group
-    uses: foxundermoon/feishu-action@v2
-    if: ${{ always() }}
-    with:
-      url: ${{ inputs.feishu_webhook_url }}
-      msg_type: post
-      content: |
-        post:
-          zh_cn:
-            title: Reload ${{ inputs.script }} ${{ job.status }}
-            content:
-            - [{"tag": "a", "text": "link", "href": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}]
+    - name: Notify Feishu Group
+      uses: foxundermoon/feishu-action@v2
+      if: ${{ always() }}
+      with:
+        url: ${{ inputs.feishu_webhook_url }}
+        msg_type: post
+        content: |
+          post:
+            zh_cn:
+              title: Reload ${{ inputs.script }} ${{ job.status }}
+              content:
+              - [{"tag": "a", "text": "link", "href": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}]
