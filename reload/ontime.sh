@@ -131,5 +131,5 @@ DROP TABLE IF EXISTS ontime ALL;
 SQL
 
 cat <<SQL | bendctl query --warehouse=$WAREHOUSE
-ALTER TABLE `ontime_reload` RENAME TO `ontime`;
+ALTER TABLE ontime_reload RENAME TO ontime;
 SQL
