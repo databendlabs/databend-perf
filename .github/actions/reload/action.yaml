@@ -27,7 +27,7 @@ runs:
       run: |
         echo ${{ inputs.aws_key_id }}
         echo ${{ inputs.aws_secret_key }}
-        bash -x ${{ inputs.script }}
+        bash -ex ${{ inputs.script }}
       env:
         AWS_KEY_ID: ${{ inputs.aws_key_id }}
         AWS_SECRET_KEY: ${{ inputs.aws_secret_key }}
