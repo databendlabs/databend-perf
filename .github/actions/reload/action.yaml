@@ -43,6 +43,6 @@ runs:
         content: |
           post:
             zh_cn:
-              title: Reload ${{ inputs.script }} ${{ job.status }}
+              title: Reload ${{ inputs.script }} ${{ github.action_status }}
               content:
               - [{"tag": "a", "text": "link", "href": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}]
