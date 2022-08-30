@@ -18,12 +18,9 @@ on:
     - cron: '25 8 * * 5'
 
 jobs:
-  perf:
-    name: Perf Data Reload
+  reload-hits:
+    name: Reload hits
     runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: false
 
     steps:
       - name: Checkout
@@ -32,88 +29,46 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.head_ref }}
 
-      - name: Get Databend version
-        id: databend_version
-        run: |
-          LASTEST_TAG=$(curl -s GET https://api.github.com/repos/datafuselabs/databend/tags\?per_page\=1 | jq -r '.[].name')
-          echo ::set-output name=VERSION::${LASTEST_TAG}
-
-      - name: Get Date
-        id: perf_date
-        run: |
-          THE_DATE=$(date +"%Y-%m-%d")
-          echo ::set-output name=DATE::${THE_DATE}
-
-      - name: Get perf-tools from repo
-        run: |
-          curl -fsSLo script/perf-tool https://repo.databend.rs/tools/perf-tool/amd64/perf-tool-2022-07-11-48525b9
-          chmod +x ./script/perf-tool
-
-      - name: Reload hits
-        env:
-          WEB_API_USER_EMAIL: ${{ secrets.WEB_API_USER_EMAIL }}
-          WEB_API_USER_PASSWORD: ${{ secrets.WEB_API_USER_PASSWORD }}
-          WAREHOUSE_TAG: ${{ steps.databend_version.outputs.VERSION }}
-          WAREHOUSE_SIZE: ${{ secrets.WAREHOUSE_SIZE }}
-          AWS_KEY_ID: ${{ secrets.REPO_ACCESS_KEY_ID }}
-          AWS_SECRET_KEY: ${{ secrets.REPO_SECRET_ACCESS_KEY }}
-        run: |
-          ./script/perf-tool --output-format json --test-dir reload/hits -target-dir collector/hits-reload -test-time 1 -warm-time 0
-          mv collector/hits-reload/reload_hits.json collector/hits-reload/${{ steps.perf_date.outputs.DATE }}-reload-hits.json
-          git diff
-
-      - name: Reload ontime
-        env:
-          WEB_API_USER_EMAIL: ${{ secrets.WEB_API_USER_EMAIL }}
-          WEB_API_USER_PASSWORD: ${{ secrets.WEB_API_USER_PASSWORD }}
-          WAREHOUSE_TAG: ${{ steps.databend_version.outputs.VERSION }}
-          WAREHOUSE_SIZE: ${{ secrets.WAREHOUSE_SIZE }}
-          AWS_KEY_ID: ${{ secrets.REPO_ACCESS_KEY_ID }}
-          AWS_SECRET_KEY: ${{ secrets.REPO_SECRET_ACCESS_KEY }}
-        run: |
-          ./script/perf-tool --output-format json --test-dir reload/ontime -target-dir collector/ontime-reload -test-time 1 -warm-time 0
-          mv collector/ontime-reload/reload_ontime.json collector/ontime-reload/${{ steps.perf_date.outputs.DATE }}-reload-ontime.json
-          git diff
-
-      - name: Push changes
-        uses: EndBug/add-and-commit@v9
+      - name: setup bendctl
+        uses: ./.github/actions/setup-bendctl
         with:
-          message: 'reload: try reload datasets to perf warehouse'
-          pull: '--rebase --autostash origin main'
-          push: origin ${{ github.head_ref }}
+          email: ${{ secrets.WEB_API_USER_EMAIL }}
+          password: ${{ secrets.WEB_API_USER_PASSWORD }}
+          org: orgchasen-slug-test
 
-      - name: Setup Go Env
-        uses: actions/setup-go@v3
+      - name: Reload
+        uses: ./.github/actions/reload
         with:
-          go-version: '>=1.17.0'
+          script: ./reload/hits.sh
+          warehouse: reload
+          aws_key_id: ${{ secrets.REPO_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.REPO_SECRET_ACCESS_KEY }}
+          feishu_webhook_url: ${{ secrets.FEISHU_BOT_WEBHOOK_URL }}
 
-      - name: Print Go Version
-        run: go version
+  reload-ontime:
+    name: Reload ontime
+    needs: [reload-hits]
+    runs-on: ubuntu-latest
 
-      - name: Do Transform
-        run: go run script/transform.go
-
-      - name: Upload Result
-        uses: peaceiris/actions-gh-pages@v3
-        if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          force_orphan: true
-          publish_branch: gh-pages
-          publish_dir: temp
-          destination_dir: json
-          keep_files: false
-          commit_message: 'Update Transform Data'
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
 
-      - name: Notify Feishu Group
-        uses: foxundermoon/feishu-action@v2
-        if: ${{ always() }}
+      - name: setup bendctl
+        uses: ./.github/actions/setup-bendctl
         with:
-          url: ${{ secrets.FEISHU_BOT_WEBHOOK_URL }}
-          msg_type: post
-          content: |
-            post:
-              zh_cn:
-                title: Reload job of ${{ github.repository }} run ${{ job.status }}
-                content:
-                - [{"tag": "a", "text": "link", "href": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}]
+          email: ${{ secrets.WEB_API_USER_EMAIL }}
+          password: ${{ secrets.WEB_API_USER_PASSWORD }}
+          org: orgchasen-slug-test
+
+      - name: Reload
+        uses: ./.github/actions/reload
+        with:
+          script: ./reload/ontime.sh
+          warehouse: reload
+          aws_key_id: ${{ secrets.REPO_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.REPO_SECRET_ACCESS_KEY }}
+          feishu_webhook_url: ${{ secrets.FEISHU_BOT_WEBHOOK_URL }}

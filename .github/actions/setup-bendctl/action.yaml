@@ -1,0 +1,26 @@
+name: Setup bendctl
+description: setup bendctl for perf test
+inputs:
+  email:
+    required: true
+  password:
+    required: true
+  org:
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Get bendctl from repo
+      shell: bash
+      run: |
+        curl -fsSLo ./bendctl https://repo.databend.rs/tools/bendctl/amd64/bendctl-2022-08-29-ffce402
+        chmod +x ./bendctl
+        sudo cp ./bendctl /usr/bin/bendctl
+
+    - name: bendctl login
+      shell: bash
+      run: |
+        bendctl auth login --email=${{ inputs.email }} --password=${{ inputs.password }} --org=${{ inputs.org }}
+      env:
+        BENDCTL_API_ENDPOINT: https://test.datafusecloud.com

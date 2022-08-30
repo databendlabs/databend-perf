@@ -1,0 +1,48 @@
+name: Reload data
+description: reload test data for perf test
+inputs:
+  script:
+    required: true
+  warehouse:
+    required: true
+  aws_key_id:
+    required: true
+  aws_secret_key:
+    required: true
+  feishu_webhook_url:
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Ensure warehouse
+      shell: bash
+      run: |
+        bendctl warehouse create ${{ inputs.warehouse }} --size=Small
+      env:
+        BENDCTL_API_ENDPOINT: https://test.datafusecloud.com
+
+    - name: Run reload script
+      shell: bash
+      run: |
+        echo ${{ inputs.aws_key_id }}
+        echo ${{ inputs.aws_secret_key }}
+        bash -ex ${{ inputs.script }}
+      env:
+        AWS_KEY_ID: ${{ inputs.aws_key_id }}
+        AWS_SECRET_KEY: ${{ inputs.aws_secret_key }}
+        WAREHOUSE: ${{ inputs.warehouse }}
+        BENDCTL_API_ENDPOINT: https://test.datafusecloud.com
+
+    - name: Notify Feishu Group
+      uses: foxundermoon/feishu-action@v2
+      if: ${{ always() }}
+      with:
+        url: ${{ inputs.feishu_webhook_url }}
+        msg_type: post
+        content: |
+          post:
+            zh_cn:
+              title: Reload ${{ inputs.script }} ${{ github.action_status }}
+              content:
+              - [{"tag": "a", "text": "link", "href": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}]
