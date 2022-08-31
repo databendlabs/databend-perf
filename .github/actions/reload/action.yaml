@@ -45,3 +45,15 @@ runs:
         WAREHOUSE: ${{ inputs.warehouse }}
         BENDCTL_API_ENDPOINT: https://test.datafusecloud.com
 
+    - name: Notify Feishu Group
+      uses: foxundermoon/feishu-action@v2
+      if: ${{ always() }}
+      with:
+        url: ${{ inputs.feishu_webhook_url }}
+        msg_type: post
+        content: |
+          post:
+            zh_cn:
+              title: Reload ${{ inputs.script }} ${{ github.action_status }}
+              content:
+              - [{"tag": "a", "text": "link", "href": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}]
