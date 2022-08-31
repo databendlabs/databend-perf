@@ -20,48 +20,48 @@ concurrency:
 
 jobs:
   reload-lineitem:
-    uses: ./.github/workflows/reuse-reload.yml
+    uses: ./.github/workflows/reuse.reload.yml
     with:
       script: ./reload/tpch/lineitem.sh
 
   reload-orders:
-    uses: ./.github/workflows/reuse-reload.yml
+    uses: ./.github/workflows/reuse.reload.yml
     needs: [reload-lineitem]
     with:
       script: ./reload/tpch/orders.sh
 
   reload-partsupp:
-    uses: ./.github/workflows/reuse-reload.yml
+    uses: ./.github/workflows/reuse.reload.yml
     needs: [reload-orders]
     with:
       script: ./reload/tpch/partsupp.sh
 
   reload-part:
-    uses: ./.github/workflows/reuse-reload.yml
+    uses: ./.github/workflows/reuse.reload.yml
     needs: [reload-partsupp]
     with:
       script: ./reload/tpch/part.sh
 
   reload-customer:
-    uses: ./.github/workflows/reuse-reload.yml
+    uses: ./.github/workflows/reuse.reload.yml
     needs: [reload-part]
     with:
       script: ./reload/tpch/customer.sh
 
   reload-supplier:
-    uses: ./.github/workflows/reuse-reload.yml
+    uses: ./.github/workflows/reuse.reload.yml
     needs: [reload-customer]
     with:
       script: ./reload/tpch/supplier.sh
 
   reload-nation:
-    uses: ./.github/workflows/reuse-reload.yml
+    uses: ./.github/workflows/reuse.reload.yml
     needs: [reload-supplier]
     with:
       script: ./reload/tpch/nation.sh
 
   reload-region:
-    uses: ./.github/workflows/reuse-reload.yml
+    uses: ./.github/workflows/reuse.reload.yml
     needs: [reload-nation]
     with:
       script: ./reload/tpch/region.sh
