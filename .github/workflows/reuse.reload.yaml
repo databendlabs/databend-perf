@@ -9,7 +9,7 @@ on:
 
 jobs:
   reload:
-    name: Reload ${{ inputs.script }}
+    name: Reload
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
