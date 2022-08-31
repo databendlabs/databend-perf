@@ -1,6 +1,12 @@
 name: Reload data
 description: reload test data for perf test
 inputs:
+  email:
+    required: true
+  password:
+    required: true
+  org:
+    required: true
   script:
     required: true
   warehouse:
@@ -15,6 +21,13 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: setup bendctl
+      uses: ./.github/actions/setup-bendctl
+      with:
+        email: ${{ inputs.WEB_API_USER_EMAIL }}
+        password: ${{ inputs.WEB_API_USER_PASSWORD }}
+        org: ${{ inputs.org }}
+
     - name: Ensure warehouse
       shell: bash
       run: |

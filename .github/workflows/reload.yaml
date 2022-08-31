@@ -29,16 +29,12 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.head_ref }}
 
-      - name: setup bendctl
-        uses: ./.github/actions/setup-bendctl
+      - name: Reload
+        uses: ./.github/actions/reload
         with:
           email: ${{ secrets.WEB_API_USER_EMAIL }}
           password: ${{ secrets.WEB_API_USER_PASSWORD }}
           org: orgchasen-slug-test
-
-      - name: Reload
-        uses: ./.github/actions/reload
-        with:
           script: ./reload/hits.sh
           warehouse: reload
           aws_key_id: ${{ secrets.REPO_ACCESS_KEY_ID }}
@@ -57,16 +53,12 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.head_ref }}
 
-      - name: setup bendctl
-        uses: ./.github/actions/setup-bendctl
+      - name: Reload
+        uses: ./.github/actions/reload
         with:
           email: ${{ secrets.WEB_API_USER_EMAIL }}
           password: ${{ secrets.WEB_API_USER_PASSWORD }}
           org: orgchasen-slug-test
-
-      - name: Reload
-        uses: ./.github/actions/reload
-        with:
           script: ./reload/ontime.sh
           warehouse: reload
           aws_key_id: ${{ secrets.REPO_ACCESS_KEY_ID }}
