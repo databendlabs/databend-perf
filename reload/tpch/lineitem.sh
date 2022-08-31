@@ -1,6 +1,6 @@
 echo "
 DROP TABLE lineitem;
-)" | bendctl query --warehouse=$WAREHOUSE
+" | bendctl query --warehouse=$WAREHOUSE
 
 
 echo "
