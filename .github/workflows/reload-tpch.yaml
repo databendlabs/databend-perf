@@ -43,6 +43,7 @@ jobs:
 
   reload-supplier:
     name: reload supplier
+    needs: [reload-customer]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
