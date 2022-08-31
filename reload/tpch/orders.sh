@@ -1,6 +1,6 @@
 echo "
 DROP TABLE IF EXISTS orders;
-)" | bendctl query --warehouse=$WAREHOUSE
+" | bendctl query --warehouse=$WAREHOUSE
 
 echo "
 CREATE TABLE IF NOT EXISTS orders (
