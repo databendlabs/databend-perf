@@ -32,4 +32,3 @@ file_format=(type='CSV' field_delimiter='|' record_delimiter='\\n' skip_header=1
 echo "
 SELECT count(*) FROM lineitem;
 " | bendctl query --warehouse=$WAREHOUSE
-
