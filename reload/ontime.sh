@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS ontime_reload ALL;
 SQL
 
 cat <<SQL | bendctl query --warehouse=$WAREHOUSE
-CREATE TABLE ontime_reload (
+CREATE TABLE IF NOT EXISTS ontime_reload (
     Year UInt16 NOT NULL,
     Quarter UInt8 NOT NULL,
     Month UInt8 NOT NULL,

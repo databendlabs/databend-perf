@@ -1,6 +1,12 @@
 name: Reload data
 description: reload test data for perf test
 inputs:
+  email:
+    required: true
+  password:
+    required: true
+  org:
+    required: true
   script:
     required: true
   warehouse:
@@ -15,6 +21,13 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: setup bendctl
+      uses: ./.github/actions/setup-bendctl
+      with:
+        email: ${{ inputs.email }}
+        password: ${{ inputs.password }}
+        org: ${{ inputs.org }}
+
     - name: Ensure warehouse
       shell: bash
       run: |
@@ -25,8 +38,6 @@ runs:
     - name: Run reload script
       shell: bash
       run: |
-        echo ${{ inputs.aws_key_id }}
-        echo ${{ inputs.aws_secret_key }}
         bash -ex ${{ inputs.script }}
       env:
         AWS_KEY_ID: ${{ inputs.aws_key_id }}
