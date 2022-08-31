@@ -19,8 +19,8 @@ concurrency:
   group: "reload"
 
 jobs:
-  reload-tpch:
-    name: Reload tpch
+  reload-nation:
+    name: Reload nation
     runs-on: ubuntu-latest
 
     steps:
@@ -36,7 +36,7 @@ jobs:
           email: ${{ secrets.WEB_API_USER_EMAIL }}
           password: ${{ secrets.WEB_API_USER_PASSWORD }}
           org: orgchasen-slug-test
-          script: ./reload/tpch/tpch100.sh
+          script: ./reload/tpch/nation.sh
           warehouse: reload
           aws_key_id: ${{ secrets.REPO_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.REPO_SECRET_ACCESS_KEY }}
