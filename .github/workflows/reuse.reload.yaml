@@ -5,6 +5,7 @@ on:
     inputs:
       script:
         required: true
+        type: string
 
 jobs:
   reload:
