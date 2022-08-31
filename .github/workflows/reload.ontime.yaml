@@ -20,24 +20,7 @@ concurrency:
 
 jobs:
   reload-ontime:
-    name: Reload ontime
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          ref: ${{ github.head_ref }}
-
-      - name: Reload
-        uses: ./.github/actions/reload
-        with:
-          email: ${{ secrets.WEB_API_USER_EMAIL }}
-          password: ${{ secrets.WEB_API_USER_PASSWORD }}
-          org: orgchasen-slug-test
-          script: ./reload/ontime.sh
-          warehouse: reload
-          aws_key_id: ${{ secrets.REPO_ACCESS_KEY_ID }}
-          aws_secret_key: ${{ secrets.REPO_SECRET_ACCESS_KEY }}
-          feishu_webhook_url: ${{ secrets.FEISHU_BOT_WEBHOOK_URL }}
+    uses: ./.github/workflows/reuse.reload.yaml
+    secrets: inherit
+    with:
+      script: ./reload/ontime.sh
