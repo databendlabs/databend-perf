@@ -20,7 +20,7 @@ concurrency:
 
 jobs:
   reload-lineitem:
-    name: reload orders
+    name: reload lineitem
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
