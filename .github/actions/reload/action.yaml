@@ -24,8 +24,8 @@ runs:
     - name: setup bendctl
       uses: ./.github/actions/setup-bendctl
       with:
-        email: ${{ inputs.WEB_API_USER_EMAIL }}
-        password: ${{ inputs.WEB_API_USER_PASSWORD }}
+        email: ${{ inputs.email }}
+        password: ${{ inputs.password }}
         org: ${{ inputs.org }}
 
     - name: Ensure warehouse
