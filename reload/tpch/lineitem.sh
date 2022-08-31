@@ -1,5 +1,5 @@
 echo "
-DROP TABLE lineitem;
+DROP TABLE IF EXISTS lineitem;
 " | bendctl query --warehouse=$WAREHOUSE
 
 
