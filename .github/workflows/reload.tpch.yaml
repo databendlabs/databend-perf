@@ -1,0 +1,218 @@
+name: Reload tpch
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "reload/tpch/**"
+  push:
+    branches:
+      - main
+    paths:
+      - "reload/tpch/**"
+  schedule:
+    # Runs at 08:25 UTC on Thursday.
+    - cron: '25 8 * * 4'
+
+concurrency:
+  group: "reload"
+
+jobs:
+  reload-lineitem:
+    name: reload lineitem
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
+      - name: Reload
+        uses: ./.github/actions/reload
+        with:
+          email: ${{ secrets.WEB_API_USER_EMAIL }}
+          password: ${{ secrets.WEB_API_USER_PASSWORD }}
+          org: orgchasen-slug-test
+          script: ./reload/tpch/lineitem.sh
+          warehouse: reload
+          aws_key_id: ${{ secrets.REPO_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.REPO_SECRET_ACCESS_KEY }}
+          feishu_webhook_url: ${{ secrets.FEISHU_BOT_WEBHOOK_URL }}
+
+  reload-orders:
+    name: reload orders
+    runs-on: ubuntu-latest
+    needs: [reload-lineitem]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
+      - name: Reload
+        uses: ./.github/actions/reload
+        with:
+          email: ${{ secrets.WEB_API_USER_EMAIL }}
+          password: ${{ secrets.WEB_API_USER_PASSWORD }}
+          org: orgchasen-slug-test
+          script: ./reload/tpch/orders.sh
+          warehouse: reload
+          aws_key_id: ${{ secrets.REPO_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.REPO_SECRET_ACCESS_KEY }}
+          feishu_webhook_url: ${{ secrets.FEISHU_BOT_WEBHOOK_URL }}
+
+  reload-partsupp:
+    name: reload partsupp
+    needs: [reload-orders]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
+      - name: Reload
+        uses: ./.github/actions/reload
+        with:
+          email: ${{ secrets.WEB_API_USER_EMAIL }}
+          password: ${{ secrets.WEB_API_USER_PASSWORD }}
+          org: orgchasen-slug-test
+          script: ./reload/tpch/partsupp.sh
+          warehouse: reload
+          aws_key_id: ${{ secrets.REPO_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.REPO_SECRET_ACCESS_KEY }}
+          feishu_webhook_url: ${{ secrets.FEISHU_BOT_WEBHOOK_URL }}
+
+  reload-part:
+    name: reload part
+    runs-on: ubuntu-latest
+    needs: [reload-partsupp]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
+      - name: Reload
+        uses: ./.github/actions/reload
+        with:
+          email: ${{ secrets.WEB_API_USER_EMAIL }}
+          password: ${{ secrets.WEB_API_USER_PASSWORD }}
+          org: orgchasen-slug-test
+          script: ./reload/tpch/part.sh
+          warehouse: reload
+          aws_key_id: ${{ secrets.REPO_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.REPO_SECRET_ACCESS_KEY }}
+          feishu_webhook_url: ${{ secrets.FEISHU_BOT_WEBHOOK_URL }}
+
+  reload-customer:
+    name: reload customer
+    runs-on: ubuntu-latest
+    needs: [reload-part]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
+      - name: Reload
+        uses: ./.github/actions/reload
+        with:
+          email: ${{ secrets.WEB_API_USER_EMAIL }}
+          password: ${{ secrets.WEB_API_USER_PASSWORD }}
+          org: orgchasen-slug-test
+          script: ./reload/tpch/customer.sh
+          warehouse: reload
+          aws_key_id: ${{ secrets.REPO_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.REPO_SECRET_ACCESS_KEY }}
+          feishu_webhook_url: ${{ secrets.FEISHU_BOT_WEBHOOK_URL }}
+
+  reload-supplier:
+    name: reload supplier
+    needs: [reload-customer]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
+      - name: Reload
+        uses: ./.github/actions/reload
+        with:
+          email: ${{ secrets.WEB_API_USER_EMAIL }}
+          password: ${{ secrets.WEB_API_USER_PASSWORD }}
+          org: orgchasen-slug-test
+          script: ./reload/tpch/supplier.sh
+          warehouse: reload
+          aws_key_id: ${{ secrets.REPO_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.REPO_SECRET_ACCESS_KEY }}
+          feishu_webhook_url: ${{ secrets.FEISHU_BOT_WEBHOOK_URL }}
+
+  reload-nation:
+    name: Reload nation
+    runs-on: ubuntu-latest
+    needs: [reload-supplier]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
+      - name: Reload
+        uses: ./.github/actions/reload
+        with:
+          email: ${{ secrets.WEB_API_USER_EMAIL }}
+          password: ${{ secrets.WEB_API_USER_PASSWORD }}
+          org: orgchasen-slug-test
+          script: ./reload/tpch/nation.sh
+          warehouse: reload
+          aws_key_id: ${{ secrets.REPO_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.REPO_SECRET_ACCESS_KEY }}
+          feishu_webhook_url: ${{ secrets.FEISHU_BOT_WEBHOOK_URL }}
+
+  reload-region:
+    name: reload region
+    needs: [reload-nation]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
+      - name: Reload
+        uses: ./.github/actions/reload
+        with:
+          email: ${{ secrets.WEB_API_USER_EMAIL }}
+          password: ${{ secrets.WEB_API_USER_PASSWORD }}
+          org: orgchasen-slug-test
+          script: ./reload/tpch/region.sh
+          warehouse: reload
+          aws_key_id: ${{ secrets.REPO_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.REPO_SECRET_ACCESS_KEY }}
+          feishu_webhook_url: ${{ secrets.FEISHU_BOT_WEBHOOK_URL }}
+
+  notify-feishu:
+    - name: Notify Feishu Group
+      uses: foxundermoon/feishu-action@v2
+      if: ${{ always() }}
+      with:
+        url: ${{ inputs.feishu_webhook_url }}
+        msg_type: post
+        content: |
+          post:
+            zh_cn:
+              title: Reload ${{ inputs.script }} ${{ github.action_status }}
+              content:
+              - [{"tag": "a", "text": "link", "href": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}]
