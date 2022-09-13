@@ -60,7 +60,7 @@ jobs:
 
       - name: Run Perf
         env:
-          WEB_API_ENDPOINT: http://webapi-service.cloud-platform.svc
+          WEB_API_ENDPOINT: http://webapi-service.cloud-platform.svc:8080
           WEB_API_USER_EMAIL: ${{ secrets.WEB_API_USER_EMAIL }}
           WEB_API_USER_PASSWORD: ${{ secrets.WEB_API_USER_PASSWORD }}
           WAREHOUSE_TAG: ${{ steps.databend_version.outputs.VERSION }}
