@@ -119,3 +119,4 @@ SQL
 cat <<SQL | bendctl query --warehouse=$WAREHOUSE
 SELECT count(*) FROM hits;
 SQL
+

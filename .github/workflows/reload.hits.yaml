@@ -5,12 +5,12 @@ on:
     branches:
       - main
     paths:
-      - "reload/hits.yaml"
+      - "reload/hits.sh"
   push:
     branches:
       - main
     paths:
-      - "reload/hits.yaml"
+      - "reload/hits.sh"
   schedule:
     # Runs at 08:25 UTC on Wed.
     - cron: '25 8 * * 3'
