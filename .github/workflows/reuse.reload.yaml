@@ -1,28 +1,16 @@
-name: Reload ontime
+name: Reload workflow
 
 on:
-  pull_request:
-    branches:
-      - main
-    paths:
-      - "reload/ontime.yaml"
-  push:
-    branches:
-      - main
-    paths:
-      - "reload/ontime.yaml"
-  schedule:
-    # Runs at 08:25 UTC on Wed.
-    - cron: '25 8 * * 3'
-
-concurrency:
-  group: "reload"
+  workflow_call:
+    inputs:
+      script:
+        required: true
+        type: string
 
 jobs:
-  reload-ontime:
-    name: Reload ontime
+  reload:
+    name: Reload
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -36,7 +24,7 @@ jobs:
           email: ${{ secrets.WEB_API_USER_EMAIL }}
           password: ${{ secrets.WEB_API_USER_PASSWORD }}
           org: orgchasen-slug-test
-          script: ./reload/ontime.sh
+          script: ${{ inputs.script }}
           warehouse: reload
           aws_key_id: ${{ secrets.REPO_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.REPO_SECRET_ACCESS_KEY }}

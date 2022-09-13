@@ -1,0 +1,26 @@
+name: Reload hits
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "reload/hits.yaml"
+  push:
+    branches:
+      - main
+    paths:
+      - "reload/hits.yaml"
+  schedule:
+    # Runs at 08:25 UTC on Wed.
+    - cron: '25 8 * * 3'
+
+concurrency:
+  group: "reload"
+
+jobs:
+  reload-hits:
+    uses: ./.github/workflows/reuse.reload.yaml
+    secrets: inherit
+    with:
+      script: ./reload/hits.sh

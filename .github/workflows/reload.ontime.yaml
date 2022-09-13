@@ -1,0 +1,26 @@
+name: Reload ontime
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "reload/ontime.yaml"
+  push:
+    branches:
+      - main
+    paths:
+      - "reload/ontime.yaml"
+  schedule:
+    # Runs at 08:25 UTC on Wed.
+    - cron: '25 8 * * 3'
+
+concurrency:
+  group: "reload"
+
+jobs:
+  reload-ontime:
+    uses: ./.github/workflows/reuse.reload.yaml
+    secrets: inherit
+    with:
+      script: ./reload/ontime.sh
