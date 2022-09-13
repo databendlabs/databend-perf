@@ -26,7 +26,7 @@ on:
 jobs:
   perf:
     name: Databend Release Perf
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, X64, Linux, development]
 
     strategy:
       fail-fast: false
@@ -60,6 +60,7 @@ jobs:
 
       - name: Run Perf
         env:
+          WEB_API_ENDPOINT: http://webapi-service.cloud-platform.svc:8080
           WEB_API_USER_EMAIL: ${{ secrets.WEB_API_USER_EMAIL }}
           WEB_API_USER_PASSWORD: ${{ secrets.WEB_API_USER_PASSWORD }}
           WAREHOUSE_TAG: ${{ steps.databend_version.outputs.VERSION }}
@@ -72,7 +73,7 @@ jobs:
 
       - name: Push changes
         uses: EndBug/add-and-commit@v9
-        with: 
+        with:
           message: 'perf: collect performance data from the latest release'
           pull: '--rebase --autostash origin main'
           push: origin ${{ github.head_ref }}
