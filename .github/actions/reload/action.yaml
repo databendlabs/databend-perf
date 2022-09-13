@@ -33,7 +33,7 @@ runs:
       run: |
         bendctl warehouse create ${{ inputs.warehouse }} --size=Small
       env:
-        BENDCTL_API_ENDPOINT: https://test.datafusecloud.com
+        BENDCTL_API_ENDPOINT: http://webapi-service.cloud-platform.svc:8080
 
     - name: Run reload script
       shell: bash
