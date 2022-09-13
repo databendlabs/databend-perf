@@ -10,7 +10,7 @@ on:
 jobs:
   reload:
     name: Reload
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, X64, Linux, development]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
