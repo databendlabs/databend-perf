@@ -12,10 +12,16 @@ statements:
     query: "SELECT IATA_CODE_Reporting_Airline AS Carrier, count() FROM default.ontime WHERE DepDelay>10 AND Year = 2007 GROUP BY Carrier ORDER BY count() DESC;"
   - name: Q5
     query: "SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(cast(DepDelay>10 as Int8))*1000 AS c3 FROM default.ontime WHERE Year=2007 GROUP BY Carrier ORDER BY c3 DESC"
+  - name: Q5-JOIN
+    query: "SELECT Carrier, c, c2, c*100/c2 as c3 FROM( SELECT IATA_CODE_Reporting_Airline AS Carrier, count(*) AS c FROM ontime WHERE DepDelay>10 AND Year=2007 GROUP BY Carrier) q JOIN ( SELECT IATA_CODE_Reporting_Airline AS Carrier, count(*) AS c2 FROM ontime WHERE Year=2007 GROUP BY Carrier ) qq USING (Carrier) ORDER BY c3 DESC;"
   - name: Q6
     query: "SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(cast(DepDelay>10 as Int8))*1000 AS c3 FROM default.ontime WHERE Year>=2000 AND Year <=2008 GROUP BY Carrier ORDER BY c3 DESC;"
+  - name: Q6-JOIN
+    query: "SELECT Carrier, c, c2, c*100/c2 as c3 FROM( SELECT IATA_CODE_Reporting_Airline AS Carrier, count(*) AS c FROM ontime WHERE DepDelay>10 AND Year>=2000 AND Year<=2008 GROUP BY Carrier) q JOIN ( SELECT IATA_CODE_Reporting_Airline AS Carrier, count(*) AS c2 FROM ontime WHERE Year>=2000 AND Year<=2008 GROUP BY Carrier ) qq USING (Carrier) ORDER BY c3 DESC;"
   - name: Q7
-    query: "SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(DepDelay) * 1000 AS c3 FROM default.ontime WHERE Year >= 2000 AND Year <= 2008 GROUP BY Carrier;"
+    query: "SELECT IATA_CODE_Reporting_Airline AS Carrier, avg(DepDelay) * 1000 AS c3 FROM default.ontime WHERE Year >= 2000 AND Year <= 2008 GROUP BY Carrier;"  
+  - name: Q7-JOIN
+    query: "SELECT Year, c1/c2 FROM( select Year, count(*)*100 as c1 from ontime WHERE DepDelay>10 GROUP BY Year) q JOIN ( select Year, count(*) as c2 from ontime GROUP BY Year ) qq USING (Year) ORDER BY Year;"
   - name: Q8
     query: "SELECT Year, avg(DepDelay) FROM default.ontime GROUP BY Year;"
   - name: Q9
