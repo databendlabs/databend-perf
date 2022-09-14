@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-	"sort"
 	"strings"
 	"sync"
 )
@@ -164,6 +163,20 @@ func HandleSourceDir() {
 	}
 }
 
+var typeIndexNamesMap = map[string][]string{}
+var typeIndexNamesMapMap = map[string]map[string]interface{}{}
+
+func AppTypeIndexNames(t string, indexName string) {
+	if _, ok := typeIndexNamesMap[t]; !ok {
+		typeIndexNamesMap[t] = []string{}
+		typeIndexNamesMapMap[t] = make(map[string]interface{}, 0)
+	}
+	if _, exist := typeIndexNamesMapMap[t][indexName]; !exist {
+		typeIndexNamesMap[t] = append(typeIndexNamesMap[t], indexName)
+		typeIndexNamesMapMap[t][indexName] = nil
+	}
+}
+
 func HandleTypeDir(typeDir string) {
 	typePath := srcDir + "/" + typeDir
 	fmt.Printf("Start reading type dir: %s\n", typePath)
@@ -270,6 +283,7 @@ func PrepareTypeDir(typeDir string) bool {
 func HandleData(data *Data, filename string, t string) {
 	for i, schema := range data.Schemas {
 		resultMap := typeMap[t]
+		AppTypeIndexNames(t, fmt.Sprintf("%s%s", schema.Name, JsonSuffix))
 		r := GetResult(resultMap, schema.Name, i)
 		r.Sql = schema.Sql
 		r.Type = t
@@ -337,7 +351,7 @@ func WriteResults(results []*Result, t string) {
 		go WriteResult(result, &wg)
 	}
 	wg.Wait()
-	WriteIndexFile(indexMap, t)
+	WriteIndexFile(t)
 }
 
 func WriteResult(r *Result, wg *sync.WaitGroup) {
@@ -352,15 +366,11 @@ func WriteResult(r *Result, wg *sync.WaitGroup) {
 	}
 }
 
-func WriteIndexFile(indexeMap map[int]string, t string) {
-	keys := make([]int, 0, len(indexeMap))
-	for k := range indexeMap {
-		keys = append(keys, k)
-	}
-	sort.Ints(keys)
-	files := make([]string, 0, len(keys))
-	for _, k := range keys {
-		files = append(files, indexeMap[k])
+func WriteIndexFile(t string) {
+	filenames := typeIndexNamesMap[t]
+	files := make([]string, 0, len(filenames))
+	for _, filename := range filenames {
+		files = append(files, filename)
 	}
 	indexJson, err := json.Marshal(files)
 	if err != nil {
@@ -372,3 +382,24 @@ func WriteIndexFile(indexeMap map[int]string, t string) {
 		return
 	}
 }
+
+// func WriteIndexFile(indexeMap map[int]string, t string) {
+// 	keys := make([]int, 0, len(indexeMap))
+// 	for k := range indexeMap {
+// 		keys = append(keys, k)
+// 	}
+// 	sort.Ints(keys)
+// 	files := make([]string, 0, len(keys))
+// 	for _, k := range keys {
+// 		files = append(files, indexeMap[k])
+// 	}
+// 	indexJson, err := json.Marshal(files)
+// 	if err != nil {
+// 		fmt.Printf("write index file err: %v\n", err)
+// 	}
+// 	err = ioutil.WriteFile(destDir+"/"+t+"/"+t+JsonSuffix, indexJson, 0644)
+// 	if err != nil {
+// 		fmt.Printf("write file err: %v\n", err)
+// 		return
+// 	}
+// }
