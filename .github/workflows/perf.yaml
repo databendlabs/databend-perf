@@ -56,7 +56,7 @@ jobs:
 
       - name: Get perf-tools from repo
         run: |
-          curl -fsSLo script/perf-tool https://repo.databend.rs/tools/perf-tool/amd64/perf-tool-2022-07-11-48525b9
+          curl -fsSLo script/perf-tool https://repo.databend.rs/tools/perf-tool/amd64/perf-tool-2022-10-21-88e738b
 
       - name: Run Perf
         env:
@@ -127,3 +127,4 @@ jobs:
                 title: Build job of ${{ github.repository }} run ${{ job.status }}
                 content:
                 - [{"tag": "a", "text": "link", "href": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}]
+
