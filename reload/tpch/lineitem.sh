@@ -1,6 +1,6 @@
 echo "
 DROP TABLE IF EXISTS lineitem;
-" | bendctl query --warehouse=$WAREHOUSE
+" | bendsql query --warehouse=$WAREHOUSE
 
 
 echo "
@@ -21,14 +21,14 @@ CREATE TABLE IF NOT EXISTS lineitem (
     l_shipinstruct STRING not null,
     l_shipmode     STRING not null,
     l_comment      STRING not null
-)" | bendctl query --warehouse=$WAREHOUSE
+)" | bendsql query --warehouse=$WAREHOUSE
 
 echo "
 COPY INTO lineitem FROM 's3://repo.databend.rs/tpch100/lineitem/'
 credentials=(aws_key_id='$AWS_KEY_ID' aws_secret_key='$AWS_SECRET_KEY') pattern ='lineitem.tbl.*'
 file_format=(type='CSV' field_delimiter='|' record_delimiter='\\n' skip_header=1);
-" | bendctl query --verbose --warehouse=$WAREHOUSE
+" | bendsql query --verbose --warehouse=$WAREHOUSE
 
 echo "
 SELECT count(*) FROM lineitem;
-" | bendctl query --warehouse=$WAREHOUSE
+" | bendsql query --warehouse=$WAREHOUSE

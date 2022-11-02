@@ -21,8 +21,8 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: setup bendctl
-      uses: ./.github/actions/setup-bendctl
+    - name: setup bendsql
+      uses: ./.github/actions/setup-bendsql
       with:
         email: ${{ inputs.email }}
         password: ${{ inputs.password }}
@@ -31,9 +31,9 @@ runs:
     - name: Ensure warehouse
       shell: bash
       run: |
-        bendctl warehouse create ${{ inputs.warehouse }} --size=Small
+        bendsql warehouse create ${{ inputs.warehouse }} --size=Small
       env:
-        BENDCTL_API_ENDPOINT: http://webapi-service.cloud-platform.svc:8080
+        BENDSQL_API_ENDPOINT: http://webapi-service.cloud-platform.svc:8080
 
     - name: Run reload script
       shell: bash
@@ -43,7 +43,7 @@ runs:
         AWS_KEY_ID: ${{ inputs.aws_key_id }}
         AWS_SECRET_KEY: ${{ inputs.aws_secret_key }}
         WAREHOUSE: ${{ inputs.warehouse }}
-        BENDCTL_API_ENDPOINT: http://webapi-service.cloud-platform.svc:8080
+        BENDSQL_API_ENDPOINT: http://webapi-service.cloud-platform.svc:8080
 
     - name: Notify Feishu Group
       uses: foxundermoon/feishu-action@v2
