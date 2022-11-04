@@ -14,7 +14,7 @@ runs:
     - name: Get bendsql from repo
       shell: bash
       run: |
-        curl -fsSLo ./bendsql.tar.gz https://github.com/databendcloud/bendsql/releases/download/v0.0.3/bendsql-linux-amd64.tar.gz
+        curl -fsSLo ./bendsql.tar.gz https://github.com/databendcloud/bendsql/releases/download/v0.0.4/bendsql-linux-amd64.tar.gz
         tar -xvzf ./bendsql.tar.gz
         chmod +x ./linux-amd64/bendsql
         sudo cp ./linux-amd64/bendsql /usr/bin/bendsql
