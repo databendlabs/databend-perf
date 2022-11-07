@@ -1,0 +1,27 @@
+name: Setup bendsql
+description: setup bendsql for perf test
+inputs:
+  email:
+    required: true
+  password:
+    required: true
+  org:
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Get bendsql from repo
+      shell: bash
+      run: |
+        curl -fsSLo ./bendsql.tar.gz https://github.com/databendcloud/bendsql/releases/download/v0.0.6/bendsql-linux-amd64.tar.gz
+        tar -xvzf ./bendsql.tar.gz
+        chmod +x ./linux-amd64/bendsql
+        sudo cp ./linux-amd64/bendsql /usr/bin/bendsql
+
+    - name: bendsql login
+      shell: bash
+      run: |
+        bendsql auth login --email=${{ inputs.email }} --password=${{ inputs.password }} --org=${{ inputs.org }}
+      env:
+        BENDSQL_API_ENDPOINT: http://webapi-service.cloud-platform.svc:8080
