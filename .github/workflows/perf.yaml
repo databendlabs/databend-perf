@@ -7,14 +7,14 @@ on:
     paths:
       - "benchmarks/**"
       - "script/transform.go"
-      - ".github/workflows/perf.yaml"
+      # - ".github/workflows/perf.yaml"
   push:
     branches:
       - main
     paths:
       - "benchmarks/**"
       - "script/transform.go"
-      - ".github/workflows/perf.yaml"
+      # - ".github/workflows/perf.yaml"
   schedule:
     - cron: '25 0 * * *'
   workflow_dispatch:

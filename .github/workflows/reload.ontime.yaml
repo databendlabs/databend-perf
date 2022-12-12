@@ -1,11 +1,11 @@
 name: Reload ontime
 
 on:
-  pull_request:
-    branches:
-      - main
-    paths:
-      - "reload/ontime.yaml"
+  # pull_request:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - "reload/ontime.yaml"
   push:
     branches:
       - main
