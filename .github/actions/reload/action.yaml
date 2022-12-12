@@ -3,20 +3,28 @@ description: reload test data for perf test
 inputs:
   email:
     required: true
+    description: ""
   password:
     required: true
+    description: ""
   org:
     required: true
+    description: ""
   script:
     required: true
+    description: ""
   warehouse:
     required: true
+    description: ""
   aws_key_id:
     required: true
+    description: ""
   aws_secret_key:
     required: true
+    description: ""
   feishu_webhook_url:
     required: true
+    description: ""
 
 runs:
   using: composite
@@ -31,9 +39,8 @@ runs:
     - name: Ensure warehouse
       shell: bash
       run: |
-        bendsql warehouse create ${{ inputs.warehouse }} --size=Small
-      env:
-        BENDSQL_API_ENDPOINT: http://webapi-service.cloud-platform.svc:8080
+        bendsql cloud warehouse create ${{ inputs.warehouse }} --size=Small
+        bendsql cloud warehouse use ${{ inputs.warehouse }}
 
     - name: Run reload script
       shell: bash
@@ -42,8 +49,6 @@ runs:
       env:
         AWS_KEY_ID: ${{ inputs.aws_key_id }}
         AWS_SECRET_KEY: ${{ inputs.aws_secret_key }}
-        WAREHOUSE: ${{ inputs.warehouse }}
-        BENDSQL_API_ENDPOINT: http://webapi-service.cloud-platform.svc:8080
 
     - name: Notify Feishu Group
       uses: foxundermoon/feishu-action@v2

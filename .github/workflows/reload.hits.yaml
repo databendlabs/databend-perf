@@ -24,4 +24,3 @@ jobs:
     secrets: inherit
     with:
       script: ./reload/hits.sh
-

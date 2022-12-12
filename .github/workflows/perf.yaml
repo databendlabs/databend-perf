@@ -22,14 +22,12 @@ on:
       imageTag:
         required: false
         default: ''
+        description: ''
 
 jobs:
   perf:
     name: Databend Release Perf
     runs-on: [self-hosted, X64, Linux, development]
-
-    strategy:
-      fail-fast: false
 
     steps:
       - name: Checkout
@@ -127,4 +125,3 @@ jobs:
                 title: Build job of ${{ github.repository }} run ${{ job.status }}
                 content:
                 - [{"tag": "a", "text": "link", "href": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}]
-
