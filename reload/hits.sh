@@ -1,8 +1,16 @@
-cat <<SQL | bendsql query --warehouse=$WAREHOUSE
+#!/bin/bash
+
+set -e
+
+cat <<SQL | bendsql query
+select version();
+SQL
+
+cat <<SQL | bendsql query
 DROP TABLE IF EXISTS hits ALL;
 SQL
 
-cat <<SQL | bendsql query --warehouse=$WAREHOUSE
+cat <<SQL | bendsql query
   CREATE TABLE hits (
     WatchID BIGINT NOT NULL,
     JavaEnable SMALLINT NOT NULL,
@@ -112,11 +120,10 @@ cat <<SQL | bendsql query --warehouse=$WAREHOUSE
   );
 SQL
 
-cat <<SQL | bendsql query --warehouse=$WAREHOUSE
+cat <<SQL | bendsql query
 COPY INTO hits FROM 's3://repo.databend.rs/hits_p/' credentials=(aws_key_id='$AWS_KEY_ID' aws_secret_key='$AWS_SECRET_KEY') pattern ='.*[.]tsv' file_format=(type='TSV' field_delimiter='\\t' record_delimiter='\\n' skip_header=1);
 SQL
 
-cat <<SQL | bendsql query --warehouse=$WAREHOUSE
+cat <<SQL | bendsql query
 SELECT count(*) FROM hits;
 SQL
-

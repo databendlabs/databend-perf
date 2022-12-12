@@ -1,11 +1,11 @@
 name: Reload hits
 
 on:
-  pull_request:
-    branches:
-      - main
-    paths:
-      - "reload/hits.sh"
+  # pull_request:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - "reload/hits.sh"
   push:
     branches:
       - main
@@ -24,4 +24,3 @@ jobs:
     secrets: inherit
     with:
       script: ./reload/hits.sh
-

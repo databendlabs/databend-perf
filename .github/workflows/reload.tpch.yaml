@@ -1,11 +1,11 @@
 name: Reload tpch
 
 on:
-  pull_request:
-    branches:
-      - main
-    paths:
-      - "reload/tpch/**"
+  # pull_request:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - "reload/tpch/**"
   push:
     branches:
       - main
