@@ -16,7 +16,7 @@ on:
       - "script/transform.go"
       # - ".github/workflows/perf.yaml"
   schedule:
-    - cron: '25 0 * * *'
+    - cron: '25 0 * * 1,3'
   workflow_dispatch:
     inputs:
       imageTag:
