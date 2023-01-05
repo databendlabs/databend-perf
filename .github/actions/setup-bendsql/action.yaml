@@ -25,7 +25,7 @@ runs:
     - name: bendsql login
       shell: bash
       env:
-        BENDSQL_API_ENDPOINT: http://webapi-service.cloud-platform.svc:8080
+        BENDSQL_API_ENDPOINT: https://webapi-dev.datafusecloud.com/
       run: |
         bendsql cloud login --email=${{ inputs.email }} --password=${{ inputs.password }} --org=${{ inputs.org }}
         bendsql cloud warehouse ls
