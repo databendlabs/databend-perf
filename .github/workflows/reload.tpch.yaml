@@ -14,6 +14,7 @@ on:
   schedule:
     # Runs at 08:25 UTC on Thursday.
     - cron: '25 8 * * 4'
+  workflow_dispatch: {}
 
 concurrency:
   group: "reload"
