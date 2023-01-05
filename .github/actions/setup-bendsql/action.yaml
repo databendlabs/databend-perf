@@ -17,7 +17,7 @@ runs:
     - name: Get bendsql from repo
       shell: bash
       run: |
-        curl -fsSLo ./bendsql.tar.gz https://github.com/databendcloud/bendsql/releases/download/v0.1.1/bendsql-linux-amd64.tar.gz
+        curl -fsSLo ./bendsql.tar.gz https://github.com/databendcloud/bendsql/releases/download/v0.1.2/bendsql-linux-amd64.tar.gz
         tar -xvzf ./bendsql.tar.gz
         chmod +x ./linux-amd64/bendsql
         sudo cp ./linux-amd64/bendsql /usr/bin/bendsql
@@ -28,3 +28,4 @@ runs:
         BENDSQL_API_ENDPOINT: http://webapi-service.cloud-platform.svc:8080
       run: |
         bendsql cloud login --email=${{ inputs.email }} --password=${{ inputs.password }} --org=${{ inputs.org }}
+        bendsql cloud warehouse ls
