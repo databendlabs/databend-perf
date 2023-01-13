@@ -55,11 +55,6 @@ const Footer: FC = (): ReactElement=> {
       title: 'More',
       list: [
         {
-          name: 'Weekly',
-          linkIcon: true,
-          link: 'https://weekly.databend.rs/'
-        },
-        {
           name: 'GitHub',
           linkIcon: true,
           link: 'https://github.com/datafuselabs/databend'
