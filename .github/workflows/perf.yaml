@@ -54,7 +54,7 @@ jobs:
 
       - name: Get perf-tools from repo
         run: |
-          curl -fsSLo script/perf-tool https://repo.databend.rs/tools/perf-tool/amd64/perf-tool-2022-10-21-88e738b
+          curl -fsSLo script/perf-tool https://repo.databend.rs/tools/perf-tool/amd64/perf-tool-2023-01-16-fa33469
 
       - name: Run Perf
         env:
