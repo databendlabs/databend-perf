@@ -99,19 +99,19 @@ jobs:
           keep_files: false
           commit_message: 'Update Transform Data'
 
-      - name: Nofify Email
-        uses: dawidd6/action-send-mail@v3
-        if: ${{ failure() }}
-        with:
-          server_address: smtp.feishu.cn
-          server_port: 465
-          username: ${{secrets.MAIL_USERNAME}}
-          password: ${{secrets.MAIL_PASSWORD}}
-          subject: Databend Perf Github Actions Run Failed
-          to: cloud.dev@datafuselabs.com
-          from: databend-perf
-          secure: true
-          body: Build job of ${{github.repository}} run failed
+      # - name: Nofify Email
+      #   uses: dawidd6/action-send-mail@v3
+      #   if: ${{ failure() }}
+      #   with:
+      #     server_address: smtp.feishu.cn
+      #     server_port: 465
+      #     username: ${{secrets.MAIL_USERNAME}}
+      #     password: ${{secrets.MAIL_PASSWORD}}
+      #     subject: Databend Perf Github Actions Run Failed
+      #     to: cloud.dev@datafuselabs.com
+      #     from: databend-perf
+      #     secure: true
+      #     body: Build job of ${{github.repository}} run failed
 
       - name: Notify Feishu Group
         uses: foxundermoon/feishu-action@v2
