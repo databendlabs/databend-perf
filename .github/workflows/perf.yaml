@@ -72,10 +72,16 @@ jobs:
             --output-format json \
             --output-dir collector \
             --size Large
-          bendsql cloud warehouse delete ${WAREHOUSE_NAME}
           mv collector/numbers.json collector/numbers/${{ env.PERF_DATE }}-numbers.json
           mv collector/ontime.json collector/ontime/${{ env.PERF_DATE }}-ontime.json
           mv collector/hits.json collector/hits/${{ env.PERF_DATE }}-hits.json
+
+      - name: Clean warehouse
+        if: ${{ always() }}
+        env:
+          WAREHOUSE_NAME: query-perf
+        run: |
+          bendsql cloud warehouse delete ${WAREHOUSE_NAME}
 
       - name: Push changes
         uses: EndBug/add-and-commit@v9
