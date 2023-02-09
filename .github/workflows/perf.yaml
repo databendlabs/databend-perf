@@ -7,7 +7,7 @@ on:
     paths:
       - "benchmarks/**"
       - "script/transform.go"
-      # - ".github/workflows/perf.yaml"
+      - ".github/workflows/perf.yaml"
   push:
     branches:
       - main
@@ -37,38 +37,41 @@ jobs:
           ref: ${{ github.head_ref }}
 
       - name: Get Databend version
-        id: databend_version
         run: |
           if [ -z "${{ github.event.inputs.imageTag }}" ]; then
             LASTEST_TAG=$(curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -s GET https://api.github.com/repos/datafuselabs/databend/tags\?per_page\=1 | jq -r '.[].name')
-            echo ::set-output name=VERSION::${LASTEST_TAG}
+            echo "DATABEND_VERSION=${LASTEST_TAG}" >> $GITHUB_ENV
           else
-            echo ::set-output name=VERSION::${{ github.event.inputs.imageTag }}
+            echo "DATABEND_VERSION=${{ github.event.inputs.imageTag }}" >> $GITHUB_ENV
           fi
 
       - name: Get Date
-        id: perf_date
         run: |
-          THE_DATE=$(date +"%Y-%m-%d")
-          echo ::set-output name=DATE::${THE_DATE}
-
-      - name: Get perf-tools from repo
-        run: |
-          curl -fsSLo script/perf-tool https://repo.databend.rs/tools/perf-tool/amd64/perf-tool-2023-01-16-fa33469
+          echo "PERF_DATE=$(date +"%Y-%m-%d")" >> $GITHUB_ENV
 
       - name: Run Perf
         env:
           WEB_API_ENDPOINT: http://webapi-service.cloud-platform.svc:8080
           WEB_API_USER_EMAIL: ${{ secrets.WEB_API_USER_EMAIL }}
           WEB_API_USER_PASSWORD: ${{ secrets.WEB_API_USER_PASSWORD }}
-          WAREHOUSE_TAG: ${{ steps.databend_version.outputs.VERSION }}
-          WAREHOUSE_SIZE: ${{ secrets.WAREHOUSE_SIZE }}
+          WAREHOUSE_TAG: ${{ env.DATABEND_VERSION }}
+          WAREHOUSE_NAME: query-perf
         run: |
-          chmod +x ./script/perf-tool
-          ./script/perf-tool --output-format json --test-dir benchmarks -target-dir collector
-          mv collector/numbers.json collector/numbers/${{ steps.perf_date.outputs.DATE }}-numbers.json
-          mv collector/ontime.json collector/ontime/${{ steps.perf_date.outputs.DATE }}-ontime.json
-          mv collector/hits.json collector/hits/${{ steps.perf_date.outputs.DATE }}-hits.json
+          bendsql cloud login \
+            --endpoint "http://webapi-service.cloud-platform.svc:8080" \
+            --email "${{ secrets.WEB_API_USER_EMAIL }}" \
+            --password "${{ secrets.WEB_API_USER_PASSWORD }}"
+          bendsql cloud warehouse ls
+          bendsql cloud warehouse delete ${WAREHOUSE_NAME}
+          bendsql cloud warehouse create ${WAREHOUSE_NAME} --tag "${DATABEND_VERSION}" --size Large
+          bendsql cloud warehouse ls
+          bendsql cloud warehouse use ${WAREHOUSE_NAME}
+          bendsql cloud warehouse resume ${WAREHOUSE_NAME} --wait
+          bendsql cloud warehouse status ${WAREHOUSE_NAME}
+          bendsql --output-format json --test-dir benchmarks --target-dir collector --size Large
+          mv collector/numbers.json collector/numbers/${{ env.PERF_DATE }}-numbers.json
+          mv collector/ontime.json collector/ontime/${{ env.PERF_DATE }}-ontime.json
+          mv collector/hits.json collector/hits/${{ env.PERF_DATE }}-hits.json
 
       - name: Push changes
         uses: EndBug/add-and-commit@v9
