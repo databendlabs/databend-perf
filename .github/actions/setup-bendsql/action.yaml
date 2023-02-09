@@ -21,6 +21,8 @@ runs:
         tar -xvzf ./bendsql.tar.gz
         chmod +x ./linux-amd64/bendsql
         sudo cp ./linux-amd64/bendsql /usr/bin/bendsql
+        rm -rf ./linux-amd64
+        rm -rf ./bendsql.tar.gz
 
     - name: bendsql login
       shell: bash
