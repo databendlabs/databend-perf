@@ -7,7 +7,7 @@ on:
     paths:
       - "benchmarks/**"
       - "script/transform.go"
-      - ".github/workflows/perf.yaml"
+      # - ".github/workflows/perf.yaml"
   push:
     branches:
       - main
