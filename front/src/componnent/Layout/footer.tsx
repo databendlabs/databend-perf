@@ -47,7 +47,7 @@ const Footer: FC = (): ReactElement=> {
         {
           name: 'Twitter',
           linkIcon: true,
-          link: 'https://twitter.com/Datafuse_Labs'
+          link: 'https://twitter.com/DatabendLabs'
         }
       ]
     },
