@@ -1,4 +1,4 @@
-// Copyright 2022 Datafuse Labs.
+// Copyright 2022 Databend Labs.
 import { FC, ReactElement, useState } from 'react';
 import styles from './css/share.module.scss';
 import { useMount } from 'ahooks';
