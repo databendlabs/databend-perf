@@ -33,6 +33,10 @@ const Footer: FC = (): ReactElement=> {
         {
           name: 'Develop',
           link: 'https://databend.rs/doc/develop'
+        },
+        {
+          name: 'Databend Cloud',
+          link: 'https://www.databend.com/'
         }
       ]
     },
@@ -84,7 +88,7 @@ const Footer: FC = (): ReactElement=> {
         }
       </div>
       <div className={styles.copyright}>
-        Copyright © {new Date().getFullYear()} Datafuse Labs, Inc.
+        Copyright © {new Date().getFullYear()} Databend Labs, Inc.
       </div>
       <img style={{display: 'block',margin: '30px auto'}} src="https://www.datocms-assets.com/31049/1618983297-powered-by-vercel.svg"/>
     </div>

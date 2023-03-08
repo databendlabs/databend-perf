@@ -1,4 +1,4 @@
-// Copyright 2022 Datafuse Labs.
+// Copyright 2022 Databend Labs.
 import { Button, notification } from 'antd';
 import { FC, ReactElement } from 'react';
 import IconFont from '../../assets/icon/icon';
