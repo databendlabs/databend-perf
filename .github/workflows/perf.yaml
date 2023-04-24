@@ -62,8 +62,8 @@ jobs:
           WAREHOUSE_NAME: query-perf
           BENDSQL_DSN: ${{ secrets.PERF_BENDSQL_DSN }}
         run: |
-          echo "DROP WAREHOUSE IF EXISTS `${WAREHOUSE_NAME}`;" | bendsql
-          echo "CREATE WAREHOUSE `${WAREHOUSE_NAME}` WITH version='${{ env.DATABEND_VERSION }}' warehouse_size='Large';" | bendsql
+          echo "DROP WAREHOUSE IF EXISTS '${WAREHOUSE_NAME}';" | bendsql
+          echo "CREATE WAREHOUSE '${WAREHOUSE_NAME}' WITH version='${{ env.DATABEND_VERSION }}' warehouse_size='Large';" | bendsql
           echo "SHOW WAREHOUSES;" | bendsql
           export BENDSQL_DSN="${BENDSQL_DSN}&warehouse=${WAREHOUSE_NAME}"
 
@@ -95,7 +95,7 @@ jobs:
           WAREHOUSE_NAME: query-perf
           BENDSQL_DSN: ${{ secrets.PERF_BENDSQL_DSN }}
         run: |
-          echo "DROP WAREHOUSE IF EXISTS `${WAREHOUSE_NAME}`;" | bendsql
+          echo "DROP WAREHOUSE IF EXISTS '${WAREHOUSE_NAME}';" | bendsql
 
       - name: Push changes
         uses: EndBug/add-and-commit@v9

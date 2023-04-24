@@ -29,7 +29,7 @@ runs:
       shell: bash
       run: |
         echo "SHOW WAREHOUSES;" | bendsql
-        echo "CREATE WAREHOUSE IF NOT EXISTS `${{ inputs.warehouse }}` WITH WAREHOUSE_SIZE = 'SMALL';" | bendsql
+        echo "CREATE WAREHOUSE IF NOT EXISTS '${{ inputs.warehouse }}' WITH WAREHOUSE_SIZE = 'SMALL';" | bendsql
         echo "SHOW WAREHOUSES;" | bendsql
         echo "BENDSQL_DSN=${{ secrets.PERF_BENDSQL_DSN }}&warehouse=${{ inputs.warehouse }}" >> $GITHUB_ENV
 
