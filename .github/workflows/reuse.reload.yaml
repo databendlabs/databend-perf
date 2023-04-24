@@ -21,9 +21,7 @@ jobs:
       - name: Reload
         uses: ./.github/actions/reload
         with:
-          email: ${{ secrets.WEB_API_USER_EMAIL }}
-          password: ${{ secrets.WEB_API_USER_PASSWORD }}
-          org: orgchasen-slug-test
+          dsn: ${{ secrets.PERF_BENDSQL_DSN }}
           script: ${{ inputs.script }}
           warehouse: reload
           aws_key_id: ${{ secrets.REPO_ACCESS_KEY_ID }}

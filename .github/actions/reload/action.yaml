@@ -1,6 +1,9 @@
 name: Reload data
 description: reload test data for perf test
 inputs:
+  dsn:
+    required: true
+    description: ""
   script:
     required: true
     description: ""
@@ -25,13 +28,13 @@ runs:
 
     - name: Ensure warehouse
       env:
-        BENDSQL_DSN: ${{ secrets.PERF_BENDSQL_DSN }}
+        BENDSQL_DSN: ${{ inputs.dsn }}
       shell: bash
       run: |
         echo "SHOW WAREHOUSES;" | bendsql
         echo "CREATE WAREHOUSE IF NOT EXISTS '${{ inputs.warehouse }}' WITH WAREHOUSE_SIZE = 'SMALL';" | bendsql
         echo "SHOW WAREHOUSES;" | bendsql
-        echo "BENDSQL_DSN=${{ secrets.PERF_BENDSQL_DSN }}&warehouse=${{ inputs.warehouse }}" >> $GITHUB_ENV
+        echo "BENDSQL_DSN=${BENDSQL_DSN}&warehouse=${{ inputs.warehouse }}" >> $GITHUB_ENV
 
     - name: Run reload script
       shell: bash
