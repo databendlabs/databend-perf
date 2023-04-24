@@ -65,7 +65,7 @@ jobs:
           echo "DROP WAREHOUSE IF EXISTS '${WAREHOUSE_NAME}';" | bendsql
           echo "CREATE WAREHOUSE '${WAREHOUSE_NAME}' WITH version='${{ env.DATABEND_VERSION }}' warehouse_size='Large';" | bendsql
           echo "SHOW WAREHOUSES;" | bendsql
-          export BENDSQL_DSN="${BENDSQL_DSN}&warehouse=${WAREHOUSE_NAME}"
+          export DATABEND_DSN="${BENDSQL_DSN}&warehouse=${WAREHOUSE_NAME}"
 
           max_retry=15
           counter=0

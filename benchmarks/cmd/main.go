@@ -67,6 +67,7 @@ func NewCmdBenchmark() *cobra.Command {
 			dsn := os.Getenv("DATABEND_DSN")
 			if dsn == "" {
 				dsn = "databend://localhost:8000?sslmode=disable"
+				fmt.Printf("DATABEND_DSN is not set, use default: %s", dsn)
 			}
 			dcConfig, err := dc.ParseDSN(dsn)
 			if err != nil {
