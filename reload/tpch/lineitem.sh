@@ -2,15 +2,15 @@
 
 set -e
 
-cat <<SQL | bendsql query
+cat <<SQL | bendsql
 select version();
 SQL
 
-cat <<SQL | bendsql query
+cat <<SQL | bendsql
 DROP TABLE IF EXISTS lineitem;
 SQL
 
-cat <<SQL | bendsql query
+cat <<SQL | bendsql
 CREATE TABLE IF NOT EXISTS lineitem (
     l_orderkey    BIGINT not null,
     l_partkey     BIGINT not null,
@@ -31,12 +31,12 @@ CREATE TABLE IF NOT EXISTS lineitem (
 );
 SQL
 
-cat <<SQL | bendsql query
+cat <<SQL | bendsql
 COPY INTO lineitem FROM 's3://repo.databend.rs/tpch100/lineitem/'
 credentials=(aws_key_id='$AWS_KEY_ID' aws_secret_key='$AWS_SECRET_KEY') pattern ='lineitem.tbl.*'
 file_format=(type='CSV' field_delimiter='|' record_delimiter='\\n' skip_header=1);
 SQL
 
-cat <<SQL | bendsql query
+cat <<SQL | bendsql
 SELECT count(*) FROM lineitem;
 SQL
