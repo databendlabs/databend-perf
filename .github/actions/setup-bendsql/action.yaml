@@ -1,33 +1,15 @@
-name: Setup bendsql
+name: Setup BendSQL
 description: setup bendsql for perf test
-inputs:
-  email:
-    required: true
-    description: ""
-  password:
-    required: true
-    description: ""
-  org:
-    required: true
-    description: ""
 
 runs:
   using: composite
   steps:
-    - name: Get bendsql from repo
+    - name: Get BendSQL from release
       shell: bash
       run: |
-        curl -fsSLo ./bendsql.tar.gz https://github.com/databendcloud/bendsql/releases/download/v0.3.1/bendsql-linux-amd64.tar.gz
+        curl -fsSLo ./bendsql.tar.gz https://github.com/datafuselabs/bendsql/releases/download/v0.3.0/bendsql-x86_64-unknown-linux-gnu.tar.gz
         tar -xvzf ./bendsql.tar.gz
-        chmod +x ./linux-amd64/bendsql
-        sudo cp ./linux-amd64/bendsql /usr/bin/bendsql
-        rm -rf ./linux-amd64
+        chmod +x ./bendsql
+        sudo cp ./bendsql /usr/local/bin/bendsql
+        rm -rf ./bendsql
         rm -rf ./bendsql.tar.gz
-
-    - name: bendsql login
-      shell: bash
-      env:
-        BENDSQL_API_ENDPOINT: https://webapi-dev.datafusecloud.com/
-      run: |
-        bendsql cloud login --email=${{ inputs.email }} --password=${{ inputs.password }} --org=${{ inputs.org }}
-        bendsql cloud warehouse ls

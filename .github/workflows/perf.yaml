@@ -51,27 +51,40 @@ jobs:
 
       - name: Setup BendSQL
         uses: ./.github/actions/setup-bendsql
+
+      - name: Setup Go
+        uses: actions/setup-go@v3
         with:
-          email: ${{ secrets.WEB_API_USER_EMAIL }}
-          password: ${{ secrets.WEB_API_USER_PASSWORD }}
-          org: orgchasen-slug-test
+          go-version: '>=1.20.0'
 
       - name: Run Perf
         env:
-          WAREHOUSE_TAG: ${{ env.DATABEND_VERSION }}
           WAREHOUSE_NAME: query-perf
+          BENDSQL_DSN: ${{ secrets.PERF_BENDSQL_DSN }}
         run: |
-          bendsql cloud warehouse delete ${WAREHOUSE_NAME}
-          bendsql cloud warehouse create ${WAREHOUSE_NAME} --tag "${DATABEND_VERSION}" --size Large
-          bendsql cloud warehouse ls
-          bendsql cloud warehouse use ${WAREHOUSE_NAME}
-          bendsql cloud warehouse resume ${WAREHOUSE_NAME} --wait
-          bendsql cloud warehouse status ${WAREHOUSE_NAME}
-          bendsql benchmark \
+          echo "DROP WAREHOUSE IF EXISTS `${WAREHOUSE_NAME}`;" | bendsql
+          echo "CREATE WAREHOUSE `${WAREHOUSE_NAME}` WITH version='${{ env.DATABEND_VERSION }}' warehouse_size='Large';" | bendsql
+          echo "SHOW WAREHOUSES;" | bendsql
+          export BENDSQL_DSN="${BENDSQL_DSN}&warehouse=${WAREHOUSE_NAME}"
+
+          max_retry=15
+          counter=0
+          until bendsql --query="SHOW WAREHOUSES LIKE '${WAREHOUSE_NAME}'" --output=tsv | grep -q "Running"; do
+            if [ $counter -eq $max_retry ]; then
+              echo "Failed to start warehouse ${WAREHOUSE_NAME}"
+              exit 1
+            fi
+            counter=$((counter+1))
+            echo "Waiting for warehouse ${WAREHOUSE_NAME} to start"
+            sleep 10
+          done
+
+          go run benchmarks/cmd/main.go \
             --test-dir benchmarks \
             --output-format json \
             --output-dir collector \
             --size Large
+
           mv collector/numbers.json collector/numbers/${{ env.PERF_DATE }}-numbers.json
           mv collector/ontime.json collector/ontime/${{ env.PERF_DATE }}-ontime.json
           mv collector/hits.json collector/hits/${{ env.PERF_DATE }}-hits.json
@@ -80,8 +93,9 @@ jobs:
         if: ${{ always() }}
         env:
           WAREHOUSE_NAME: query-perf
+          BENDSQL_DSN: ${{ secrets.PERF_BENDSQL_DSN }}
         run: |
-          bendsql cloud warehouse delete ${WAREHOUSE_NAME}
+          echo "DROP WAREHOUSE IF EXISTS `${WAREHOUSE_NAME}`;" | bendsql
 
       - name: Push changes
         uses: EndBug/add-and-commit@v9
@@ -90,13 +104,6 @@ jobs:
           pull: '--rebase --autostash origin main'
           push: origin ${{ github.head_ref }}
 
-      - name: Setup Go Env
-        uses: actions/setup-go@v3
-        with:
-          go-version: '>=1.17.0'
-
-      - name: Print Go Version
-        run: go version
       - name: Do Transform
         run: go run script/transform.go
 
@@ -111,20 +118,6 @@ jobs:
           destination_dir: json
           keep_files: false
           commit_message: 'Update Transform Data'
-
-      # - name: Nofify Email
-      #   uses: dawidd6/action-send-mail@v3
-      #   if: ${{ failure() }}
-      #   with:
-      #     server_address: smtp.feishu.cn
-      #     server_port: 465
-      #     username: ${{secrets.MAIL_USERNAME}}
-      #     password: ${{secrets.MAIL_PASSWORD}}
-      #     subject: Databend Perf Github Actions Run Failed
-      #     to: cloud.dev@datafuselabs.com
-      #     from: databend-perf
-      #     secure: true
-      #     body: Build job of ${{github.repository}} run failed
 
       - name: Notify Feishu Group
         uses: foxundermoon/feishu-action@v2
