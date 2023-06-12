@@ -63,7 +63,7 @@ jobs:
           BENDSQL_DSN: ${{ secrets.PERF_BENDSQL_DSN }}
         run: |
           echo "DROP WAREHOUSE IF EXISTS '${WAREHOUSE_NAME}';" | bendsql
-          echo "CREATE WAREHOUSE '${WAREHOUSE_NAME}' WITH version='${{ env.DATABEND_VERSION }}' warehouse_size='Large';" | bendsql
+          echo "CREATE WAREHOUSE '${WAREHOUSE_NAME}' WITH version='${{ env.DATABEND_VERSION }}' warehouse_size='XLarge';" | bendsql
           echo "SHOW WAREHOUSES;" | bendsql
           export DATABEND_DSN="${BENDSQL_DSN}&warehouse=${WAREHOUSE_NAME}"
 
@@ -83,7 +83,7 @@ jobs:
             --test-dir benchmarks \
             --output-format json \
             --output-dir collector \
-            --size Large
+            --size XLarge
 
           mv collector/numbers.json collector/numbers/${{ env.PERF_DATE }}-numbers.json
           mv collector/ontime.json collector/ontime/${{ env.PERF_DATE }}-ontime.json
