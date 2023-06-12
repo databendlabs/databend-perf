@@ -27,7 +27,7 @@ on:
 jobs:
   perf:
     name: Databend Release Perf
-    runs-on: [self-hosted, X64, Linux, development]
+    runs-on: [self-hosted, X64, Linux, 4c8g]
 
     steps:
       - name: Checkout

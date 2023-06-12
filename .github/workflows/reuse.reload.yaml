@@ -10,7 +10,7 @@ on:
 jobs:
   reload:
     name: Reload
-    runs-on: [self-hosted, X64, Linux, development]
+    runs-on: [self-hosted, X64, Linux, 4c8g]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
