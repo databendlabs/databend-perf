@@ -36,6 +36,11 @@ runs:
         echo "SHOW WAREHOUSES;" | bendsql
         echo "BENDSQL_DSN=${BENDSQL_DSN}&warehouse=${{ inputs.warehouse }}" >> $GITHUB_ENV
 
+    - name: Get start time
+      shell: bash
+      run: |
+        echo "START_TIME=$(date +%s)" >> GITHUB_ENV
+
     - name: Run reload script
       shell: bash
       run: |
@@ -43,6 +48,12 @@ runs:
       env:
         AWS_KEY_ID: ${{ inputs.aws_key_id }}
         AWS_SECRET_KEY: ${{ inputs.aws_secret_key }}
+
+    - name: Get time elapsed
+      if: ${{ always() }}
+      shell: bash
+      run: |
+        echo "ELAPSED_SECONDS=$(expr $(date +%s) - $START_TIME)" >> GITHUB_ENV
 
     - name: Notify Feishu Group
       uses: foxundermoon/feishu-action@v2
@@ -53,6 +64,6 @@ runs:
         content: |
           post:
             zh_cn:
-              title: Reload ${{ inputs.script }} ${{ github.action_status }}
+              title: Reload ${{ inputs.script }} ${{ github.action_status }} (${{ env.ELAPSED_SECONDS }})
               content:
               - [{"tag": "a", "text": "link", "href": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}]
