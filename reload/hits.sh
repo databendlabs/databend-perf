@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS hits (
 SQL
 
 cat <<SQL | bendsql
-COPY INTO hits FROM 'https://datasets.databend.rs/hits_100m_obfuscated_v1.tsv.xz' FILE_FORMAT = (type = TSV compression = XZ field_delimiter = '\t'  record_delimiter = '\n' skip_header = 0);
+COPY INTO hits FROM 'https://datasets.databend.com/hits_100m_obfuscated_v1.tsv.xz' FILE_FORMAT = (type = TSV compression = XZ field_delimiter = '\t'  record_delimiter = '\n' skip_header = 0);
 SQL
 
 cat <<SQL | bendsql
