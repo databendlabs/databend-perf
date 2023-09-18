@@ -39,7 +39,7 @@ runs:
     - name: Get start time
       shell: bash
       run: |
-        echo "START_TIME=$(date +%s)" >> GITHUB_ENV
+        echo "START_TIME=$(date +%s)" >> $GITHUB_ENV
 
     - name: Run reload script
       shell: bash
@@ -53,7 +53,7 @@ runs:
       if: ${{ always() }}
       shell: bash
       run: |
-        echo "ELAPSED_SECONDS=$(expr $(date +%s) - $START_TIME)" >> GITHUB_ENV
+        echo "ELAPSED_SECONDS=$(expr $(date +%s) - $START_TIME)" >> $GITHUB_ENV
 
     - name: Notify Feishu Group
       uses: foxundermoon/feishu-action@v2
