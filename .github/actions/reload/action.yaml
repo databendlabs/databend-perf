@@ -64,6 +64,6 @@ runs:
         content: |
           post:
             zh_cn:
-              title: Reload ${{ inputs.script }} ${{ github.action_status }} in ${{ env.ELAPSED_SECONDS }} seconds
+              title: Reload ${{ inputs.script }} ${{ github.action_status }} after ${{ env.ELAPSED_SECONDS }} seconds
               content:
               - [{"tag": "a", "text": "link", "href": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}]
