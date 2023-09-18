@@ -19,7 +19,7 @@ cat <<SQL | bendsql
     EventTime TIMESTAMP NOT NULL,
     EventDate Date NOT NULL,
     CounterID INTEGER NOT NULL,
-    ClientIP INTEGER NOT NULL,
+    ClientIP INTEGER UNSIGNED NOT NULL,
     RegionID INTEGER NOT NULL,
     UserID BIGINT NOT NULL,
     CounterClass SMALLINT NOT NULL,
