@@ -7,9 +7,8 @@ runs:
     - name: Get BendSQL from release
       shell: bash
       run: |
-        curl -fsSLo ./bendsql.tar.gz https://github.com/datafuselabs/bendsql/releases/download/v0.3.0/bendsql-x86_64-unknown-linux-gnu.tar.gz
-        tar -xvzf ./bendsql.tar.gz
-        chmod +x ./bendsql
-        sudo cp ./bendsql /usr/local/bin/bendsql
-        rm -rf ./bendsql
-        rm -rf ./bendsql.tar.gz
+        sudo curl -L -o /usr/share/keyrings/datafuselabs-keyring.gpg https://repo.databend.rs/deb/datafuselabs.gpg
+        sudo curl -L -o /etc/apt/sources.list.d/datafuselabs.list https://repo.databend.rs/deb/datafuselabs.list
+        sudo apt update
+        sudo apt install -y bendsql
+        bendsql --version
