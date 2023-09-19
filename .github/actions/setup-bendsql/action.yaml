@@ -7,7 +7,7 @@ runs:
     - name: Get BendSQL from release
       shell: bash
       run: |
-        curl -fsSLo ./bendsql.tar.gz https://github.com/datafuselabs/bendsql/releases/download/v0.3.0/bendsql-x86_64-unknown-linux-gnu.tar.gz
+        curl -fsSLo ./bendsql.tar.gz https://github.com/datafuselabs/bendsql/releases/download/v0.6.7/bendsql-x86_64-unknown-linux-gnu.tar.gz
         tar -xvzf ./bendsql.tar.gz
         chmod +x ./bendsql
         sudo cp ./bendsql /usr/local/bin/bendsql
