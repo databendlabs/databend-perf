@@ -31,16 +31,18 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           ref: ${{ github.head_ref }}
 
       - name: Get Databend version
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           if [ -z "${{ github.event.inputs.imageTag }}" ]; then
-            LASTEST_TAG=$(curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -s GET https://api.github.com/repos/datafuselabs/databend/tags\?per_page\=1 | jq -r '.[].name')
-            echo "DATABEND_VERSION=${LASTEST_TAG}" >> $GITHUB_ENV
+            LASTEST_RELEASE=$(gh api repos/datafuselabs/databend/tags -X GET -f per_page=1 | jq -r .[].name)
+            echo "DATABEND_VERSION=${LASTEST_RELEASE}" >> $GITHUB_ENV
           else
             echo "DATABEND_VERSION=${{ github.event.inputs.imageTag }}" >> $GITHUB_ENV
           fi
