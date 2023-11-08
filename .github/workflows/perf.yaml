@@ -88,7 +88,6 @@ jobs:
             --size XLarge
 
           mv collector/numbers.json collector/numbers/${{ env.PERF_DATE }}-numbers.json
-          mv collector/ontime.json collector/ontime/${{ env.PERF_DATE }}-ontime.json
           mv collector/hits.json collector/hits/${{ env.PERF_DATE }}-hits.json
 
       - name: Clean warehouse
