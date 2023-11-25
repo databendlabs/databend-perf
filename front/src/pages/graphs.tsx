@@ -139,7 +139,6 @@ const Graphs: FC = (): ReactElement=> {
         }
         
       }
-      console.log(xAxis, 'xAxis')
       lines?.map((item:any)=>{
         return item.type = 'line'
       })
