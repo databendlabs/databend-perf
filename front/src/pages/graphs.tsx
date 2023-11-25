@@ -101,7 +101,6 @@ const Graphs: FC = (): ReactElement=> {
     }
   }
   function drawCharts(category: string,graph: string, graphData: any, i:number, isFullDate: boolean) {
-    console.log(graphData, 'graphDatagraphDatagraphDatagraphDatagraphDatagraphData')
     const name = `${category}-${graph}`;
     const container = document.getElementById(`${name}`) as HTMLElement;
     if (container) {
@@ -234,7 +233,7 @@ const Graphs: FC = (): ReactElement=> {
         }
       >
         <Row gutter={10}>
-          <Col span={isPhone?24:6}>
+          {/* <Col span={isPhone?24:6}>
             <Form.Item
               name="date"
               label="Date range">
@@ -244,7 +243,7 @@ const Graphs: FC = (): ReactElement=> {
                 disabledDate={disabledRangeTime}
                 style={{width: '100%'}}/>
             </Form.Item>
-          </Col>
+          </Col> */}
           <Col span={isPhone?12:4}>
             <Form.Item
               name="kind"

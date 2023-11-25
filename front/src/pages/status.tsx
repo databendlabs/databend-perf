@@ -142,7 +142,8 @@ const Status: FC = (): ReactElement=> {
           </Col>
           <Col span={isPhone?24:6}>
            <Form.Item label="Latest">
-            <span>{date} ({container && container.length>0 && container[0].version})</span>
+            <span>{date} </span>
+            {/* ({container && container.length>0 && container[0].version}) */}
            </Form.Item>
           </Col>
         </Row>
