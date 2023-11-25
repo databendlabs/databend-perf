@@ -23,7 +23,7 @@ const PerfLayout: FC = (): ReactElement=> {
   }, [pathname]);
   function MenuContent(mode: any){
     return  (
-        <Menu onClick={menuClick} style={mode==='vertical'?{}:{minWidth: '500px', marginLeft: '40px'}} theme="dark" mode={mode} selectedKeys={[selectKey]}>
+        <Menu onClick={menuClick} style={mode==='vertical'?{}:{minWidth: '620px', marginLeft: '40px'}} theme="dark" mode={mode} selectedKeys={[selectKey]}>
           <Menu.Item key='graphs'>
             <Link to={'/'}>Graphs</Link>  
           </Menu.Item>
@@ -34,8 +34,14 @@ const PerfLayout: FC = (): ReactElement=> {
               <Link to={'/status'}>Status</Link>
           </Menu.Item>
           <Menu.Item key="documentation">
-            <a style={{display: 'flex', alignItems: 'center'}} className="out-link" href={'https://databend.rs/doc'} target="_blank">
+            <a style={{display: 'flex', alignItems: 'center'}} className="out-link" href={'https://docs.databend.com/doc'} target="_blank">
               <span style={{paddingRight: '5px'}}>Documentation</span>
+              <LinkIcon></LinkIcon>
+            </a>
+          </Menu.Item>
+          <Menu.Item key="Cloud">
+            <a style={{display: 'flex', alignItems: 'center'}} className="out-link" href={'https://www.databend.com/'} target="_blank">
+              <span style={{paddingRight: '5px'}}>Databend Cloud</span>
               <LinkIcon></LinkIcon>
             </a>
           </Menu.Item>
