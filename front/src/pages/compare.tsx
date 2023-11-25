@@ -94,9 +94,9 @@ const Compare: FC = (): ReactElement=> {
         const { lines, sql,  title, version, xAxis} = graphData;
         if (!before) {
           const [before, after] = xAxis.slice(-2);
-          const [beforeVersion, afterVersion] = version.slice(-2);
+          // const [beforeVersion, afterVersion] = version.slice(-2);
           setCompareDate({
-            before: `${before} (${beforeVersion})`, after: `${after} (${afterVersion})`
+            before: `${before}`, after: `${after}`
           })
           compareData = lines.map((item:any)=>{
             return {
