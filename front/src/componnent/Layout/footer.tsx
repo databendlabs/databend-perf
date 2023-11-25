@@ -32,7 +32,7 @@ const Footer: FC = (): ReactElement=> {
         },
         {
           name: 'Develop',
-          link: 'https://docs.databend.com/doc/develop'
+          link: 'https://docs.databend.com/doc/develop/'
         },
         {
           name: 'Databend Cloud',

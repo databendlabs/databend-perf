@@ -4,9 +4,9 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: './',
-  plugins: [react()],
-  resolve: {
+	base: './',
+	plugins: [react()],
+	resolve: {
 		alias: {
 			'@': path.resolve(__dirname, 'src'),
 			'components': path.resolve(__dirname, 'src/components'),
@@ -15,18 +15,18 @@ export default defineConfig({
 			'apis': path.resolve(__dirname, 'src/apis')
 		},
 	},
-  build: {
+	build: {
 		rollupOptions: {
-			output:{
+			output: {
 				manualChunks: {
 					lodash: ['lodash'],
 					react: ['react', 'react-dom', 'react-router-dom']
 				}
-        
+
 			}
 		}
 	},
-  css: {
+	css: {
 		preprocessorOptions: {
 			scss: {
 				charset: false,
@@ -34,7 +34,7 @@ export default defineConfig({
 			}
 		}
 	},
-  server:{
-    open: true
-  }
+	server: {
+		open: true
+	}
 })
