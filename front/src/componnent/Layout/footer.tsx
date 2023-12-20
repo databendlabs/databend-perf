@@ -15,7 +15,7 @@ const Footer: FC = (): ReactElement=> {
       list: [
         {
           name: 'What is Databend?',
-          link: 'https://docs.databend.com/doc'
+          link: 'https://docs.databend.com/guides'
         },
         {
           name: 'Performance',
@@ -28,11 +28,11 @@ const Footer: FC = (): ReactElement=> {
       list: [
         {
           name: 'Deployment',
-          link: 'https://docs.databend.com/doc/deploy'
+          link: 'https://docs.databend.com/guides/deploy'
         },
         {
-          name: 'Develop',
-          link: 'https://docs.databend.com/doc/develop/'
+          name: 'Developer',
+          link: 'https://docs.databend.com/developer'
         },
         {
           name: 'Databend Cloud',

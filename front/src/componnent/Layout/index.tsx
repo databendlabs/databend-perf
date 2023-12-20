@@ -34,7 +34,7 @@ const PerfLayout: FC = (): ReactElement=> {
               <Link to={'/status'}>Status</Link>
           </Menu.Item>
           <Menu.Item key="documentation">
-            <a style={{display: 'flex', alignItems: 'center'}} className="out-link" href={'https://docs.databend.com/doc'} target="_blank">
+            <a style={{display: 'flex', alignItems: 'center'}} className="out-link" href={'https://docs.databend.com/guides'} target="_blank">
               <span style={{paddingRight: '5px'}}>Documentation</span>
               <LinkIcon></LinkIcon>
             </a>
